@@ -75,7 +75,7 @@ login() {
                 'Success',
                 'Login Successful'
               );
-              this.router.navigate(['/home/profilesetting']);
+              this.router.navigate(['/home/dashboard']);
             } else {
               this._alertService.simpleAlert(
                 'error',

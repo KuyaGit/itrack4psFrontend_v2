@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SessionService {
-	redirectUrl: string = "/home/profilesettings/";
+	redirectUrl: string = "/home/dashboard";
 	isNavVisible: boolean = false;
 	isUserLoggedIn: boolean = false;
 	isAlertOnceOnTokenExpire: boolean = false;

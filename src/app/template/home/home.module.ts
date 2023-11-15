@@ -26,7 +26,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { MatMenuModule} from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { ProfileSettingComponent } from './pages/profile-setting/profile-setting.component';
+import { ProfileSettingComponent } from '../../shared/profile-setting/profile-setting.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';

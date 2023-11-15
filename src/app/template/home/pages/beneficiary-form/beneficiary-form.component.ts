@@ -11,7 +11,7 @@ import { BeneficiaryregComponent } from 'src/app/shared/beneficiaryreg/beneficia
 import { UpdateModeEnum } from 'chart.js';
 import { UpdateinfoComponent } from 'src/app/shared/updateinfo/updateinfo.component';
 import { InformationComponent } from 'src/app/shared/information/information.component';
-import { ProfileSettingComponent } from '../profile-setting/profile-setting.component';
+import { ProfileSettingComponent } from '../../../../shared/profile-setting/profile-setting.component';
 @Component({
   selector: 'app-beneficiary-form',
   templateUrl: './beneficiary-form.component.html',
