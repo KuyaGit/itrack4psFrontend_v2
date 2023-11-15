@@ -40,6 +40,7 @@ import { ViewchildComponent } from 'src/app/shared/beneficiary/viewchild/viewchi
 import { SchoolregistrarComponent } from './pages/schoolregistrar/schoolregistrar.component';
 import { NgChartsModule } from 'ng2-charts';
 import { SchoolaccountsComponent } from './pages/schoolaccounts/schoolaccounts.component';
+import { AvatarComponent } from 'src/app/shared/avatar/avatar.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { SchoolaccountsComponent } from './pages/schoolaccounts/schoolaccounts.c
     ChildbeneficiaryComponent,
     ViewchildComponent,
     SchoolregistrarComponent,
-    SchoolaccountsComponent
+    SchoolaccountsComponent,
+    AvatarComponent
   ],
   imports: [
     CommonModule,

@@ -4,13 +4,7 @@
         <header>4Ps Holder</header>
       <button *ngIf="account_type === 1 || account_type === 2" mat-raised-button color="primary" (click)="createbeneficiary()">Add 4ps Holder</button>
     </div>
-    <section class="card-wrapper" (click)="profilesettings()">
-      <img [src]="profile_piclink" alt="Matt Cooper">
-      <div class="description">
-        <h3>{{fname}} {{lname}}</h3>
-        <p>{{typeAccount}}</p>
-      </div>
-    </section>
+    <app-avatar></app-avatar>
   </div>
   <div class="search-container">
     <mat-form-field appearance="outline" class="search">

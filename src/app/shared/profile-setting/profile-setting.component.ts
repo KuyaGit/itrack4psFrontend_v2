@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { accountdetails, userprofile } from 'src/app/services/data';
 import { HttpResponse } from '@angular/common/http';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile-setting',
@@ -25,6 +26,7 @@ export class ProfileSettingComponent implements OnInit{
     private _dataService: DataService,
     private fb: FormBuilder,
     private _alertService: AlertServiceService,
+    private ref : MatDialogRef<ProfileSettingComponent>
 
   ) {
     this.profileForm = this.fb.group({
@@ -70,6 +72,7 @@ export class ProfileSettingComponent implements OnInit{
             this.handleSuccess('Password is updated');
             this.upload()
             await this.getProfileData();
+            this.ref.close();
           }
 
           else {
@@ -101,6 +104,9 @@ export class ProfileSettingComponent implements OnInit{
         })
       );
     }
+  }
+  closepopup(){
+    this.ref.close();
   }
 
 
@@ -191,13 +197,16 @@ export class ProfileSettingComponent implements OnInit{
           this.handleSuccess('Profile updated');
           this.upload()
           await this.getProfileData();
+          this.ref.close();
         } else {
           this.handleError('Failed to update profile');
+          this.ref.close();
         }
       },
       (error) => {
         this.handleError('An error occurred while updating profile');
         console.error(error);
+        this.ref.close();
       }
     );
   }

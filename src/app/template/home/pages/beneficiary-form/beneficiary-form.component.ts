@@ -138,7 +138,7 @@ createItemDialog(component: any) {
     _popup.afterClosed().subscribe(item => {
       this.getAllbeneficiary();
     })
-  }
+}
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.alluserData.filter = filterValue.trim().toLowerCase();

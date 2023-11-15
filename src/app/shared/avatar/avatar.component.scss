@@ -1,0 +1,30 @@
+
+.card-wrapper{
+  padding: 3%;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  max-width: 100%;
+  background-color: white;
+  border-radius: 13px;
+  line-height: 13px;
+  cursor: pointer;
+
+
+  img{
+    width: 5em;
+    height: 5em;
+    border-radius: 5em;
+    object-fit: cover;
+    margin-right: 0.5em;
+  }
+
+  h3{
+    font-size: 1.3rem;
+    margin-bottom: 0 !important;
+  }
+
+  p{
+    font-size: .8rem;
+  }
+}
