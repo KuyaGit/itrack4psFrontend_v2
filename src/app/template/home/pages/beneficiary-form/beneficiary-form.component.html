@@ -1,0 +1,48 @@
+<body>
+  <div class="container">
+    <div class="header">
+      <header>4Ps Holder</header>
+      <button *ngIf="account_type === 1 || account_type === 2" mat-raised-button color="primary" (click)="createbeneficiaryAccount()">Add Beneficiary Account</button>
+    </div>
+    <mat-form-field appearance="outline" class="search">
+      <mat-label>Search 4Ps Holder</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search 4Ps Holder" #input>
+    </mat-form-field>
+  </div>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="alluserData" matSort>
+        <!-- header row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+        <!-- column -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <ng-container matColumnDef="accountuser_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Account User Details ID </th>
+          <td mat-cell *matCellDef="let item">
+              {{ item.accountuser_id }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let item">
+              {{ item.fname }} {{ item.lname }}
+          </td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+        <td mat-cell *matCellDef="let item">
+            {{ item.address }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="mobile_number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </th>
+        <td mat-cell *matCellDef="let item">
+            {{ item.mobile_number }}
+        </td>
+      </ng-container>
+      </table>
+    <mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
+                [length]="alluserData.data.length"></mat-paginator>
+  </div>
+</body>

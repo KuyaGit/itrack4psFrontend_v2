@@ -1,0 +1,96 @@
+
+
+<mat-toolbar  *ngIf="isMobileLayout">
+  <button mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  Itrack4ps Monitoring System
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav class="sidebar" #sidenav="matSidenav">
+      <header>
+        <div class="image-text">
+          <span class="image">
+            <img src="assets/navbar/logo.png" alt="logo">
+          </span>
+          <div class="text header-text">
+            <span class="name">Itrack4ps</span>
+            <span class="title">Monitoring System</span>
+          </div>
+        </div>
+      </header>
+      <div class="menu-bar">
+        <div class="menu">
+          <ul class="menu-links">
+            <li class="nav-link" *ngIf="account_type === 1 || account_type ===2">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/dashboard">
+                <i class='bx bx-home-alt icon'></i>
+                <span class="text nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="account_type === 3">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/householdbeneficiary">
+                <i class='bx bx-male-female icon'></i>
+                <span class="text nav-text">Household <br> Beneficiaries</span>
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="account_type === 1 || account_type === 2">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/beneficiary">
+                <i class='bx bx-money-withdraw icon'></i>
+                <span class="text nav-text">4ps Holder</span>
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="account_type === 4">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/studentbeneficiary">
+                <i class='bx bx-money-withdraw icon'></i>
+                <span class="text nav-text">Student<br> Beneficiaries</span>
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="account_type === 1 && 2">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/schoolaccounts">
+                <i class='bx bxs-school icon'></i>
+                <span class="text nav-text">School Account <br> Management</span>
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="account_type === 1">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/usermanagement">
+                <i class='bx bx-user-circle icon'></i>
+                <span class="text nav-text">User Management</span>
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="account_type === 1 || account_type === 2 || account_type === 3 || account_type ===4">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/profilesetting">
+                <i class='bx bx-cog icon'></i>
+                <span class="text nav-text">Profile Settings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="bottom content">
+          <div class="bottom-content">
+            <li *ngIf="account_type == 2 || account_type == 3 || account_type == 4">
+              <a href="mailto:itrack4ps@gmail.com" class="bottom-content">
+                <i class='bx bx-support icon'></i>
+                <span class="text nav-text">Help & Support</span>
+            </a>
+            </li>
+          </div>
+          <li>
+            <a (click)="logoutModal()" style=" border: 2px solid #fff;
+            border-radius: 5px;;">
+              <i class='bx bx-log-out icon'></i>
+              <span class="text nav-text">Logout</span>
+            </a>
+          </li>
+        </div>
+      </div>
+    <!-- </nav> -->
+  </mat-sidenav>
+  <div class="content mat-elevation-z8">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
+

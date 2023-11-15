@@ -1,0 +1,32 @@
+<body>
+  <div class="header">
+    <header>Beneficiary</header>
+    <button mat-raised-button extended color="primary" (click)="addchildBeneficiary()">
+      <mat-icon>add</mat-icon>
+      Add Beneficiary Details
+    </button>
+  </div>
+      <div class="array-card">
+        <div class="h-beneficiary">
+          <mat-card class="example-card" *ngFor="let item of dataInfo">
+            <mat-card-header>
+              <mat-card-title>{{item.fname}}</mat-card-title>
+              <mat-card-subtitle>{{item.lname}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src='{{item.profile_piclink}}' alt="Photo of a Shiba Inu">
+            <mat-card-content>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" class="actions" (click)="viewItem(item.child_id)">
+                <mat-icon>visibility</mat-icon>
+                View
+              </button>
+              <button mat-raised-button color="primary" class="actions" (click)="deletechild(item.child_id)">
+                <mat-icon>delete</mat-icon>
+                Delete
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+</body>
