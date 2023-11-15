@@ -8,6 +8,10 @@ import { MatSort } from '@angular/material/sort';
 import { accountdetails, getalluser } from 'src/app/services/data';
 import { MatDialog } from '@angular/material/dialog';
 import { BeneficiaryregComponent } from 'src/app/shared/beneficiaryreg/beneficiaryreg.component';
+import { UpdateModeEnum } from 'chart.js';
+import { UpdateinfoComponent } from 'src/app/shared/updateinfo/updateinfo.component';
+import { InformationComponent } from 'src/app/shared/information/information.component';
+import { ProfileSettingComponent } from '../profile-setting/profile-setting.component';
 @Component({
   selector: 'app-beneficiary-form',
   templateUrl: './beneficiary-form.component.html',
@@ -19,6 +23,12 @@ export class BeneficiaryFormComponent implements OnInit{
 
   id: any = localStorage.getItem('user_loginSession')
   account_type = (JSON.parse(this.id)).account_type;
+  fname = (JSON.parse(this.id)).fname;
+  lname = (JSON.parse(this.id)).lname;
+  profile_piclink = (JSON.parse(this.id)).profile_piclink;
+  typeAccount = (JSON.parse(this.id)).typeAccount;
+
+
   alluserData = new MatTableDataSource<getalluser>([]);
 
   displayedColumns: any[] = [
@@ -26,17 +36,20 @@ export class BeneficiaryFormComponent implements OnInit{
     'name',
     'address',
     'mobile_number',
+    'actions'
   ];
 
   private subsription_get_all_user: Subscription = new Subscription();
 
   constructor (
     private _dataService: DataService,
-    public dialog : MatDialog
+    public dialog : MatDialog,
+    private _alertService: AlertServiceService
   ) {}
   ngOnInit(): void {
     this.getAllbeneficiary();
   }
+
   alluserList!: getalluser[]
   getAllbeneficiary() {
     this.subsription_get_all_user.add(
@@ -60,11 +73,65 @@ export class BeneficiaryFormComponent implements OnInit{
       )
     );
   }
-  createbeneficiaryAccount(){
-    this.viewItemDialog(BeneficiaryregComponent)
-  }
+deleteuser(accountuser_id: string) {
+    this._alertService.simpleAlert(
+      'warning',
+      'Warning',
+      'Are you sure you want to delete this user?',
+      () => {
+        this._dataService.deleteuserprofile(accountuser_id).subscribe(
+          (result) => {
+            if (result && result.status === '200') {
+              this.handleSuccess('User profile deleted successfully');
 
-  viewItemDialog(component: any) {
+              this.getAllbeneficiary();
+            } else {
+              this.handleError('Failed to delete user profile');
+            }
+          },
+          (error) => {
+            this.handleError(
+              'An error occurred while deleting the user profile'
+            );
+            console.error(error);
+          }
+        );
+      },
+      () => {
+        //cancel
+        console.log('Action canceled.');
+      }
+    );
+  }
+createbeneficiary(){
+    this.createItemDialog(BeneficiaryregComponent)
+}
+viewItem(accountuser_id: any) {
+    this.viewItemDialog(accountuser_id, 'User Information', InformationComponent);
+}
+
+updateItem(accountuser_id: any) {
+this.viewItemDialog(accountuser_id, 'Edit Information', UpdateinfoComponent);
+}
+
+
+viewItemDialog(accountuser_id: number, title: string, component: any) {
+  var _popup = this.dialog.open(component, {
+    width: '80%',
+    data: {
+      title: title,
+      code: accountuser_id
+    }
+  });
+  _popup.afterClosed().subscribe(item => {
+    this.getAllbeneficiary();
+  })
+}
+profilesettings(){
+  this.createItemDialog(ProfileSettingComponent)
+}
+
+createItemDialog(component: any) {
     var _popup = this.dialog.open(component, {
       width: '80%',
     });
@@ -77,4 +144,10 @@ export class BeneficiaryFormComponent implements OnInit{
     this.alluserData.filter = filterValue.trim().toLowerCase();
 }
 
+private handleError(message: string) {
+  this._alertService.simpleAlert('error', 'Error', message);
+}
+private handleSuccess(message: string) {
+  this._alertService.simpleAlert('success', 'Success', message);
+}
 }

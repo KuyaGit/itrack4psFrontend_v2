@@ -1,18 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
 body{
   background: var(--body-color);
   height: 100vh;
   padding-top: 2% !important;
   padding:  3%;
 }
-.container{
+.contain{
   display: flex;
+  align-items: space-between;
+  align-content: flex-start;
   justify-content: space-between;
+  margin-bottom: 1%;
+}
+.right{
+  display: flex;
   align-items: flex-start;
-  .search{
-    width: 40%;
-    height: 10px;
-  }
+  justify-content: flex-end;
+
+}
+.search-container{
+  display: flex ;
+  justify-content: flex-end;
+}
+.search{
+  width: 40%;
+  margin-bottom: 1%;
+
 }
 .header{
   font-size: 30px;
@@ -31,4 +44,35 @@ body{
   bottom: 0px;
   position: sticky;
   z-index: 10;
+}
+
+
+.card-wrapper{
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  max-width: 30em;
+  background-color: white;
+  border-radius: 1em;
+  line-height: 1.5em;
+  cursor: pointer;
+
+
+  img{
+    width: 5em;
+    height: 5em;
+    border-radius: 5em;
+    object-fit: cover;
+    margin-right: 0.5em;
+  }
+
+  h3{
+    font-size: 1.3rem;
+    margin-bottom: 0 !important;
+  }
+
+  p{
+    font-size: .8rem;
+  }
 }

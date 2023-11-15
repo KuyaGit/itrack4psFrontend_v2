@@ -40,10 +40,33 @@ login() {
         (result) => {
           if (result['status'] == 200) {
             if (result['results']) {
+              const accountType = result['results']['account_type'];
+
+              // Modify account_type based on its value
+              let modifiedAccountType: string;
+
+              switch (accountType) {
+                case 1:
+                  modifiedAccountType = 'Administrator';
+                  break;
+                case 2:
+                  modifiedAccountType = '4ps Staff';
+                  break;
+                // Add more cases as needed
+
+                default:
+                  modifiedAccountType = 'Unknown Role';
+                  break;
+              }
+
               this._sessionService.setToken(
                 JSON.stringify({
                   accountuser_id: result['results']['accountuser_id'],
                   account_type: result['results']['account_type'],
+                  typeAccount: modifiedAccountType,
+                  fname: result['results']['fname'],
+                  lname: result['results']['lname'],
+                  profile_piclink: result['results']['profile_piclink'],
                   authorizationToken: result['results']['authorizationToken'],
                 })
               );

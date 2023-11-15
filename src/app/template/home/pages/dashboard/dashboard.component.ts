@@ -80,7 +80,7 @@ renderLineChart() {
     }
   })
 }
-
+sum !: number
 getallstatussum() {
   this.get_all_status_sum.add(
     this._analytics.allstatussum().subscribe(
@@ -92,6 +92,8 @@ getallstatussum() {
           console.log(this.countValues)
           // Update the data property of the chart with the extracted data
           console.log(this.linechart)
+
+          this.sum = this.countValues + 10
           this.linechart.data.datasets[0].data = this.countValues;
           this.linechart.update();
         }

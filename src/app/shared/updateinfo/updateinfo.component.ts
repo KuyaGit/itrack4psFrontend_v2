@@ -62,14 +62,6 @@ export class UpdateinfoComponent implements OnInit{
       value : 2,
       text : '4ps Staff'
     },
-    {
-      value : 3,
-      text : 'Beneficiary'
-    },
-    {
-      value : 4,
-      text: 'School Registrar'
-    }
   ];
 
   getAccountType(account_type: number): string {

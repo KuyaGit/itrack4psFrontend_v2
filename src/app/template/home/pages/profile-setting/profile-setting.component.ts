@@ -97,14 +97,6 @@ export class ProfileSettingComponent implements OnInit{
         this._dataService.get_user_profile(this.accountuser_id).subscribe((result) => {
           this.profileInfo = result.result[0];
           this.fileUrl = this.profileInfo.profile_piclink;
-
-          // Add the 'schoolname' to the existing user session data
-          parsed.schoolname = this.profileInfo.schoolname;
-
-          // Store the updated session data back in localStorage
-          localStorage.setItem('user_loginSession', JSON.stringify(parsed));
-
-          // Update your form with the new 'schoolname' value
           this.profileForm.patchValue(this.profileInfo);
         })
       );

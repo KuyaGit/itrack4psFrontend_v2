@@ -13,6 +13,9 @@ export class SessionService {
 	isAlertOnceOnTokenExpire: boolean = false;
 	acccountuser_id: number = 0;
 	account_type: number = 0;
+  fname : string = "";
+  lname : string = "";
+  profile_piclink: string = "";
   navbarVisibilityChange: Subject<boolean> = new Subject<boolean>();
 	isUserLoggedInStatus: Subject<boolean> = new Subject<boolean>();
 
@@ -38,6 +41,9 @@ export class SessionService {
 		if (sessionVal) {
       this.acccountuser_id  = JSON.parse(sessionVal)['accountuser_id'];
 			this.account_type  = JSON.parse(sessionVal)['account_type'];
+      this.fname = JSON.parse(sessionVal)['fname'];
+      this.lname = JSON.parse(sessionVal)['lname'];
+      this.profile_piclink = JSON.parse(sessionVal)['profile_piclink'];
         }
 		return sessionVal;
 	}
