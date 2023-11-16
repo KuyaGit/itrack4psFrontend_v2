@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ProfileSettingComponent } from '../profile-setting/profile-setting.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-avatar',
@@ -16,8 +17,10 @@ export class AvatarComponent {
   typeAccount = (JSON.parse(this.id)).typeAccount;
 
 
+
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+
   ){}
 
 
@@ -28,6 +31,5 @@ export class AvatarComponent {
     _popup.afterClosed()
 
   }
-
 
 }

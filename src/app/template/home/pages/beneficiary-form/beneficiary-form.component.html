@@ -2,16 +2,17 @@
   <div class="contain">
     <div class="header">
         <header>4Ps Holder</header>
-      <button *ngIf="account_type === 1 || account_type === 2" mat-raised-button color="primary" (click)="createbeneficiary()">Add 4ps Holder</button>
+        <button *ngIf="account_type === 1 || account_type === 2" mat-raised-button color="primary" (click)="createbeneficiary()">Add 4ps Holder</button>
     </div>
-    <app-avatar></app-avatar>
+      <div class="search-container">
+        <mat-form-field appearance="outline" class="search">
+          <mat-label>Search 4Ps Holder</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search 4Ps Holder" #input>
+        </mat-form-field>
+      </div>
+      <app-avatar *ngIf="!isMobileLayout"></app-avatar>
   </div>
-  <div class="search-container">
-    <mat-form-field appearance="outline" class="search">
-      <mat-label>Search 4Ps Holder</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Search 4Ps Holder" #input>
-    </mat-form-field>
-  </div>
+
     <div class="table-container">
       <table mat-table [dataSource]="alluserData" matSort>
         <!-- header row -->

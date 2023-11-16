@@ -1,6 +1,6 @@
 
 .card-wrapper{
-  padding: 3%;
+  padding: 10px;
   display: flex;
   align-items: center;
   font-family: sans-serif;
@@ -9,8 +9,10 @@
   border-radius: 13px;
   line-height: 13px;
   cursor: pointer;
-
-
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  z-index: 1;
   img{
     width: 5em;
     height: 5em;

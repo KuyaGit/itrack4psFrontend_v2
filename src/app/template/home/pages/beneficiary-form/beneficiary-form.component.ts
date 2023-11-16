@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { Subscription } from 'rxjs'
@@ -12,6 +12,7 @@ import { UpdateModeEnum } from 'chart.js';
 import { UpdateinfoComponent } from 'src/app/shared/updateinfo/updateinfo.component';
 import { InformationComponent } from 'src/app/shared/information/information.component';
 import { ProfileSettingComponent } from '../../../../shared/profile-setting/profile-setting.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 @Component({
   selector: 'app-beneficiary-form',
   templateUrl: './beneficiary-form.component.html',
@@ -44,7 +45,9 @@ export class BeneficiaryFormComponent implements OnInit{
   constructor (
     private _dataService: DataService,
     public dialog : MatDialog,
-    private _alertService: AlertServiceService
+    private _alertService: AlertServiceService,
+    private breakpointObserver: BreakpointObserver,
+    private cdr : ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.getAllbeneficiary();
@@ -150,4 +153,15 @@ private handleError(message: string) {
 private handleSuccess(message: string) {
   this._alertService.simpleAlert('success', 'Success', message);
 }
+public isMobileLayout = false;
+  ngAfterViewInit() {
+    this.breakpointObserver.observe(["(max-width: 912px)"]).subscribe((res) => {
+      if (res.matches) {
+        this.isMobileLayout = true;
+      } else {
+        this.isMobileLayout = false;
+      }
+    });
+    this.cdr.detectChanges();
+    }
 }

@@ -11,6 +11,7 @@ import { HouseholdbeneficiaryComponent } from './pages/householdbeneficiary/hous
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { SchoolregistrarComponent } from './pages/schoolregistrar/schoolregistrar.component';
 import { SchoolaccountsComponent } from './pages/schoolaccounts/schoolaccounts.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
         path: 'usermanagement',
         title: 'User Management',
         component: UsermanagementComponent
+      },
+      {
+        path: 'profilesetting',
+        title: 'Profile Setting',
+        component: SettingsComponent
       },
       {
         path: 'householdbeneficiary',

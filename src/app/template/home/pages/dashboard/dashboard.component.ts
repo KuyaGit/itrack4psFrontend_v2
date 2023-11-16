@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit{
   constructor(
     private _analytics: AnalyticsService,
     private _dataService: DataService,
+    private breakpointObserver: BreakpointObserver,
+    private cdr: ChangeDetectorRef
   ) { }
   ngOnInit(): void {
     this.combinedSubscription()
@@ -40,6 +42,17 @@ export class DashboardComponent implements OnInit{
     this.getallUser()
     this.getallstatussum()
 }
+public isMobileLayout = false;
+  ngAfterViewInit() {
+    this.breakpointObserver.observe(["(max-width: 912px)"]).subscribe((res) => {
+      if (res.matches) {
+        this.isMobileLayout = true;
+      } else {
+        this.isMobileLayout = false;
+      }
+    });
+    this.cdr.detectChanges();
+    }
 combinedSubscription() {
   const allStatusCount$ = this._analytics.allstatuscount();
   const status5$ = this._analytics.status5();

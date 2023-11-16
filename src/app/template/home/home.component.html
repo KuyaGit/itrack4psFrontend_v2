@@ -49,11 +49,16 @@
                 <span class="text nav-text">Student<br> Beneficiaries</span>
               </a>
             </li>
-
             <li class="nav-link" *ngIf="account_type === 1">
               <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/usermanagement">
                 <i class='bx bx-user-circle icon'></i>
                 <span class="text nav-text">User Management</span>
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="isMobileLayout">
+              <a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/home/profilesetting">
+                <i class='bx bxs-cog icon'></i>
+                <span class="text nav-text">Profile Setting</span>
               </a>
             </li>
           </ul>

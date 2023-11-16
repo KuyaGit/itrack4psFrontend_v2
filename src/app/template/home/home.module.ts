@@ -41,6 +41,7 @@ import { SchoolregistrarComponent } from './pages/schoolregistrar/schoolregistra
 import { NgChartsModule } from 'ng2-charts';
 import { SchoolaccountsComponent } from './pages/schoolaccounts/schoolaccounts.component';
 import { AvatarComponent } from 'src/app/shared/avatar/avatar.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { AvatarComponent } from 'src/app/shared/avatar/avatar.component';
     ViewchildComponent,
     SchoolregistrarComponent,
     SchoolaccountsComponent,
-    AvatarComponent
+    AvatarComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
