@@ -13,6 +13,7 @@ import { UpdateinfoComponent } from 'src/app/shared/updateinfo/updateinfo.compon
 import { InformationComponent } from 'src/app/shared/information/information.component';
 import { ProfileSettingComponent } from '../../../../shared/profile-setting/profile-setting.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-beneficiary-form',
   templateUrl: './beneficiary-form.component.html',
@@ -47,12 +48,16 @@ export class BeneficiaryFormComponent implements OnInit{
     public dialog : MatDialog,
     private _alertService: AlertServiceService,
     private breakpointObserver: BreakpointObserver,
-    private cdr : ChangeDetectorRef
+    private cdr : ChangeDetectorRef,
+    private router : Router
   ) {}
   ngOnInit(): void {
     this.getAllbeneficiary();
   }
 
+  navigatetoChildbeneficiaries(householdid : Number) {
+    this.router.navigate(["/home/householdbeneficiary"])
+  }
   alluserList!: getalluser[]
   getAllbeneficiary() {
     this.subsription_get_all_user.add(

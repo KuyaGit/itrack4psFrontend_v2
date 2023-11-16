@@ -1,5 +1,11 @@
 <body>
   <div class="header">
+    <div class="example-button-container">
+      <button  mat-raised-button color="disabled" aria-label="Example icon button with a home icon" routerLink="/home/beneficiary">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </button>
+    </div>
     <header>Beneficiary</header>
     <button mat-raised-button extended color="primary" (click)="addchildBeneficiary()">
       <mat-icon>add</mat-icon>

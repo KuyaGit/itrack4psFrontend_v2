@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup, NumberValueAccessor, Validators } from '@angular/forms';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
@@ -14,6 +14,7 @@ import { accountuser } from 'src/app/services/data';
 import { RegisterService } from 'src/app/services/register.service';
 import { InformationComponent } from 'src/app/shared/information/information.component';
 import { UpdateinfoComponent } from 'src/app/shared/updateinfo/updateinfo.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-usermanagement',
@@ -28,7 +29,6 @@ export class UsermanagementComponent implements OnInit{
   schoolnames: schoolname [] = []
   hide = true;
   createaccountForm: FormGroup;
-  createbeneForm: FormGroup;
   id: any = localStorage.getItem('user_loginSession')
   account_type = (JSON.parse(this.id)).account_type;
 
@@ -51,6 +51,8 @@ export class UsermanagementComponent implements OnInit{
     public formbuilder: FormBuilder,
     private _dataService: DataService,
     private _schoolname: SchoolService,
+    private breakpointObserver: BreakpointObserver,
+    private cdr : ChangeDetectorRef
     )
     {
       this.createaccountForm = this.formbuilder.group({
@@ -62,17 +64,6 @@ export class UsermanagementComponent implements OnInit{
         schoolName : [null, [Validators.required]],
         profile_piclink: 'https://itrack4ps.s3.ap-southeast-2.amazonaws.com/default.png'
       });
-      this.createbeneForm = this.formbuilder.group({
-        fName : ['', Validators.required],
-        lName : ['', Validators.required],
-        householdNumber: ['', Validators.required],
-        email : ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-        password: ['', Validators.required],
-        profile_piclink: 'https://itrack4ps.s3.ap-southeast-2.amazonaws.com/default.png',
-        account_type: 3,
-      })
-      this.createaccountForm.controls['account_type'].valueChanges
-        .subscribe(value => this.schoolnamerequired(value));
   }
 
   viewItem(accountuser_id: any) {
@@ -179,23 +170,9 @@ export class UsermanagementComponent implements OnInit{
     return this.createaccountForm.controls ;
   }
 
-  get createform(): { [key: string]: AbstractControl } {
-    return this.createbeneForm.controls ;
-  }
 
 
-  // Make Form School Name required when account type 4 is selected
-  schoolnamerequired(value: string) {
-    // This function will change the validators for the schoolName field
-    const account_type = this.createaccountForm.get('account_type');
-    const schoolName = this.createaccountForm.get('schoolName');
-    if ( account_type?.value == '4') {
-      schoolName?.setValidators(Validators.required);
-    } else {
-      schoolName?.clearValidators();
-    }
-    schoolName?.updateValueAndValidity();
-  }
+
 
   adduserSubscription() {
         const formData: accountdetails  = this.createaccountForm.value;
@@ -237,49 +214,17 @@ export class UsermanagementComponent implements OnInit{
       }
     );
   }
-  registerSubscription() {
-    console.log(this.createbeneForm.value)
-
-    this._registerService.register(this.createbeneForm.value).subscribe(
-      (response) => {
-        console.log('reg success', response.message);
-        this._alertService.simpleAlert(
-          'success',
-          'Success',
-          response.message,
-          () => {
-          }
-        );
-        this.getallUser()
-        this.createbeneForm.reset();
-      },
-      (error) => {
-        console.log('error', error);
-        if (error.status === 401) {
-          this._alertService.simpleAlert(
-            'error',
-            'Error',
-            'You already have an account.'
-          );
-          this.createbeneForm.reset();
-        } else if (error.status === 400) {
-          this._alertService.simpleAlert(
-            'error',
-            'Error',
-            'Email already exists.'
-          );
-          this.createbeneForm.reset();
-        } else {
-          this._alertService.simpleAlert(
-            'error',
-            'Error',
-            "Household number doesn't exists on our Database you can't register."
-          );
-          this.createbeneForm.reset();
-        }
+  public isMobileLayout = false;
+  ngAfterViewInit() {
+    this.breakpointObserver.observe(["(max-width: 912px)"]).subscribe((res) => {
+      if (res.matches) {
+        this.isMobileLayout = true;
+      } else {
+        this.isMobileLayout = false;
       }
-    );
-  }
+    });
+    this.cdr.detectChanges();
+    }
   deleteuser(accountuser_id: string) {
     this._alertService.simpleAlert(
       'warning',
