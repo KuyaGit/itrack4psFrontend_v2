@@ -95,7 +95,6 @@ export class ProfileSettingComponent implements OnInit{
     if (userSessString !== null) {
       const parsed = JSON.parse(userSessString);
       this.accountuser_id = parsed.accountuser_id;
-
       this.subscription.add(
         this._dataService.get_user_profile(this.accountuser_id).subscribe((result) => {
           this.profileInfo = result.result[0];

@@ -22,6 +22,8 @@ form.sign-in-form {
 }
 
 .signin-signup{
+  background-image: url("https://car.dswd.gov.ph/wp-content/uploads/2023/06/Banner.png");
+  opacity: .5;
   width: 50%;
   height: 100%;
   display: flex;
@@ -41,6 +43,9 @@ form.sign-in-form {
   justify-content: space-between;
 }
 .panel {
+
+  background-position: center;
+
   background-color: white;
   flex-direction: column;
   align-items: center;

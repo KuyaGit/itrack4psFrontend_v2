@@ -58,7 +58,8 @@ export interface schoolname {
 }
 
 export interface ProfileData {
-  accountsdetails_id : number;
+  accountdetail_id : number;
+  accountuser_id: number;
   fName : string;
   lName : string;
   address : string;

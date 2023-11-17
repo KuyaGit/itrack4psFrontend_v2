@@ -1,7 +1,8 @@
 <body>
   <div class="container">
     <div class="signin-signup">
-      <form action="" class="sign-in-form" [formGroup]="loginForm">
+      <div class="form-field">
+        <form action="" class="sign-in-form" [formGroup]="loginForm">
           <h2 class="title">LOGIN</h2>
           <div class="input-field">
               <i class='bx bxs-envelope' style="font-size: 2em;"></i>
@@ -13,6 +14,7 @@
           </div>
           <input type="submit" value="Login" class="btn" (click)="login()">
       </form>
+      </div>
     </div>
     <div class="panel right-panel">
       <div class="content">

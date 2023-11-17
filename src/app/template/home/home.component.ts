@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
     });
     this.cdr.detectChanges();
     }
+    
     logoutModal(){
       Swal.fire({
         icon: 'error',
