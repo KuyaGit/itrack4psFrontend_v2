@@ -7,11 +7,14 @@
 }
 
 body {
+  background: url("https://www.officialgazette.gov.ph/images/uploads/Banner_DSWD-Pantawid_150427_Twitter-041.png") no-repeat,rgba(255, 255, 255, 0.2);;
+  background-blend-mode: lighten;
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #444;
 }
 
 
@@ -22,8 +25,10 @@ form.sign-in-form {
 }
 
 .signin-signup{
-  background-image: url("https://car.dswd.gov.ph/wp-content/uploads/2023/06/Banner.png");
-  opacity: .5;
+  background: url("https://car.dswd.gov.ph/wp-content/uploads/2023/06/Banner.png") no-repeat,rgba(255, 255, 255, 0.2);;
+  background-blend-mode: lighten;
+  background-size: cover;
+  background-position: center;
   width: 50%;
   height: 100%;
   display: flex;
@@ -31,31 +36,12 @@ form.sign-in-form {
   justify-content: space-around;
 }
 
-.container {
-  width: 70vw;
-  height: 80vh;
-  background: #007E94;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3019607843), 0 6px 20px rgba(0, 0, 0, 0.3019607843);
-  overflow: hidden;
-  display: flex;
-  padding: 0;
-  justify-content: space-between;
-}
 .panel {
-
-  background-position: center;
-
-  background-color: white;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 50%;
   text-align: center;
-  padding: 8%;
+  padding: 10%;
   display: flex;
 }
-
 .input-field {
   width: 100%;
   height: 50px;
@@ -99,19 +85,21 @@ form{
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   min-width: 238px;
   padding: 0 10px;
 }
 
-.logo {
+.container {
+  width: 60vh;
+  background: rgba(0,126,148, 0.6);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3019607843), 0 6px 20px rgba(0, 0, 0, 0.3019607843);
+  overflow: hidden;
+  padding: 0;
   position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 100px;
-  height: auto;
+  right: 5%;
 }
-
 .panel h3 {
   font-size: 24px;
   font-weight: 600;
@@ -123,13 +111,24 @@ form{
 }
 
 .image {
-  width: 100%;
+  width: 50%;
   transition: 1.1s ease-in-out;
   transition-delay: 0.4s;
 }
 
 .title {
+  margin-top: 7%;
   font-size: 35px;
   color: #daebee;
   margin-bottom: 10px;
+}
+@media only screen and (max-width: 600px) {
+.container {
+  width: 90vw;
+  background: rgba(0, 126, 148, 0.6);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3019607843), 0 6px 20px rgba(0, 0, 0, 0.3019607843);
+  overflow: hidden;
+  padding: 0;
+}
 }

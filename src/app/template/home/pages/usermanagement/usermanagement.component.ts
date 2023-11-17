@@ -58,11 +58,11 @@ export class UsermanagementComponent implements OnInit{
       this.createaccountForm = this.formbuilder.group({
         fName : ['', [Validators.required]],
         lName : ['', [Validators.required]],
-        account_type: ['', [Validators.required]],
+        account_type: [2],
+        profile_piclink: ['default.png'],
         email : ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
         password: ['', [Validators.required,Validators.minLength(6)]],
-        schoolName : [null, [Validators.required]],
-        profile_piclink: 'https://itrack4ps.s3.ap-southeast-2.amazonaws.com/default.png'
+
       });
   }
 
@@ -98,14 +98,6 @@ export class UsermanagementComponent implements OnInit{
     {
       value : 2,
       text : '4ps Staff'
-    },
-    {
-      value : 3,
-      text : 'Beneficiary'
-    },
-    {
-      value : 4,
-      text: 'School Registrar'
     }
   ];
 
