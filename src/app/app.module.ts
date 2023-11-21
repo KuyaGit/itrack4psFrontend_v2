@@ -21,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ArhivedchildComponent } from './template/home/pages/arhivedchild/arhivedchild.component';
+import { UpdateuserinformationComponent } from './shared/user/updateuserinformation/updateuserinformation.component';
+
 
 
 
@@ -33,6 +35,8 @@ import { ArhivedchildComponent } from './template/home/pages/arhivedchild/arhive
     AppComponent,
     LoginComponent,
     ArhivedchildComponent,
+    UpdateuserinformationComponent,
+    
 
   ],
   imports: [

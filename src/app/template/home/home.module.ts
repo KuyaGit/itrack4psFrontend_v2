@@ -30,8 +30,8 @@ import { ProfileSettingComponent } from '../../shared/profile-setting/profile-se
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { InformationComponent } from 'src/app/shared/information/information.component';
-import { UpdateinfoComponent } from 'src/app/shared/updateinfo/updateinfo.component';
+import { InformationComponent } from 'src/app/shared/holder/information/information.component';
+import { UpdateinfoComponent } from 'src/app/shared/holder/updateinfo/updateinfo.component';
 import { BeneficiaryregComponent } from 'src/app/shared/beneficiaryreg/beneficiaryreg.component';
 import { MatSortModule } from '@angular/material/sort';
 import { ChildbeneficiaryComponent } from 'src/app/shared/childbeneficiary/childbeneficiary.component';
@@ -42,6 +42,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { SchoolaccountsComponent } from './pages/schoolaccounts/schoolaccounts.component';
 import { AvatarComponent } from 'src/app/shared/avatar/avatar.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { ViewuserinformationComponent } from 'src/app/shared/user/viewuserinformation/viewuserinformation.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
     SchoolregistrarComponent,
     SchoolaccountsComponent,
     AvatarComponent,
-    SettingsComponent
+    SettingsComponent,
+    ViewuserinformationComponent,
   ],
   imports: [
     CommonModule,
@@ -92,5 +94,4 @@ import { SettingsComponent } from './pages/settings/settings.component';
   ]
 })
 export class HomeModule {
-
 }

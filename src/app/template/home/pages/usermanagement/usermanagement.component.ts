@@ -12,9 +12,12 @@ import { MatSort } from '@angular/material/sort';
 import { SchoolService } from 'src/app/services/school.service';
 import { accountuser } from 'src/app/services/data';
 import { RegisterService } from 'src/app/services/register.service';
-import { InformationComponent } from 'src/app/shared/information/information.component';
-import { UpdateinfoComponent } from 'src/app/shared/updateinfo/updateinfo.component';
+import { InformationComponent } from 'src/app/shared/holder/information/information.component';
+import { UpdateinfoComponent } from 'src/app/shared/holder/updateinfo/updateinfo.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewuserinformationComponent } from 'src/app/shared/user/viewuserinformation/viewuserinformation.component';
+import { UpdateModeEnum } from 'chart.js';
+import { UpdateuserinformationComponent } from 'src/app/shared/user/updateuserinformation/updateuserinformation.component';
 
 @Component({
   selector: 'app-usermanagement',
@@ -67,11 +70,11 @@ export class UsermanagementComponent implements OnInit{
   }
 
   viewItem(accountuser_id: any) {
-        this.viewItemDialog(accountuser_id, 'User Information', InformationComponent);
+        this.viewItemDialog(accountuser_id, 'User Information', ViewuserinformationComponent);
   }
 
   updateItem(accountuser_id: any) {
-    this.viewItemDialog(accountuser_id, 'Edit Information', UpdateinfoComponent);
+    this.viewItemDialog(accountuser_id, 'Edit Information', UpdateuserinformationComponent);
   }
 
 
