@@ -27,14 +27,17 @@ export class InformationComponent implements OnInit{
     private fb: FormBuilder,
   ){
     this.profileForm = this.fb.group({
-      accountuser_id : [''],
-      email : ['', [Validators.required, Validators.email]],
-      fname : ['', [Validators.required]],
-      lname : ['', [Validators.required]],
-      mobile_number : ['', [Validators.required]],
-      address : ['', [Validators.required]],
-      account_type: [''],
-      schoolname: [''],
+      householdid : [''],
+      fname : [''],
+      mname : [''],
+      lname : [''],
+      birthdate : [''],
+      address : [''],
+      maritalstatus : [''],
+      mobile_number : [''],
+      spoucename: [''],
+      spoucebirthdate: [''],
+      assigned: [''],
       profile_piclink: [''],
     })
   }
@@ -43,49 +46,47 @@ export class InformationComponent implements OnInit{
     return this.profileForm.controls;
   }
 
-  accountTypeText : string = ''
-
-  accountTypeName : any [] = [
-    { value : 1 ,
-      text : 'Admin'
-    },
-    {
-      value : 2,
-      text : '4ps Staff'
-    },
-    {
-      value : 3,
-      text : 'Beneficiary'
-    },
-    {
-      value : 4,
-      text: 'School Registrar'
-    }
-  ];
-
-  getAccountType(account_type: number): string {
-    const status = this.accountTypeName.find(
-      (option) => option.value === account_type
-    );
-    return status ? status.text : '';
-  }
+ 
+ 
   typeaccount?: number
   ngOnInit(): void {
-
-    this.inputdata = this.data
+    this.inputdata = this.data;
     this.subsription_get_all_user.add(
-      this._dataService.get_user_profile(this.inputdata.code).subscribe((result) => {
+      this._dataService.get_holder_profile(this.inputdata.code).subscribe((result) => {
         this.userInfo = result.result[0];
-        this.fileUrl = this.userInfo.profile_img;
-        this.typeaccount = this.userInfo.account_type;
-        if (typeof this.userInfo.account_type === 'number') {
-          this.userInfo.account_type = Number(this.userInfo.account_type);
-          this.userInfo.accountTypeName = this.getAccountType(this.userInfo.account_type);
+
+        // Convert the birthdate to "Month - Date - Year" format
+        if (this.userInfo.birthdate) {
+          const isoDate = this.userInfo.birthdate;
+          const parsedDate = new Date(isoDate);
+          const formattedDate = parsedDate.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          });
+
+          // Assign the formatted date to the birthdate property
+          this.userInfo.birthdate = formattedDate;
         }
+
+        if (this.userInfo.spoucebirthdate) {
+          const isoDateSpouse = this.userInfo.spoucebirthdate;
+          const parsedDateSpouse = new Date(isoDateSpouse);
+          const formattedDateSpouse = parsedDateSpouse.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          });
+
+          // Assign the formatted date to the spousebirthdate property
+          this.userInfo.spoucebirthdate = formattedDateSpouse;
+        }
+        this.fileUrl = this.userInfo.profile_piclink;
         this.profileForm.patchValue(this.userInfo);
       })
-    )
+    );
   }
+
   closepopup(){
     this.ref.close();
   }

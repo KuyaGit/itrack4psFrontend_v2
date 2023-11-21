@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs'
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { accountdetails, getalluser } from 'src/app/services/data';
+import { accountdetails, getalluser, holder } from 'src/app/services/data';
 import { MatDialog } from '@angular/material/dialog';
 import { BeneficiaryregComponent } from 'src/app/shared/beneficiaryreg/beneficiaryreg.component';
 import { UpdateModeEnum } from 'chart.js';
@@ -32,12 +32,13 @@ export class BeneficiaryFormComponent implements OnInit{
 
 
   alluserData = new MatTableDataSource<getalluser>([]);
-
+  archivedHolder = new MatTableDataSource<holder>([]);
   displayedColumns: any[] = [
     'accountuser_id',
     'name',
     'address',
     'mobile_number',
+    'created',
     'actions'
   ];
 
@@ -53,21 +54,16 @@ export class BeneficiaryFormComponent implements OnInit{
   ) {}
   ngOnInit(): void {
     this.getAllbeneficiary();
+    console.log(this.fname)
   }
-
-  navigatetoChildbeneficiaries(householdid : Number) {
-    this.router.navigate(["/home/householdbeneficiary"])
-  }
+  
   alluserList!: getalluser[]
   getAllbeneficiary() {
     this.subsription_get_all_user.add(
-      this._dataService.get_all_user().subscribe(
+      this._dataService.getholder().subscribe(
         (result) => {
           if (Array.isArray(result.result)) {
-            this.alluserList = result.result.filter(
-              (item: getalluser) => item.account_type === 3,
-            );
-            console.log(this.alluserList);
+            this.alluserList = result.result
             if (this.paginator && this.sort) {
               this.alluserData = new MatTableDataSource(this.alluserList);
               this.alluserData.paginator = this.paginator;
@@ -81,13 +77,59 @@ export class BeneficiaryFormComponent implements OnInit{
       )
     );
   }
-deleteuser(accountuser_id: string) {
+  allarchivedHolder!: holder[]
+  getholderArchived() {
+    this.archived = true;
+    this.subsription_get_all_user.add(
+      this._dataService.getholderarchived().subscribe(
+        (result) => {
+          if (Array.isArray(result.result)) {
+            this.allarchivedHolder = result.result
+            if (this.paginator && this.sort) {
+              this.archivedHolder = new MatTableDataSource(this.allarchivedHolder);
+              this.archivedHolder.paginator = this.paginator;
+              this.archivedHolder.sort = this.sort;
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    );
+  }
+restoreholder(householdid : string){
+  this._alertService.simpleAlert(
+    'warning',
+    'Warning',
+    'Are you sure you want to restore this user?',
+    () => {
+      this._dataService.restoreholder(householdid).subscribe(
+        (result) => {
+          if (result && result.status === '200') {
+            this.handleSuccess('User profile deleted successfully');
+            this.getholderArchived();
+          } else {
+            this.handleError('Failed to delete user profile');
+          }
+        },
+        (error) => {
+          this.handleError(
+            'An error occurred while deleting the user profile'
+          );
+          console.error(error);
+        }
+  )},
+  )
+  
+}
+deleteuser(householdid: string) {
     this._alertService.simpleAlert(
       'warning',
       'Warning',
       'Are you sure you want to delete this user?',
       () => {
-        this._dataService.deleteuserprofile(accountuser_id).subscribe(
+        this._dataService.deleteholderprofile(householdid).subscribe(
           (result) => {
             if (result && result.status === '200') {
               this.handleSuccess('User profile deleted successfully');
@@ -106,29 +148,29 @@ deleteuser(accountuser_id: string) {
         );
       },
       () => {
-        //cancel
         console.log('Action canceled.');
       }
     );
   }
 createbeneficiary(){
     this.createItemDialog(BeneficiaryregComponent)
+    this.getAllbeneficiary();
 }
-viewItem(accountuser_id: any) {
-    this.viewItemDialog(accountuser_id, 'User Information', InformationComponent);
+viewItem(householdid: any) {
+    this.viewItemDialog(householdid, '4ps Holder Information', InformationComponent);
 }
 
 updateItem(accountuser_id: any) {
-this.viewItemDialog(accountuser_id, 'Edit Information', UpdateinfoComponent);
+  this.viewItemDialog(accountuser_id, 'Edit Information', UpdateinfoComponent);
 }
 
 
-viewItemDialog(accountuser_id: number, title: string, component: any) {
+viewItemDialog(householdid: string, title: string, component: any) {
   var _popup = this.dialog.open(component, {
     width: '80%',
     data: {
       title: title,
-      code: accountuser_id
+      code: householdid,
     }
   });
   _popup.afterClosed().subscribe(item => {
@@ -151,6 +193,9 @@ createItemDialog(component: any) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.alluserData.filter = filterValue.trim().toLowerCase();
 }
+
+archived : boolean = false;
+
 
 private handleError(message: string) {
   this._alertService.simpleAlert('error', 'Error', message);

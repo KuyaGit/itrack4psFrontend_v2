@@ -4,49 +4,55 @@
       <header>{{data.title}}</header>
     </div>
     <div class="first-info">
-      <mat-grid-list cols="2" rowHeight="2:1" >
-        <mat-grid-tile class="user-image">
-          <div class="image">
-            <img class="avatar huge" [src]="userInfo?.profile_piclink">
-          </div>
-        </mat-grid-tile>
-      <mat-grid-tile class="name">
-        <div class="name">
-          <form [formGroup]="profileForm">
-            <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
-              <mat-label>First Name</mat-label>
-              <input matInput type="text" placeholder="First Name" id="inputEmail4" formControlName="fname" readonly>
-            </mat-form-field>
-            <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
-              <mat-label>Last Name</mat-label>
-              <input matInput type="text" placeholder="Last Name" id="inputEmail4" formControlName="lname" readonly>
-            </mat-form-field>
-          </form>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
+      <div class="image">
+        <img class="avatar huge" [src]="userInfo?.profile_piclink">
+      </div>
     </div>
     <div class="second-info">
       <form [formGroup]="profileForm">
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
-          <mat-label>Email</mat-label>
-          <input matInput type="text" placeholder="Email" id="inputEmail4" formControlName="email" readonly>
+          <mat-label>Household ID</mat-label>
+          <input matInput type="text" placeholder="Household ID" id="inputEmail4" formControlName="householdid" readonly>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" placeholder="Firstname" id="inputEmail4" formControlName="fname" readonly>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+          <mat-label>Middle Name</mat-label>
+          <input matInput type="text" placeholder="Middle Name" id="inputEmail4" formControlName="mname" readonly>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" placeholder="Last Name" id="inputEmail4" formControlName="lname" readonly>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+          <mat-label>Birthdate</mat-label>
+          <input matInput type="text" placeholder="Birthdate" id="inputEmail4" formControlName="birthdate" readonly>
         </mat-form-field>
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
           <mat-label>Address</mat-label>
           <input matInput type="text" placeholder="Address" id="inputEmail4" formControlName="address" readonly>
         </mat-form-field>
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+          <mat-label>Marital Status</mat-label>
+          <input matInput type="text" placeholder="Marital Status" id="inputEmail4" formControlName="maritalstatus" readonly>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
           <mat-label>Mobile Number</mat-label>
           <input matInput type="text" placeholder="Mobile Number" id="inputEmail4" formControlName="mobile_number" readonly>
         </mat-form-field>
-        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true"*ngIf='this.typeaccount == 4'>
-          <mat-label>School Name</mat-label>
-          <input matInput type="text" placeholder="School Name" id="inputEmail4" formControlName="schoolname" readonly>
+        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+          <mat-label>Spouse Name</mat-label>
+          <input matInput type="text" placeholder="Spouse Name" id="inputEmail4" formControlName="spoucename" readonly>
         </mat-form-field>
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
-          <mat-label>Account Type</mat-label>
-          <input matInput type="text" placeholder="Account Type" id="inputEmail4" formControlName="account_type" [value]="userInfo?.accountTypeName" readonly>
+          <mat-label>Spouse Birthdate</mat-label>
+          <input matInput type="text" placeholder="Spouse Name" id="inputEmail4" formControlName="spoucebirthdate" readonly>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+          <mat-label>Created By</mat-label>
+          <input matInput type="text" placeholder="Created By" id="inputEmail4" formControlName="assigned" readonly>
         </mat-form-field>
       </form>
     </div>

@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { ViewchildComponent } from 'src/app/shared/beneficiary/viewchild/viewchild.component';
 
 
+
 @Component({
   selector: 'app-schoolregistrar',
   templateUrl: './schoolregistrar.component.html',

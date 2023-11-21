@@ -1,5 +1,6 @@
 body{
   background: var(--body-color);
+  height: 90vh;
   padding-top: 2% !important;
   padding:  3%;
   overflow: auto;
@@ -58,11 +59,18 @@ body{
   width: 100%;
 }
 
-.large-button {
+button {
   font-size: 16px;
   padding: 12px 24px;
 }
-
+.image-select{
+  margin-top: 3%;
+  background-color: #007E94;
+  color: white;
+}
+.image-select:hover{
+  background-color: #7A5CFA;
+}
 button[type="submit"] {
   background-color: #007E94;
   color: #fff;
@@ -164,6 +172,9 @@ button[type="submit"]:hover {
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   margin-bottom: 3% ;
+  display: flex;
+  background-color: #fff;
+  justify-content: center;
 }
 form{
   padding-top: 1%
@@ -182,26 +193,27 @@ form{
 mat-grid-tile .name{
   display: block;
 }
-
-.center img {
-  transition: opacity 0.35s ease-in;
+.control-container{
+  display: flex;
+  flex-direction: column;
 }
+.image-container {
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
 
-.center img:hover {
-  opacity: 0.4;
-  filter: grayscale(100%);
-}
+  > mat-progress-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-.center i {
-  color: white;
-  transform: scale(0);
-  position: absolute;
-  top: 69%;
-  left: 49%;
-}
-
-.center img:hover + i {
-  transform: scale(4);
-  transition: transform 0.35s ease-in;
-
+  > img {
+    width: 50%;
+    min-width: 30%;
+    max-width: 30%;
+    border-radius: 50%;
+  }
 }

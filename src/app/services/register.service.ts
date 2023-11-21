@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { accountuser } from './data';
 
 
@@ -10,7 +10,7 @@ import { accountuser } from './data';
   providedIn: 'root'
 })
 export class RegisterService {
-  private url = `${environment.server_link}/api/beneficiary/register`;
+  private url = environment.server_link;
 
   constructor(
     private http: HttpClient
@@ -21,5 +21,21 @@ export class RegisterService {
     post(this.url,
       accountuser,
       );
+  }
+  public addholder (holder: any): Observable<any> {
+    return this.http.post(this.url + '/api/admin/addholder', holder)
+
+    .pipe(catchError(this.handleError));
+  }
+  
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

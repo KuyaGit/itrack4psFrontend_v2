@@ -14,7 +14,6 @@ export class AddUserService {
 
   constructor(
     private http: HttpClient,
-
   ) { }
 
   public adduser( accountdetails: any ): Observable<any>{

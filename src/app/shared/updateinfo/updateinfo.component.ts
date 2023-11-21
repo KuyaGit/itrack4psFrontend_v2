@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { HttpResponse } from '@angular/common/http';
+import { holder } from 'src/app/services/data';
 
 @Component({
   selector: 'app-updateinfo',
@@ -19,6 +20,10 @@ import { HttpResponse } from '@angular/common/http';
 export class UpdateinfoComponent implements OnInit{
   id: any = localStorage.getItem('user_loginSession')
   account_type = (JSON.parse(this.id)).account_type;
+  fname = (JSON.parse(this.id)).fname;
+  lname = (JSON.parse(this.id)).lname;
+  assignedName = this.fname + ' ' + this.lname;
+
   userInfo: any;
   inputdata : any;
   custdata: any;
@@ -36,14 +41,18 @@ export class UpdateinfoComponent implements OnInit{
     private _alertService: AlertServiceService,
   ){
     this.profileForm = this.fb.group({
-      accountuser_id : [''],
-      email : ['', [Validators.required, Validators.email]],
-      fname : ['', [Validators.required]],
-      lname : ['', [Validators.required]],
-      mobile_number : ['', [Validators.required]],
-      address : ['', [Validators.required]],
-      account_type: [''],
-      schoolName: [''],
+      householdid : [''],
+      fname : [''],
+      mname : [''],
+      lname : [''],
+      birthdate : [''],
+      address : [''],
+      maritalstatus : [''],
+      mobile_number : [''],
+      spoucename: [''],
+      spoucebirthdate: [''],
+      assigned: [''],
+      update_by: [this.assignedName],
       profile_piclink: [''],
     })
   }
@@ -51,35 +60,40 @@ export class UpdateinfoComponent implements OnInit{
     // This function will return the form controls
     return this.profileForm.controls;
   }
-
-  accountTypeText : string = ''
-
-  accountTypeName : any [] = [
-    { value : 1 ,
-      text : 'Admin'
-    },
-    {
-      value : 2,
-      text : '4ps Staff'
-    },
-  ];
-
-  getAccountType(account_type: number): string {
-    const status = this.accountTypeName.find(
-      (option) => option.value === account_type
-    );
-    return status ? status.text : '';
-  }
+  householdid: any;
   ngOnInit(): void {
     this.inputdata = this.data
     this.subsription_get_all_user.add(
-      this._dataService.get_user_profile(this.inputdata.code).subscribe((result) => {
+      this._dataService.get_holder_profile(this.inputdata.code).subscribe((result) => {
         this.userInfo = result.result[0];
-        this.fileUrl = this.userInfo.profile_piclink;
-        if (typeof this.userInfo.account_type === 'number') {
-          this.userInfo.account_type = Number(this.userInfo.account_type);
-          this.userInfo.accountTypeName = this.getAccountType(this.userInfo.account_type);
+        this.householdid = this.userInfo.householdid
+        if (this.userInfo.birthdate) {
+          const isoDate = this.userInfo.birthdate;
+          const parsedDate = new Date(isoDate);
+          const formattedDate = parsedDate.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          });
+
+          // Assign the formatted date to the birthdate property
+          this.userInfo.birthdate = formattedDate;
         }
+
+        if (this.userInfo.spoucebirthdate) {
+          const isoDateSpouse = this.userInfo.spoucebirthdate;
+          const parsedDateSpouse = new Date(isoDateSpouse);
+          const formattedDateSpouse = parsedDateSpouse.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          });
+
+          // Assign the formatted date to the spousebirthdate property
+          this.userInfo.spoucebirthdate = formattedDateSpouse;
+        }
+        this.fileUrl = this.userInfo.profile_piclink;
+
         this.profileForm.patchValue(this.userInfo);
         console.log(this.userInfo);
       })
@@ -93,17 +107,11 @@ export class UpdateinfoComponent implements OnInit{
 
 
   selectedFileName!: any;
-
-
-
   profileInfo!: any;
-  defaultProfilePhotoUrl: string = 'assets/default.png'
 
   hide = true;
   isInputDisabled = false;
   subscription: Subscription = new Subscription();
-
-
   secActive: boolean = false;
   passwordSuccess: boolean = false;
   infoSuccess: boolean = false;
@@ -122,32 +130,10 @@ export class UpdateinfoComponent implements OnInit{
     this.profileForm.controls['confirmPassword'].value;
   }
 
-  onInfoSubmit() {
-    this.infoSuccess = true;
-    this.profileForm.controls['name'].value;
-  }
 
 
-  accountuser_id : number = 0;
-  getProfileData() {
-    const userSessString = localStorage.getItem('user_loginSession');
-    if (userSessString !== null) {
-      const parsed = JSON.parse(userSessString);
-      this.accountuser_id = parsed.accountuser_id;
-    }
-    this.subscription.add(
-      this._dataService.get_user_profile(this.accountuser_id).subscribe((result) => {
-        console.log(result);
-        this.profileInfo = result.result[0];
-        console.log(this.profileInfo)
-        this.fileUrl = this.profileInfo.profile_piclink;
-        this.profileForm.patchValue(this.profileInfo);
 
-      })
-
-    );
-  }
-
+  
   currentFile?: File;
   progress = 0;
   message = '';
@@ -225,18 +211,18 @@ export class UpdateinfoComponent implements OnInit{
   }
 
   update() {
-    this._dataService.update_profile(this.profileForm.value).subscribe(
+    this._dataService.update_holderinfo(this.profileForm.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {
-          this.handleSuccess('Beneficiary Profile Created');
+          this.handleSuccess('4ps Holder Information Updated');
           this.upload()
-          await this.getProfileData();
+          this.ref.close();
         } else {
-          this.handleError('Failed to Create Beneficiary profile');
+          this.handleError('Failed to Update 4ps Holder Information');
         }
       },
       (error) => {
-        this.handleError('An error occurred while updating profile');
+        this.handleError('Server Error');
         console.error(error);
       }
     );

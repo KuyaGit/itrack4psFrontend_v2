@@ -189,7 +189,7 @@ export class ProfileSettingComponent implements OnInit{
   }
 
   update() {
-    console.log(this.profileForm.value);
+    console.log(this.profileForm.value)
     this._dataService.update_profile(this.profileForm.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {

@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'beneficiary',
-        title: 'Beneficiary',
+        title: '4ps Holder',
         component: BeneficiaryFormComponent
       },
       {
@@ -40,7 +40,7 @@ const routes: Routes = [
         component: SettingsComponent
       },
       {
-        path: 'householdbeneficiary',
+        path: 'householdbeneficiary/:id',
         title: 'Household Beneficiary',
         component: HouseholdbeneficiaryComponent
       },

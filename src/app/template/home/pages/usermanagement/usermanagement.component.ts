@@ -116,14 +116,12 @@ export class UsermanagementComponent implements OnInit{
     this.subsription_get_all_user.add(
       this._dataService.get_all_user().subscribe(
         (result) => {
-          console.log(result);
           if (Array.isArray(result.result)) {
             this.alluserList = result.result;
             this.alluserList.forEach((user)=>{
               user.account_type = Number(user.account_type);
               user.accountTypeName = this.getAccountType(user.account_type);
             })
-            console.log(this.alluserList);
             if (this.paginator && this.sort) {
               this.alluserData = new MatTableDataSource(this.alluserList);
               this.alluserData.paginator = this.paginator;

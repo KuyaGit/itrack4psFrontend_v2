@@ -4,7 +4,20 @@ export interface accountuser {
   password : string;
   account_type : number;
 }
-
+export interface holder {
+  householdid : string;
+  fname : string;
+  mname : string;
+  lname : string;
+  birthdate : string;
+  address : string;
+  maritalstatus : string;
+  mobile_number : string;
+  spoucename : string;
+  spoucebirthdate : string;
+  assigned : string;
+  update_by : string;
+}
 export interface accountdetails {
   accoundetails_id : number;
   fName : string;

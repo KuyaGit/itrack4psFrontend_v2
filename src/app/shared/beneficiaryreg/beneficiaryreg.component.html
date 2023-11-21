@@ -1,53 +1,130 @@
-<h2 mat-dialog-title>Create Household Beneficiary Account</h2>
+<h2 mat-dialog-title>Input 4ps Holder Information</h2>
   <mat-dialog-content class="mat-typography">
       <mat-grid-list cols="1">
         <form [formGroup]="registrationForm">
+          <div class="first-info">
+            <div class="control-container">
+              <div class="image-container">
+                <img
+                  *ngIf="imagePreview"
+                  [src]="imagePreview"
+                  alt="Photo"
+                />
+                <img
+                  *ngIf="!imagePreview"
+                  [src]="fileUrl"
+                  alt="Photo"
+                />
+              </div>
+              <input
+                #inputField
+                hidden
+                type="file" 
+                accept="image/*"
+                (change)="selectFile($event)"
+                (click)="inputField.value = ''"
+              />
+              <button mat-raised-button (click)="inputField.click()" class="image-select">
+                Select Photo
+              </button>
+            </div>
+          </div>
           <div class="example-container">
             <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true">
               <mat-label>Household ID</mat-label>
-              <input matInput placeholder="Household ID" formControlName="householdNumber">
+              <input matInput placeholder="Household ID" formControlName="householdid">
               <mat-error class="error-message">
-                <span *ngIf="registrationForm.controls['householdNumber'].errors?.touched || registrationForm.controls['householdNumber'].errors?.required">This field is required.</span>
+                <span *ngIf="registrationForm.controls['householdid'].errors?.touched || registrationForm.controls['householdid'].errors?.required">This field is required.</span>
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="width-50" hideRequiredMarker="true">
               <mat-label>First Name</mat-label>
-              <input matInput formControlName="fName" required>
+              <input matInput formControlName="fname" required>
               <mat-error class="error-message">
-                <span *ngIf="registrationForm.controls.fName.touched">This field is required.</span>
+                <span *ngIf="registrationForm.controls.fname.touched">This field is required.</span>
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="width-50 ml-2" hideRequiredMarker="true">
-              <mat-label>Surname</mat-label>
-              <input matInput formControlName="lName">
+              <mat-label>Middle Name</mat-label>
+              <input matInput formControlName="mname">
               <mat-error class="error-message">
-                <span *ngIf="registrationForm.controls.lName.touched">This field is required.</span>
-              </mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Ex. juandelacruz@gmail.com" formControlName="email" >
-              <mat-error class="error-message">
-                <span *ngIf="registrationForm.controls['email'].errors?.touched || registrationForm.controls['email'].errors?.required">This field is required.</span>
-                <span *ngIf="registrationForm.controls['email'].errors?.pattern">Please enter a valid email address.</span>
-              </mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true">
-              <mat-label>Enter password</mat-label>
-              <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error class="error-message">
-                <span *ngIf="registrationForm.controls.password.touched && registrationForm.controls['password'].errors?.required">
-                  This field is required.</span>
-                <span *ngIf="registrationForm.controls['password'].errors?.minlength">This password must 6 or more characters</span>
+                <span *ngIf="registrationForm.controls.mname.touched">This field is required.</span>
               </mat-error>
             </mat-form-field>
             <br>
           </div>
+          <div class="example-container">
+            <mat-form-field appearance="outline" class="width-50" hideRequiredMarker="true">
+              <mat-label>Surname</mat-label>
+              <input matInput formControlName="lname">
+              <mat-error class="error-message">
+                <span *ngIf="registrationForm.controls.lname.touched">This field is required.</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="width-50 ml-2" hideRequiredMarker="true">
+              <mat-label>Birthdate</mat-label>
+              <input matInput formControlName="birthdate"  [matDatepicker]="picker" required>
+              <mat-hint>MM/DD/YYYY</mat-hint><mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+              <mat-error class="error-message">
+                <span *ngIf="registrationForm.controls.birthdate.touched">This field is required.</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput formControlName="mobile_number">
+            <mat-error class="error-message">
+              <span *ngIf="registrationForm.controls.lname.touched">This field is required.</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="width-50" hideRequiredMarker="true">
+            <mat-label>Address</mat-label>
+                <mat-select formControlName="address" >
+                  <mat-option *ngFor="let item of barangay" [value]="item.barangay">
+                    {{item.barangay}}
+                  </mat-option>
+                </mat-select>
+                <mat-error class="error-message">
+                  <span *ngIf="registrationForm.controls['address'].errors?.touched || registrationForm.controls['address'].errors?.required">This field is required.</span>
+                </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="width-50 ml-2" hideRequiredMarker="true">
+            <mat-label>Marital Status</mat-label>
+                <mat-select formControlName="maritalstatus" >
+                  <mat-option value="Single Mom">
+                    Single Mom
+                  </mat-option>
+                  <mat-option value="Married">
+                    Married
+                  </mat-option>
+                  <mat-option value="Devorced">
+                    Devorced
+                  </mat-option>
+                  <mat-option value="Widow">
+                    Widow
+                  </mat-option>
+                </mat-select>
+                <mat-error class="error-message">
+                  <span *ngIf="registrationForm.controls['maritalstatus'].errors?.touched || registrationForm.controls['maritalstatus'].errors?.required">This field is required.</span>
+                </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="registrationForm.controls['maritalstatus'].value === 'Married'|| registrationForm.controls['maritalstatus'].value === 'Widow'">
+            <mat-label>Spouse Name</mat-label>
+            <input matInput formControlName="spoucename">
+            <mat-error class="error-message">
+              <span *ngIf="registrationForm.controls.spoucename.touched">This field is required.</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="registrationForm.controls['maritalstatus'].value === 'Married'|| registrationForm.controls['maritalstatus'].value === 'Widow'">
+            <mat-label>Spouse Birthdate</mat-label>
+            <input matInput formControlName="spoucebirthdate"  [matDatepicker]="picker" required>
+            <mat-hint>MM/DD/YYYY</mat-hint><mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+            <mat-error class="error-message">
+              <span *ngIf="registrationForm.controls.spoucebirthdate.touched">This field is required.</span>
+            </mat-error>
+          </mat-form-field>
         </form>
     </mat-grid-list>
   </mat-dialog-content>

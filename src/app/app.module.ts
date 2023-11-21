@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ArhivedchildComponent } from './template/home/pages/arhivedchild/arhivedchild.component';
 
 
 
@@ -31,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     AppComponent,
     LoginComponent,
+    ArhivedchildComponent,
 
   ],
   imports: [

@@ -34,11 +34,6 @@ header{
   padding: 3%;
 }
 .image{
-  top: 0%;
-  left: 0;
-  right: 1%;
-  bottom: 0;
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,6 +65,11 @@ form{
   margin-bottom: 3% ;
 }
 
+.first-info{
+  display: flex;
+}
 img {
-  border: solid 10px black
+  width: 30%;
+  border: solid 3px #007E94;
+  border-radius: 50%;
 }

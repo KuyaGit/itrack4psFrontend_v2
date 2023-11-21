@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { MatDialog, } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChildbeneficiaryComponent } from 'src/app/shared/childbeneficiary/childbeneficiary.component';
 import { Subscription } from 'rxjs'
 import { DataService } from 'src/app/services/data.service';
-import { ViewchildComponent } from 'src/app/shared/beneficiary/viewchild/viewchild.component';
 
+import { ActivatedRoute, Router } from '@angular/router';
+import { ViewchildComponent } from 'src/app/shared/beneficiary/viewchild/viewchild.component';
 @Component({
   selector: 'app-householdbeneficiary',
   templateUrl: './householdbeneficiary.component.html',
@@ -18,15 +19,18 @@ export class HouseholdbeneficiaryComponent implements OnInit {
   accountuser_id = (JSON.parse(this.id)).accountuser_id;
   childbeneficiaryForm: FormGroup;
     constructor(
-      private alertService: AlertServiceService,
+      private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
       public formbuilder: FormBuilder,
       private _dataService: DataService,
       private _alertService: AlertServiceService
     ) {
+      this.activatedRoute.params.subscribe(params=>{
+        console.log(params)
+      })
       this.childbeneficiaryForm = this.formbuilder.group({
-        fName : ['', [Validators.required]],
-        sName : ['', [Validators.required]],
+        fname : ['', [Validators.required]],
+        lname : ['', [Validators.required]],
         password: ['', [Validators.required,Validators.minLength(6)]],
         schoolName : ['', [Validators.required]],
       })
@@ -34,6 +38,8 @@ export class HouseholdbeneficiaryComponent implements OnInit {
   get form(): { [key: string]: AbstractControl } {
     return this.childbeneficiaryForm.controls;
   }
+  inputdata : any;
+  
   ngOnInit() {
     this.getChildsData()
   }

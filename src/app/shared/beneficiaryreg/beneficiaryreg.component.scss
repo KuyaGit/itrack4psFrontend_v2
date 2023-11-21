@@ -62,3 +62,43 @@ mat-label{
   border-radius: 50%;
 }
 
+.image-container {
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  > mat-progress-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  > img {
+    width: 20%;
+    border-radius: 50%;
+    border: 3px solid #007E94;
+    margin-bottom: 2%;
+  }
+}
+
+.image-select{
+  background-color: #007E94;
+  color: white;
+}
+
+.first-info{
+  padding: 2%;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  margin-bottom: 3% ;
+  display: flex;
+  background-color: #fff;
+  justify-content: center;
+}
+
+.control-container{
+  display: flex;
+  flex-direction: column;
+}
