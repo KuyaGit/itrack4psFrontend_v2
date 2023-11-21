@@ -80,10 +80,8 @@ export class UpdateuserinformationComponent {
           this.userInfo.accountTypeName = this.getAccountType(this.userInfo.account_type);
         }
         this.profileForm.patchValue(this.userInfo);
-        console.log(this.userInfo);
       })
     );
-    console.log(this.userInfo);
   }
   closepopup(){
     this.ref.close();
@@ -227,8 +225,9 @@ export class UpdateuserinformationComponent {
     this._dataService.update_profile(this.profileForm.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {
-          this.handleSuccess('Beneficiary Profile Created');
+          this.handleSuccess(result.message);
           this.upload()
+          this.ref.close();
           await this.getProfileData();
         } else {
           this.handleError('Failed to Create Beneficiary profile');
@@ -241,10 +240,10 @@ export class UpdateuserinformationComponent {
     );
   }
   private handleSuccess(message: any) {
-    this._alertService.simpleAlert('success', 'success', message);
+    this._alertService.simpleAlert('Success', 'success', message);
   }
 
   private handleError(message: any) {
-    this._alertService.simpleAlert('error', 'Error', message);
+    this._alertService.simpleAlert('Error', 'Error', message);
   }
 }

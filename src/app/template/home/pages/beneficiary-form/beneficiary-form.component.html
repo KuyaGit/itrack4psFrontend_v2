@@ -21,7 +21,7 @@
       Archived
     </button>
   </div>
-    <div class="table-container" *ngIf="archived == false">
+  <div class="table-container" *ngIf="archived == false">
       <table mat-table [dataSource]="alluserData" matSort > 
         <!-- header row -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>

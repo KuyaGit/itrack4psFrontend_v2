@@ -138,8 +138,8 @@ export class SchoolregistrarComponent implements OnInit {
             console.log(this.alluserList)
             this.alluserList = this.alluserList.filter((user)=> user.beneficiary_status === 2)
             this.alluserList.forEach((user) => {
-              user.statusName = Number(user.status);
-              user.statusText = this.getStatusType(user.statusName);
+              user.status = Number(user.status);
+              user.statusText = this.getStatusType(user.status);
             });
 
             // Add this part to change the status to the corresponding value

@@ -1,34 +1,42 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { MatDialog, } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ChildbeneficiaryComponent } from 'src/app/shared/childbeneficiary/childbeneficiary.component';
+import { ChildbeneficiaryComponent } from 'src/app/shared/beneficiary/childbeneficiary/childbeneficiary.component';
 import { Subscription } from 'rxjs'
 import { DataService } from 'src/app/services/data.service';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ViewchildComponent } from 'src/app/shared/beneficiary/viewchild/viewchild.component';
+import { UpdateinfoComponent } from 'src/app/shared/holder/updateinfo/updateinfo.component';
+import { InformationComponent } from 'src/app/shared/holder/information/information.component';
+import { child_beneficiary, getalluser } from 'src/app/services/data';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { BreakpointObserver } from '@angular/cdk/layout';
 @Component({
   selector: 'app-householdbeneficiary',
   templateUrl: './householdbeneficiary.component.html',
   styleUrls: ['./householdbeneficiary.component.scss']
 })
 export class HouseholdbeneficiaryComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   hide = true;
-  id: any = localStorage.getItem('user_loginSession')
-  accountuser_id = (JSON.parse(this.id)).accountuser_id;
-  childbeneficiaryForm: FormGroup;
+  householdid: any;
+  childbeneficiaryForm: FormGroup;  
     constructor(
+      private breakpointObserver: BreakpointObserver,
+      private cdr : ChangeDetectorRef,
       private activatedRoute: ActivatedRoute,
       public dialog: MatDialog,
       public formbuilder: FormBuilder,
       private _dataService: DataService,
       private _alertService: AlertServiceService
     ) {
-      this.activatedRoute.params.subscribe(params=>{
-        console.log(params)
-      })
       this.childbeneficiaryForm = this.formbuilder.group({
+        householdid : [this.householdid],
         fname : ['', [Validators.required]],
         lname : ['', [Validators.required]],
         password: ['', [Validators.required,Validators.minLength(6)]],
@@ -42,16 +50,20 @@ export class HouseholdbeneficiaryComponent implements OnInit {
   
   ngOnInit() {
     this.getChildsData()
+    
   }
 
-  addchildBeneficiary() {
-    this.openDialog(ChildbeneficiaryComponent)
-    this.getChildsData()
+  addchildBeneficiary(householdid: string) {
+    this.openDialog(householdid, 'Create 4ps Beneficiary', ChildbeneficiaryComponent)
   }
 
-  openDialog(component: any) {
+  openDialog(householdid: string, title : string, component: any) {
     let dialogRef = this.dialog.open(component,{
       width: '80%',
+      data: {
+        title: title,
+        code: householdid
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -59,14 +71,40 @@ export class HouseholdbeneficiaryComponent implements OnInit {
       this.getChildsData()
     });
   }
+  archived: boolean = false;
   dataInfo!: any;
   subscription: Subscription = new Subscription();
   user!: any;
+  displayedColumns: any[] = [
+    'child_id',
+    'full_name',
+    'status',
+    'assigned',
+    'actions'
+  ];
+  alluserData = new MatTableDataSource<child_beneficiary>([]);
+  alluserList!: child_beneficiary[];
   getChildsData() {
+    this.activatedRoute.params.subscribe(params=>{
+      this.householdid = params.id
+    })
     this.subscription.add(
-      this._dataService.getbeneficiary(this.accountuser_id).subscribe(
+      this._dataService.getbeneficiary(this.householdid).subscribe(
         (result) => {
-            this.dataInfo = result.results.data;
+          if (Array.isArray(result.result)) {
+            this.alluserList = result.result;
+            console.log(this.alluserList)
+            this.alluserList.forEach((user)=>{
+              user.status = Number(user.status)
+              user.statusName = this.getStatusType(user.status);
+            })
+            if (this.paginator && this.sort) {
+              console.log(this.alluserList)
+              this.alluserData = new MatTableDataSource(this.alluserList);
+              this.alluserData.paginator = this.paginator;
+              this.alluserData.sort = this.sort;
+            }
+          }
         },
         (error) => {
           console.log(error);
@@ -74,8 +112,13 @@ export class HouseholdbeneficiaryComponent implements OnInit {
       )
     );
   }
-  viewItem(child_id: any) {
-    console.log(child_id);
+
+updateItem(accountuser_id: any) {
+  this.viewItemDialog(accountuser_id, 'Edit Information', UpdateinfoComponent);
+}
+
+
+viewItem(child_id: any) {
     this.viewItemDialog(child_id, 'View Information', ViewchildComponent);
     this.getChildsData()
   }
@@ -184,4 +227,15 @@ export class HouseholdbeneficiaryComponent implements OnInit {
   private handleSuccess(message: string) {
     this._alertService.simpleAlert('success', 'Success', message);
   }
+  public isMobileLayout = false;
+  ngAfterViewInit() {
+    this.breakpointObserver.observe(["(max-width: 912px)"]).subscribe((res) => {
+      if (res.matches) {
+        this.isMobileLayout = true;
+      } else {
+        this.isMobileLayout = false;
+      }
+    });
+    this.cdr.detectChanges();
+    }
 }

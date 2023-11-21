@@ -1,33 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { SchoolService } from 'src/app/services/school.service';
-import { schoolname, statusNames, barangayNames, child_beneficiary } from 'src/app/services/data';
+import { schoolname, statusNames, barangayNames } from 'src/app/services/data';
 import { StatusService } from 'src/app/services/status.service';
 import { BarangaysService } from 'src/app/services/barangays.service';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { DataService } from 'src/app/services/data.service';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-childbeneficiary',
   templateUrl: './childbeneficiary.component.html',
   styleUrls: ['./childbeneficiary.component.scss']
 })
 export class ChildbeneficiaryComponent implements OnInit {
-  // id: any = localStorage.getItem('user_loginSession')
-  // accountuser_id = (JSON.parse(this.id)).accountuser_id;
   schoolnames: schoolname [] = []
   status: statusNames[] = []
   barangay: barangayNames[] = []
   hide = false;
+  id: any = localStorage.getItem('user_loginSession')
+  account_type = (JSON.parse(this.id)).account_type;
+  fname = (JSON.parse(this.id)).fname;
+  lname = (JSON.parse(this.id)).lname;
+  assignedName = this.fname + ' ' + this.lname;
   previousStatusValue?: string;
   childbeneficiary : FormGroup;
   startDate = new Date(2000, 0, 1);
-  fileUrl: string = '';
-  accountuser_id!: any;
-
-
+  fileUrl: string = 'assets/default.png';
+  
+  inputdata : string = '';
   constructor(
+    @Inject (MAT_DIALOG_DATA)
+    public data: any,
+    private ref: MatDialogRef<ChildbeneficiaryComponent>,
     private fb : FormBuilder,
     private _schoolname: SchoolService,
     private statuslist: StatusService,
@@ -36,58 +42,57 @@ export class ChildbeneficiaryComponent implements OnInit {
     private _dataService: DataService
 
   ) {
+    this.inputdata = this.data.code;
+    const currentDate = new Date();
+    // Format the date if needed (e.g., toISOString())
+    const formattedDate = currentDate.toISOString();
     this.childbeneficiary = this.fb.group({
-      child_id_var: [''],
-      accountsdetails_id_var : [''],
-      schoolname_var: ['',Validators.required],
-      fname_var: ['',Validators.required],
-      lname_var: ['',Validators.required],
-      birthdate_var: ['',Validators.required],
-      snhcourse_var: ['',Validators.required],
-      collegecourse_var: ['',Validators.required],
+      householdid: [this.inputdata],
+      date_created: [formattedDate],
+      
+      schoolname: ['',Validators.required],
+      fname: ['',Validators.required],
+      lname: ['',Validators.required],
+      birthdate: ['',Validators.required],
+      snhcourse: ['',Validators.required],
+      collegecourse: ['',Validators.required],
       profile_piclink: ['',Validators.required],
-      collegeschoolname_var: ['',Validators.required],
-      collegeaddress_var: ['',Validators.required],
-      status_var: ['',Validators.required],
-      elemschool_var: ['',Validators.required],
-      elemaddress_var: ['',Validators.required],
-      junschool_var: ['',Validators.required],
-      junaddress_var: ['',Validators.required],
-      shschoolname_var: ['',Validators.required],
-      scschooladdress_var: ['',Validators.required],
-      tesdacourse_var: ['',Validators.required],
-      work_var: ['',Validators.required]
+      collegeschoolname: ['',Validators.required],
+      collegeaddress: ['',Validators.required],
+      status: ['',Validators.required],
+      elemschool: ['',Validators.required],
+      elemaddress: ['',Validators.required],
+      junschool: ['',Validators.required],
+      junaddress: ['',Validators.required],
+      shschoolname: ['',Validators.required],
+      scschooladdress: ['',Validators.required],
+      tesdacourse: ['',Validators.required],
+      work: ['',Validators.required],
+      assigned : [this.assignedName]
     })
-    this.childbeneficiary.controls['status_var'].valueChanges.subscribe(value => this.statusRequired(value))
+    this.childbeneficiary.controls['status'].valueChanges.subscribe(value => this.statusRequired(value))
   }
   get form() : { [key: string]: AbstractControl} {
     return this.childbeneficiary.controls
   }
 
+
   ngOnInit() {
     this.schoolnames = this._schoolname.getSchoolNames();
     this.status = this.statuslist.getStatusList();
     this.barangay = this._barangay.getAllBarangayNames();
-
-    const userSessString = localStorage.getItem('user_loginSession');
-    if (userSessString !== null) {
-      const parsed = JSON.parse(userSessString);
-      this.accountuser_id = parsed.accountuser_id;
-    }
-    console.log(this.accountuser_id);
   }
 
   addbeneficiariesSubscription() {
-    console.log(this.childbeneficiary.value)
-    this.childbeneficiary.get("accountsdetails_id_var")?.setValue(this.accountuser_id)
-    const formData = this.childbeneficiary.value;
-    this._dataService.addchildbeneficiary(formData).subscribe(
+    this._dataService.addchildbeneficiary(this.childbeneficiary.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {
           this.handleSuccess('Beneficiary added successfully');
           this.upload()
+          this.ref.close()
         } else {
           this.handleError('Failed to add beneficiary information');
+          this.childbeneficiary.reset();
         }
       },
       (error) => {
@@ -100,24 +105,24 @@ export class ChildbeneficiaryComponent implements OnInit {
 
 
   statusRequired(value: string) {
-    const status = this.childbeneficiary.get('status_var');
+    const status = this.childbeneficiary.get('status');
     console.log('Status value:', status?.value);
 
     if (status?.value == 1) {
-      const fieldsToUpdate = ['schoolname_var', 'elemschool_var', 'elemaddress_var'];
+      const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress'];
 
       // Clear validators for fields not in fieldsToUpdate
       const fieldsToClearValidators = [
-        'snhcourse_var',
-        'collegeschoolname_var',
-        'collegeaddress_var',
-        'collegecourse_var',
-        'tesdacourse_var',
-        'junschool_var',
-        'junaddress_var',
-        'shschoolname_var',
-        'scschooladdress_var',
-        'work_var'
+        'snhcourse',
+        'collegeschoolname',
+        'collegeaddress',
+        'collegecourse',
+        'tesdacourse',
+        'junschool',
+        'junaddress',
+        'shschoolname',
+        'scschooladdress',
+        'work'
       ];
 
       fieldsToUpdate.forEach(fieldName => {
@@ -137,16 +142,16 @@ export class ChildbeneficiaryComponent implements OnInit {
       });
     }
     else if( status?.value == 2){
-    const fieldsToUpdate = ['schoolname_var', 'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var',];
+    const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress',];
     const fieldsToClearValidators = [
-      'snhcourse_var',
-      'collegeschoolname_var',
-      'collegeaddress_var',
-      'collegecourse_var',
-      'tesdacourse_var',
-      'shschoolname_var',
-      'scschooladdress_var',
-      'work_var'
+      'snhcourse',
+      'collegeschoolname',
+      'collegeaddress',
+      'collegecourse',
+      'tesdacourse',
+      'shschoolname',
+      'scschooladdress',
+      'work'
     ];
     fieldsToUpdate.forEach(fieldName => {
       const field = this.childbeneficiary.get(fieldName);
@@ -165,13 +170,13 @@ export class ChildbeneficiaryComponent implements OnInit {
     });
     }
     else if( status?.value == 3){
-    const fieldsToUpdate = ['schoolname_var', 'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var',];
+    const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress',];
     const fieldsToClearValidators = [
-      'collegeschoolname_var',
-      'collegeaddress_var',
-      'collegecourse_var',
-      'tesdacourse_var',
-      'work_var'
+      'collegeschoolname',
+      'collegeaddress',
+      'collegecourse',
+      'tesdacourse',
+      'work'
     ];
       fieldsToUpdate.forEach(fieldName => {
         const field = this.childbeneficiary.get(fieldName);
@@ -191,14 +196,14 @@ export class ChildbeneficiaryComponent implements OnInit {
     }
     else if( status?.value == 4){
     const fieldsToUpdate = [
-      'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var',];
+      'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress',];
     const fieldsToClearValidators = [
-      'schoolname_var',
-      'collegeschoolname_var',
-      'collegeaddress_var',
-      'collegecourse_var',
-      'tesdacourse_var',
-      'work_var'
+      'schoolname',
+      'collegeschoolname',
+      'collegeaddress',
+      'collegecourse',
+      'tesdacourse',
+      'work'
     ];
 
       fieldsToUpdate.forEach(fieldName => {
@@ -218,10 +223,10 @@ export class ChildbeneficiaryComponent implements OnInit {
       });
       }
       else if( status?.value == 5){
-        const fieldsToUpdate = ['schoolname_var', 'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var','collegeschoolname_var','collegeaddress_var','collegecourse_var',];
+        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress','collegeschoolname','collegeaddress','collegecourse',];
         const fieldsToClearValidators = [
-          'tesdacourse_var',
-          'work_var'
+          'tesdacourse',
+          'work'
         ];
         fieldsToUpdate.forEach(fieldName => {
           const field = this.childbeneficiary.get(fieldName);
@@ -240,12 +245,12 @@ export class ChildbeneficiaryComponent implements OnInit {
         });
       }
       else if( status?.value == 6){
-        const fieldsToUpdate = ['schoolname_var', 'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var', 'tesdacourse_var',];
+        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'tesdacourse',];
         const fieldsToClearValidators = [
-          'collegeschoolname_var',
-          'collegeaddress_var',
-          'collegecourse_var',
-          'work_var'
+          'collegeschoolname',
+          'collegeaddress',
+          'collegecourse',
+          'work'
         ];
         fieldsToUpdate.forEach(fieldName => {
           const field = this.childbeneficiary.get(fieldName);
@@ -264,12 +269,12 @@ export class ChildbeneficiaryComponent implements OnInit {
         });
       }
       else if( status?.value == 7){
-        const fieldsToUpdate = ['schoolname_var', 'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var',  'tesdacourse_var',];
+        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress',  'tesdacourse',];
         const fieldsToClearValidators = [
-          'collegeschoolname_var',
-          'collegeaddress_var',
-          'collegecourse_var',
-          'work_var','snhcourse_var','shschoolname_var', 'scschooladdress_var',
+          'collegeschoolname',
+          'collegeaddress',
+          'collegecourse',
+          'work','snhcourse','shschoolname', 'scschooladdress',
         ];
         fieldsToUpdate.forEach(fieldName => {
           const field = this.childbeneficiary.get(fieldName);
@@ -288,13 +293,13 @@ export class ChildbeneficiaryComponent implements OnInit {
         });
         }
         else if( status?.value == 8){
-          const fieldsToUpdate = ['elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var', 'work_var'];
+          const fieldsToUpdate = ['elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'work'];
           const fieldsToClearValidators = [
-            'schoolname_var',
-            'collegeschoolname_var',
-            'collegeaddress_var',
-            'collegecourse_var',
-            'tesdacourse_var',
+            'schoolname',
+            'collegeschoolname',
+            'collegeaddress',
+            'collegecourse',
+            'tesdacourse',
           ];
           fieldsToUpdate.forEach(fieldName => {
             const field = this.childbeneficiary.get(fieldName);
@@ -313,13 +318,13 @@ export class ChildbeneficiaryComponent implements OnInit {
           });
         }
         else if( status?.value == 9){
-          const fieldsToUpdate = [ 'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var', 'collegeschoolname_var',
-          'collegeaddress_var',
-          'collegecourse_var', ];
+          const fieldsToUpdate = [ 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'collegeschoolname',
+          'collegeaddress',
+          'collegecourse', ];
           const fieldsToClearValidators = [
-            'schoolname_var',
-            'tesdacourse_var',
-            'work_var'
+            'schoolname',
+            'tesdacourse',
+            'work'
           ];
           fieldsToUpdate.forEach(fieldName => {
             const field = this.childbeneficiary.get(fieldName);
@@ -338,12 +343,12 @@ export class ChildbeneficiaryComponent implements OnInit {
           });
         }
         else if( status?.value == 10){
-          const fieldsToUpdate = [ 'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var', 'collegeschoolname_var',
-          'collegeaddress_var',
-          'collegecourse_var', 'work_var'];
+          const fieldsToUpdate = [ 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'collegeschoolname',
+          'collegeaddress',
+          'collegecourse', 'work'];
           const fieldsToClearValidators = [
-            'schoolname_var',
-            'tesdacourse_var',
+            'schoolname',
+            'tesdacourse',
           ];
           fieldsToUpdate.forEach(fieldName => {
             const field = this.childbeneficiary.get(fieldName);
@@ -362,12 +367,12 @@ export class ChildbeneficiaryComponent implements OnInit {
           });
         }
         else if( status?.value == 11){
-          const fieldsToUpdate = ['tesdacourse_var' ];
+          const fieldsToUpdate = ['tesdacourse' ];
           const fieldsToClearValidators = [
-            'elemschool_var', 'elemaddress_var','junschool_var','junaddress_var', 'snhcourse_var','shschoolname_var', 'scschooladdress_var', 'collegeschoolname_var',
-          'collegeaddress_var',
-          'collegecourse_var', 'work_var',
-            'schoolname_var',
+            'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'collegeschoolname',
+          'collegeaddress',
+          'collegecourse', 'work',
+            'schoolname',
 
           ];
           fieldsToUpdate.forEach(fieldName => {
@@ -387,17 +392,17 @@ export class ChildbeneficiaryComponent implements OnInit {
           });
         }
         else if( status?.value == 12){
-          const fieldsToUpdate = ['elemschool_var', 'elemaddress_var','junschool_var','junaddress_var' ];
+          const fieldsToUpdate = ['elemschool', 'elemaddress','junschool','junaddress' ];
           const fieldsToClearValidators = [
-            'tesdacourse_var',
-            'snhcourse_var',
-            'shschoolname_var',
-            'scschooladdress_var',
-            'collegeschoolname_var',
-            'collegeaddress_var',
-            'collegecourse_var',
-            'work_var',
-            'schoolname_var',
+            'tesdacourse',
+            'snhcourse',
+            'shschoolname',
+            'scschooladdress',
+            'collegeschoolname',
+            'collegeaddress',
+            'collegecourse',
+            'work',
+            'schoolname',
           ];
           fieldsToUpdate.forEach(fieldName => {
             const field = this.childbeneficiary.get(fieldName);
@@ -418,19 +423,19 @@ export class ChildbeneficiaryComponent implements OnInit {
     else {
       // Clear validators for all fields when status is not '1'
       const allFields = [
-        'schoolname_var',
-        'elemschool_var',
-        'elemaddress_var',
-        'snhcourse_var',
-        'collegeschoolname_var',
-        'collegeaddress_var',
-        'collegecourse_var',
-        'tesdacourse_var',
-        'junschool_var',
-        'junaddress_var',
-        'shschoolname_var',
-        'scschooladdress_var',
-        'work_var'
+        'schoolname',
+        'elemschool',
+        'elemaddress',
+        'snhcourse',
+        'collegeschoolname',
+        'collegeaddress',
+        'collegecourse',
+        'tesdacourse',
+        'junschool',
+        'junaddress',
+        'shschoolname',
+        'scschooladdress',
+        'work'
       ];
 
       allFields.forEach(fieldName => {

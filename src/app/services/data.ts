@@ -31,22 +31,33 @@ export interface accountdetails {
 }
 
 export interface child_beneficiary{
-  statusName: number;
-  statusText: string;
-  child_id : number;
-  accoundetails_id : number;
-  schoolName : string;
-  beneficiary_status : number;
-  fname: string;
-  lname: string;
-  birthdate: string;
-  snhcourse: string;
-  collegecourse: string;
-  other_status: string;
-  profile_piclink: string;
-  status: number;
-
-}
+  date_created : Date,
+  householdid : string,
+  child_id : Number,
+  schoolname : string,
+  fname : string,
+  lname : string,
+  birthdate : Date,
+  snhcourse : string,
+  collegecourse : string,
+  profile_piclink : string,
+  collegeschoolname : string,
+  collegeaddress : string,
+  status : number,
+  elemschool : string,
+  elemaddress : string,
+  junschool : string,
+  junaddress : string,
+  shschoolname : string,
+  scschooladdress: string,
+  tesdacourse: string,
+  work: string,
+  assigned : string,
+  beneficiary_status : Number,
+  statusName : string,
+  barangay : string,
+  statusText: any
+} 
 
 
 export interface loginform {

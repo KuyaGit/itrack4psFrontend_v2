@@ -57,13 +57,12 @@ export class BeneficiaryregComponent implements OnInit{
     return this.fname
   }
   registerSubscription() {
-    console.log('Click add holder')
     this._registerService.addholder(this.registrationForm.value).subscribe(
       (response) => {
         this._alertService.simpleAlert(
           'success',
           'Success',
-          response.message,
+          response.message, // show the message from backend
           () => {
             this.upload();
           }

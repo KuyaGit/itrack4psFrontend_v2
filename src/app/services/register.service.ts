@@ -24,7 +24,6 @@ export class RegisterService {
   }
   public addholder (holder: any): Observable<any> {
     return this.http.post(this.url + '/api/admin/addholder', holder)
-
     .pipe(catchError(this.handleError));
   }
   

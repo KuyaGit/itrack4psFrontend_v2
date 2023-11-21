@@ -7,11 +7,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { accountdetails, getalluser, holder } from 'src/app/services/data';
 import { MatDialog } from '@angular/material/dialog';
-import { BeneficiaryregComponent } from 'src/app/shared/beneficiaryreg/beneficiaryreg.component';
+import { BeneficiaryregComponent } from 'src/app/shared/holder/beneficiaryreg/beneficiaryreg.component';
 import { UpdateModeEnum } from 'chart.js';
 import { UpdateinfoComponent } from 'src/app/shared/holder/updateinfo/updateinfo.component';
 import { InformationComponent } from 'src/app/shared/holder/information/information.component';
-import { ProfileSettingComponent } from '../../../../shared/profile-setting/profile-setting.component';
+import { ProfileSettingComponent } from '../../../../shared/user/profile-setting/profile-setting.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 @Component({
@@ -62,8 +62,11 @@ export class BeneficiaryFormComponent implements OnInit{
     this.subsription_get_all_user.add(
       this._dataService.getholder().subscribe(
         (result) => {
+          console.log(result.result)
           if (Array.isArray(result.result)) {
             this.alluserList = result.result
+            console.log(this.alluserList)
+            
             if (this.paginator && this.sort) {
               this.alluserData = new MatTableDataSource(this.alluserList);
               this.alluserData.paginator = this.paginator;

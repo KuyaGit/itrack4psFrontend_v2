@@ -121,6 +121,7 @@ export class UsermanagementComponent implements OnInit{
         (result) => {
           if (Array.isArray(result.result)) {
             this.alluserList = result.result;
+            console.log(this.alluserList)
             this.alluserList.forEach((user)=>{
               user.account_type = Number(user.account_type);
               user.accountTypeName = this.getAccountType(user.account_type);

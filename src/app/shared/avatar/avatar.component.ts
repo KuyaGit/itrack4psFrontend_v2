@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ProfileSettingComponent } from '../profile-setting/profile-setting.component';
+import { ProfileSettingComponent } from '../user/profile-setting/profile-setting.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { DataService } from 'src/app/services/data.service';

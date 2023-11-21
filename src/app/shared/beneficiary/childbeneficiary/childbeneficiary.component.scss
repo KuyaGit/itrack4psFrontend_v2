@@ -211,7 +211,7 @@ button[type="submit"]:hover {
 }
 
 .first-info{
-  padding: 5%;
+  padding: 3%;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   margin-bottom: 3% ;
@@ -245,4 +245,33 @@ mat-grid-tile .name{
 
 .input-image{
   margin-left: 3%
+}
+.image-container {
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+
+  > mat-progress-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  > img {
+    width: 20%;
+    margin-bottom: 2%;
+    border-radius: 50%;
+    border: 3px solid #007E94;
+  }
+}
+.control-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.image-select{
+  background-color: #007E94;
+  color: white;
 }

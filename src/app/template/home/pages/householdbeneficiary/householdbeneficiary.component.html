@@ -1,4 +1,5 @@
 <body>
+  <app-avatar *ngIf="!isMobileLayout"></app-avatar>
   <div class="header">
     <div class="example-button-container">
       <button  mat-raised-button color="disabled" aria-label="Example icon button with a home icon" routerLink="/home/beneficiary">
@@ -7,32 +8,69 @@
       </button>
     </div>
     <header>Beneficiary</header>
-    <button mat-raised-button extended color="primary" (click)="addchildBeneficiary()">
+    <button mat-raised-button extended color="primary" (click)="addchildBeneficiary(this.householdid)">
       <mat-icon>add</mat-icon>
       Add Beneficiary Details
     </button>
   </div>
-      <div class="array-card">
-        <div class="h-beneficiary">
-          <mat-card class="example-card" *ngFor="let item of dataInfo">
-            <mat-card-header>
-              <mat-card-title>{{item.fname}}</mat-card-title>
-              <mat-card-subtitle>{{item.lname}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src='{{item.profile_piclink}}' alt="Photo of a Shiba Inu">
-            <mat-card-content>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-raised-button color="primary" class="actions" (click)="viewItem(item.child_id)">
-                <mat-icon>visibility</mat-icon>
-                View
+  <div class="archived-buttons">
+    <button mat-button color="primary" (click)="archived = false" [class.mat-mdc-raised-button]="!archived">
+      Active
+    </button>
+    <button mat-button color="primary" (click)="archived = true" [class.mat-mdc-raised-button]="archived">
+      Archived
+    </button>
+  </div>
+  <div class="table-container" *ngIf="archived == false">
+      <table mat-table [dataSource]="alluserData" matSort > 
+        <!-- header row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+        <!-- column -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <ng-container matColumnDef="child_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Child ID </th>
+          <td mat-cell *matCellDef="let item">
+              {{ item.child_id }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="full_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let item">
+              {{ item.full_name}}
+          </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let user">
+            {{ user.statusName}}
+        </td>
+    </ng-container>
+      <ng-container matColumnDef="assigned">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
+        <td mat-cell *matCellDef="let item">
+            {{ item.assigned_creation }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef > Action </th>
+        <td mat-cell *matCellDef="let item">
+              <button mat-icon-button (click)="viewItem(item.child_id)">
+                <mat-icon> preview </mat-icon>
               </button>
-              <button mat-raised-button color="primary" class="actions" (click)="deletechild(item.child_id)">
-                <mat-icon>delete</mat-icon>
-                Delete
+              <button mat-icon-button (click)="updateItem(item.child_id)">
+                <mat-icon> edit </mat-icon>
               </button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-      </div>
+              <!-- <button mat-icon-button (click)="deleteuser(item.householdid)">
+                <mat-icon> person_remove </mat-icon>
+              </button> -->
+              <!-- <button mat-icon-button [routerLink]="'/home/householdbeneficiary/' + item.householdid">
+                <mat-icon> format_list_bulleted </mat-icon>
+              </button> -->
+        </td>
+    </ng-container>
+      </table>
+    <mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
+                [length]="alluserData.data.length"></mat-paginator>
+  </div>
 </body>

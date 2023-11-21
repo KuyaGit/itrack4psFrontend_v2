@@ -26,7 +26,7 @@ export class DataService {
     return this.http.get<any>(this.url.concat('/api/admin/getholderarchived'));
   }
 
-  public get_holder_profile(householdid: number): Observable<any> {
+  public get_holder_profile(householdid: string): Observable<any> {
     return this.http
       .post<any>(this.url.concat('/api/admin/holderprofile'), {
         householdid : householdid,
@@ -115,13 +115,10 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  public addchildbeneficiary(childbeneficiary : any): Observable<any> {
-    return this.http
-    .post<any>(this.url.concat('/api/beneficiary/addbeneficiary'), {
-        childbeneficiary,
-      })
+  public addchildbeneficiary (child_beneficiary: any): Observable<any> {
+    return this.http.post(this.url + '/api/beneficiary/addbeneficiary', child_beneficiary)
+    .pipe(catchError(this.handleError));
   }
-
   public changepassword( accountuser: any ) : Observable<any> {
     return this.http.
     post(this.url.concat('/api/admin/changepassword'),

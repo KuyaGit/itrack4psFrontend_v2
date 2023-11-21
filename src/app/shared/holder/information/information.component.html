@@ -4,8 +4,14 @@
       <header>{{data.title}}</header>
     </div>
     <div class="first-info">
-      <div class="image">
-        <img class="avatar huge" [src]="userInfo?.profile_piclink">
+      <div class="control-container">
+        <div class="image-container">
+          <img
+            *ngIf="!imagePreview"
+            [src]="fileUrl"
+            alt="Photo"
+          />
+        </div>
       </div>
     </div>
     <div class="second-info">

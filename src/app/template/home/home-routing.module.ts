@@ -5,7 +5,7 @@ import { HomeComponent } from './home.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BeneficiaryFormComponent } from './pages/beneficiary-form/beneficiary-form.component';
 
-import { ProfileSettingComponent } from '../../shared/profile-setting/profile-setting.component';
+import { ProfileSettingComponent } from '../../shared/user/profile-setting/profile-setting.component';
 import { UsermanagementComponent } from './pages/usermanagement/usermanagement.component';
 import { HouseholdbeneficiaryComponent } from './pages/householdbeneficiary/householdbeneficiary.component';
 import { AuthGuard } from 'src/app/guard/auth.guard';
