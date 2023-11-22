@@ -25,6 +25,9 @@ export class DataService {
   public getholderarchived(): Observable<any> {
     return this.http.get<any>(this.url.concat('/api/admin/getholderarchived'));
   }
+  public getchildarchived(): Observable<any> {
+    return this.http.get<any>(this.url.concat('/api/admin/getchildlistarchived'));
+  }
 
   public get_holder_profile(householdid: string): Observable<any> {
     return this.http
@@ -63,6 +66,12 @@ export class DataService {
     })
     .pipe(catchError(this.handleError));
   }
+  public deletechildprofile(accountuser_id: string): Observable<any> {
+    return this.http.post<any>(this.url.concat('/api/admin/deleteuserprofile'), {
+      accountuser_id: accountuser_id,
+    })
+    .pipe(catchError(this.handleError));
+  }
 
   public deleteholderprofile(householdid: string): Observable<any> {
     return this.http.post<any>(this.url.concat('/api/admin/deleteholder'), {
@@ -78,7 +87,7 @@ export class DataService {
     
   }
 
-  public deletechildprofile(child_id: string): Observable<any> {
+  public forcedeletechildprofile(child_id: string): Observable<any> {
     return this.http.post<any>(this.url.concat('/api/beneficiary/deletechild'), {
       child_id: child_id,
     })

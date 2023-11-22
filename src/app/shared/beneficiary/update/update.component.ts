@@ -105,11 +105,11 @@ export class UpdateComponent implements OnInit {
     this.inputdata = this.data.code;
     const currentDate = new Date();
     // Format the date if needed (e.g., toISOString())
-    const formattedDate = currentDate.toISOString();
+    const updateDate = currentDate.toISOString();
     this.childbeneficiary = this.fb.group({
       householdid: [this.inputdata],
-      date_created: [formattedDate],
-      
+      date_created: [''],
+      date_updated: [updateDate],
       schoolname: ['',Validators.required],
       fname: ['',Validators.required],
       lname: ['',Validators.required],
@@ -129,7 +129,8 @@ export class UpdateComponent implements OnInit {
       tesdacourse: ['',Validators.required],
       work: ['',Validators.required],
       assigned : [this.assignedName],
-      proof: ['']
+      proof: [''],
+      updated_by: [this.assignedName],
     })
     this.childbeneficiary.controls['status'].valueChanges.subscribe(value => this.statusRequired(value))
   }
@@ -638,8 +639,8 @@ export class UpdateComponent implements OnInit {
   selectFileUpload(event: any): void {
     this.selectedFileUpload = event.target.files;
 
-    if (this.selectedFiles && this.selectedFiles.length > 0) {
-      const file: File = this.selectedFiles[0];
+    if (this.selectedFileUpload && this.selectedFileUpload.length > 0) {
+      const file: File = this.selectedFileUpload[0];
 
       // Check the file size
       if (file.size <= 2 * 1024 * 1024) { // 2MB or smaller

@@ -45,10 +45,10 @@ export class ChildbeneficiaryComponent implements OnInit {
     this.inputdata = this.data.code;
     const currentDate = new Date();
     // Format the date if needed (e.g., toISOString())
-    const formattedDate = currentDate.toISOString();
+    const creationDate = currentDate.toISOString();
     this.childbeneficiary = this.fb.group({
       householdid: [this.inputdata],
-      date_created: [formattedDate],
+      date_created: [creationDate],
       
       schoolname: ['',Validators.required],
       fname: ['',Validators.required],

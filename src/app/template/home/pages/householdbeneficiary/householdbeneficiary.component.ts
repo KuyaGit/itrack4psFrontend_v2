@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ViewchildComponent } from 'src/app/shared/beneficiary/viewchild/viewchild.component';
 import { UpdateinfoComponent } from 'src/app/shared/holder/updateinfo/updateinfo.component';
 import { InformationComponent } from 'src/app/shared/holder/information/information.component';
-import { child_beneficiary, getalluser } from 'src/app/services/data';
+import { child_beneficiary, getalluser, holder } from 'src/app/services/data';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -199,12 +199,12 @@ viewItem(child_id: any) {
     this._alertService.simpleAlert(
       'warning',
       'Warning',
-      'Are you sure you want to delete this user?',
+      'Are you sure you want to archived this user?',
       () => {
         this._dataService.deletechildprofile(child_id).subscribe(
           (result) => {
             if (result && result.status === '200') {
-              this.handleSuccess('User profile deleted successfully');
+              this.handleSuccess('Child Beneficiary profile archived successfully');
               this.getChildsData();
             } else {
               this.handleError('Failed to delete user profile');
@@ -221,7 +221,29 @@ viewItem(child_id: any) {
 
     );
   }
-  
+  private subsription_get_childlistarchived: Subscription = new Subscription();
+  allarchivedChild!: child_beneficiary[]
+  archivedChild = new MatTableDataSource<child_beneficiary>([]);
+  getholderArchived() {
+    this.archived = true;
+    this.subsription_get_childlistarchived.add(
+      this._dataService.getchildarchived().subscribe(
+        (result) => {
+          if (Array.isArray(result.result)) {
+            this.allarchivedChild = result.result
+            if (this.paginator && this.sort) {
+              this.archivedChild = new MatTableDataSource(this.allarchivedChild);
+              this.archivedChild.paginator = this.paginator;
+              this.archivedChild.sort = this.sort;
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    );
+  }
   private handleError(message: string) {
     this._alertService.simpleAlert('error', 'Error', message);
   }
