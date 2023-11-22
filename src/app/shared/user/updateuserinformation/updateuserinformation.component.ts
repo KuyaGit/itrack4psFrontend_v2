@@ -240,7 +240,7 @@ export class UpdateuserinformationComponent {
     );
   }
   private handleSuccess(message: any) {
-    this._alertService.simpleAlert('Success', 'success', message);
+    this._alertService.simpleAlert('success', 'Success', message);
   }
 
   private handleError(message: any) {
