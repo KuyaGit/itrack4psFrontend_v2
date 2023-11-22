@@ -1,9 +1,9 @@
 body{
     background: var(--body-color);
-    height: 100vh;
     padding-top: 2% !important;
     padding:  3%;
     overflow-y: auto;
+    height: 95vh;
   }
   .header{
     font-size: 30px;
@@ -213,7 +213,8 @@ body{
   
   .first-info{
     padding: 3%;
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 13px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     margin-bottom: 3% ;
   }
@@ -223,10 +224,14 @@ body{
   .title{
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     padding: 1%;
+    background-color: #fff;
+    border-radius: 13px;
+    margin-bottom: 2%;
   }
   .second-info{
     padding: 5%;
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 13px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     margin-bottom: center
   }
@@ -275,4 +280,9 @@ body{
   .image-select{
     background-color: #007E94;
     color: white;
+  }
+  header{
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
   }

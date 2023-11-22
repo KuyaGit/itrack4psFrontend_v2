@@ -1,7 +1,7 @@
 body{
     background: var(--body-color);
-    height: 90vh;
     padding-top: 2% !important;
+    height: 95vh;
     padding:  3%;
     overflow: auto;
   }
@@ -57,12 +57,16 @@ body{
     padding-top: 1%
   }
   .title{
+    background-color: #fff;
+    border-radius: 13px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     padding: 1%;
+    margin-bottom: 2%;
   }
   .second-info{
     padding: 5%;
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 13px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     margin-bottom: 3% ;
     background-color: #fff;
@@ -71,7 +75,10 @@ body{
     margin-right: 2%;
   }
   .first-info{
+    margin-top: 2%;
     display: flex;
+    background-color: #fff;
+    border-radius: 13px;
   }
   .profile-photo {
     border-radius: 50%;
