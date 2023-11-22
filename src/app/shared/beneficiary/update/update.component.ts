@@ -135,8 +135,24 @@ export class UpdateComponent implements OnInit {
     this.childbeneficiary.controls['status'].valueChanges.subscribe(value => this.statusRequired(value))
   }
 
-  update(householdid: string) {
-    console.log(this.childbeneficiary.value)
+  update() {
+    this._dataService.update_profile(this.childbeneficiary.value).subscribe(
+      async (result) => {
+        if (result && result.status === '200') {
+          this.handleSuccess(result.message);
+          this.upload()
+          this.uploadProof()
+          this.ref.close();
+          
+        } else {
+          this.handleError('Failed to Create Beneficiary profile');
+        }
+      },
+      (error) => {
+        this.handleError('An error occurred while updating profile');
+        console.error(error);
+      }
+    );
   }
 
 
