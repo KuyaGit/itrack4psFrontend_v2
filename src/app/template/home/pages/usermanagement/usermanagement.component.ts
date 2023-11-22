@@ -46,6 +46,7 @@ export class UsermanagementComponent implements OnInit{
   fileUrl = 'assets/default-profile-photo.png';
   imgUrl!: string;
   alluserData = new MatTableDataSource<getalluser>([]);
+  default: string;
   constructor(
     private _alertService: AlertServiceService,
     public _addUserService: AddUserService,
@@ -58,14 +59,13 @@ export class UsermanagementComponent implements OnInit{
     private cdr : ChangeDetectorRef
     )
     {
+      this.default = 'default.png'
       this.createaccountForm = this.formbuilder.group({
         fName : ['', [Validators.required]],
         lName : ['', [Validators.required]],
-        account_type: [2],
-        profile_piclink: ['default.png'],
+        profile_piclink: [this.default],
         email : ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
         password: ['', [Validators.required,Validators.minLength(6)]],
-
       });
   }
 
@@ -169,8 +169,7 @@ export class UsermanagementComponent implements OnInit{
 
 
   adduserSubscription() {
-        const formData: accountdetails  = this.createaccountForm.value;
-        this._addUserService.adduser(formData).subscribe(
+        this._addUserService.adduser(this.createaccountForm.value).subscribe(
           (response) => {
             console.log('reg success', response);
             this._alertService.simpleAlert(
@@ -202,7 +201,7 @@ export class UsermanagementComponent implements OnInit{
               this._alertService.simpleAlert(
                 'error',
                 'Error',
-                "Household number doesn't exists on our Database you can't register."
+                "Server Error. Please try again later."
           );
         }
       }

@@ -17,6 +17,7 @@ export class AddUserService {
   ) { }
 
   public adduser( accountdetails: any ): Observable<any>{
+    console.log("Add USer")
     return this.http.post(this.url + '/api/admin/add_user', accountdetails)
     .pipe(catchError(this.handleError));;
     }
