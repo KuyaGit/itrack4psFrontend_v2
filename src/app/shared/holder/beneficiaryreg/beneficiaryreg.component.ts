@@ -44,7 +44,7 @@ export class BeneficiaryregComponent implements OnInit{
         maritalstatus: [''],
         mobile_number: [''],
         spoucename: [''],
-        spoucebirthdate: [''],
+        spoucebirthdate: [],
         assigned: [this.assignedName],
         profile_piclink: ['default.png']
     });

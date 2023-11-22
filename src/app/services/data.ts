@@ -14,7 +14,7 @@ export interface holder {
   maritalstatus : string;
   mobile_number : string;
   spoucename : string;
-  spoucebirthdate : string;
+  spoucebirthdate : Date;
   assigned : string;
   update_by : string;
 }
