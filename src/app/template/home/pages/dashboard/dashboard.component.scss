@@ -193,3 +193,15 @@ mat-card-content{
     margin-right: 0;
   }
 }
+
+
+.dashboard-error{
+  font-size: 30px;
+  font-weight: 600;
+  color: #333;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

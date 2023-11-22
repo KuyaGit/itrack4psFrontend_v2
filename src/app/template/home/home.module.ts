@@ -43,8 +43,9 @@ import { SchoolaccountsComponent } from './pages/schoolaccounts/schoolaccounts.c
 import { AvatarComponent } from 'src/app/shared/avatar/avatar.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ViewuserinformationComponent } from 'src/app/shared/user/viewuserinformation/viewuserinformation.component';
-
-
+import { UpdateComponent } from 'src/app/shared/beneficiary/update/update.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -63,6 +64,7 @@ import { ViewuserinformationComponent } from 'src/app/shared/user/viewuserinform
     AvatarComponent,
     SettingsComponent,
     ViewuserinformationComponent,
+    UpdateComponent,
   ],
   imports: [
     CommonModule,
@@ -90,7 +92,8 @@ import { ViewuserinformationComponent } from 'src/app/shared/user/viewuserinform
     MatSortModule,
     MatDatepickerModule,
     NgChartsModule,
-
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ]
 })
 export class HomeModule {

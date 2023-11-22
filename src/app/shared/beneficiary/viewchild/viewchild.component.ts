@@ -75,7 +75,6 @@ export class ViewchildComponent {
           this.userInfo.status = this.getStatusType(this.userInfo.status);
         }
         this.profileForm.patchValue(this.userInfo);
-
       })
     );
   }

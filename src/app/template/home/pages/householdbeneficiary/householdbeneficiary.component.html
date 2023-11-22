@@ -61,12 +61,12 @@
               <button mat-icon-button (click)="updateItem(item.child_id)">
                 <mat-icon> edit </mat-icon>
               </button>
-              <!-- <button mat-icon-button (click)="deleteuser(item.householdid)">
+              <button mat-icon-button [routerLink]="'/home/householdbeneficiary/' + item.householdid">
+                <mat-icon> school </mat-icon>
+              </button>
+              <button mat-icon-button (click)="deletechild(item.child_id)">
                 <mat-icon> person_remove </mat-icon>
-              </button> -->
-              <!-- <button mat-icon-button [routerLink]="'/home/householdbeneficiary/' + item.householdid">
-                <mat-icon> format_list_bulleted </mat-icon>
-              </button> -->
+              </button>
         </td>
     </ng-container>
       </table>

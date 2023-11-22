@@ -1,62 +1,62 @@
-<h2 mat-dialog-title>Create Beneficiary Details</h2>
-    <mat-dialog-content class="mat-typography">
-        <mat-grid-list cols="1">
-          <form [formGroup]="childbeneficiary">
-            <div class="example-container">
-              <div class="first-info">
-                <div class="control-container">
-                  <div class="image-container">
-                    <img
-                      *ngIf="imagePreview"
-                      [src]="imagePreview"
-                      alt="Photo"
-                    />
-                    <img
-                      *ngIf="!imagePreview"
-                      [src]="fileUrl"
-                      alt="Photo"
-                    />
-                  </div>
-                  <input
-                    #inputField
-                    hidden
-                    type="file" 
-                    accept="image/*"
-                    (change)="selectFile($event)"
-                    (click)="inputField.value = ''"
+
+<body>
+    <div class="title">
+      <header>{{data.title}}</header>
+      <button mat-fab disabled *ngIf="this.beneStatus == 2">
+        <mat-icon>pending</mat-icon>
+        
+      </button>
+      <button mat-fab class="disabled" color="primary" *ngIf="this.beneStatus == 1">
+        <mat-icon>recommend</mat-icon>
+      </button>
+      <button mat-fab class="disabled" color="warn" *ngIf="this.beneStatus == 3">
+        <mat-icon>recommend</mat-icon>
+        
+      </button>
+    </div>
+    <div class="first-info">
+            <div class="control-container">
+                <div class="image-container">
+                  <img
+                    *ngIf="imagePreview"
+                    [src]="imagePreview"
+                    alt="Photo"
                   />
-                  <button mat-raised-button (click)="inputField.click()" class="image-select">
-                    Select Photo
-                  </button>
+                  <img
+                    *ngIf="!imagePreview"
+                    [src]="fileUrl"
+                    alt="Photo"
+                  />
                 </div>
+                <input
+                  #inputField
+                  hidden
+                  type="file" 
+                  accept="image/*"
+                  (change)="selectFile($event)"
+                  (click)="inputField.value = ''"
+                />
+                <button mat-raised-button (click)="inputField.click()" class="image-select">
+                  Select Photo
+                </button>
               </div>
-              <mat-form-field appearance="outline" class="width-50" hideRequiredMarker="true">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="fname" required>
-                <mat-error class="error-message">
-                  <span *ngIf="childbeneficiary.controls.fname.touched">This field is required.</span>
-                </mat-error>
-              </mat-form-field>
+        <div class="name">
+          <form [formGroup]="childbeneficiary">
+            <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+              <mat-label>First Name</mat-label>
+              <input matInput type="text" placeholder="First Name" id="inputEmail4" formControlName="fname" readonly>
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
+              <mat-label>Last Name</mat-label>
+              <input matInput type="text" placeholder="Last Name" id="inputEmail4" formControlName="lname" readonly>
+            </mat-form-field>
+          </form>
+        </div>
 
-              <mat-form-field appearance="outline" class="width-50 ml-2" hideRequiredMarker="true">
-                <mat-label>Surname</mat-label>
-                <input matInput formControlName="lname">
-                <mat-error class="error-message">
-                  <span *ngIf="childbeneficiary.controls.lname.touched">This field is required.</span>
-                </mat-error>
-              </mat-form-field>
-              <br>
-              <mat-form-field appearance="outline" class="width-50" hideRequiredMarker="true">
-                <mat-label>Birthdate</mat-label>
-                <input matInput formControlName="birthdate"  [matDatepicker]="picker" required>
-                <mat-hint>MM/DD/YYYY</mat-hint><mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-                <mat-error class="error-message">
-                  <span *ngIf="childbeneficiary.controls.birthdate.touched">This field is required.</span>
-                </mat-error>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline" class="width-50 ml-2" hideRequiredMarker="true">
+    </div>
+      <div class="second-info">
+        <form [formGroup]="childbeneficiary">
+            <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true">
                 <mat-label>Status</mat-label>
                 <mat-select formControlName="status">
                   <mat-option *ngFor="let item of status" [value]="item.value">
@@ -195,29 +195,28 @@
                 <mat-error class="error-message">
                   <span *ngIf="childbeneficiary.controls['work'].errors?.touched || childbeneficiary.controls['work'].errors?.required">This field is required.</span>
                 </mat-error>
-              </mat-form-field>
-            </div>
+            </mat-form-field>
             <div *ngIf="childbeneficiary.controls.status.value == 1 || childbeneficiary.controls.status.value == 2 || childbeneficiary.controls.status.value == 3 || childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 7 || childbeneficiary.controls.status.value == 4 || childbeneficiary.controls.status.value == 9 || childbeneficiary.controls.status.value == 11">
-              <div class="file-upload-header">
-                  <header>Upload File Proof Document</header>
-              </div>
-              <div class="wrapper">
-                      <input type="file" class="file-input"
-                      accept="file/*"
-                      (change)="selectFileUpload($event)" #fileUpload>
-                  <div class="file-upload">
-                      {{fileName || "No file uploaded yet."}}
-                      <button mat-mini-fab color="primary" class="upload-btn"
-                      (click)="fileUpload.click()">
-                          <mat-icon class="file-icon">attach_file</mat-icon>
-                      </button>
-                  </div>
-              </div>
-          </div>
-          </form>
-        </mat-grid-list>
-        <div mat-dialog-actions align="end" class="bottom-buttons">
-          <button mat-button mat-dialog-close>Cancel</button>
-          <button mat-fab extended color="primary" [mat-dialog-close]="true" (click)="addbeneficiariesSubscription()" [disabled]="!childbeneficiary.valid" >Add User</button>
-          </div>
-      </mat-dialog-content>
+                <div class="file-upload-header">
+                    <header>Upload File Proof Document</header>
+                </div>
+                <div class="wrapper">
+                        <input type="file" class="file-input"
+                        accept="file/*"
+                        (change)="selectFileUpload($event)" #fileUpload>
+                    <div class="file-upload">
+                        {{fileName || "No file uploaded yet."}}
+                        <button mat-mini-fab color="primary" class="upload-btn"
+                        (click)="fileUpload.click()">
+                            <mat-icon class="file-icon">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+        <button mat-raised-button color="primary" (click)="update(this.childId)">Update</button>
+        <button mat-raised-button color="warn" class="actions" class="ml-2" (click)="closepopup()">Close</button>
+</body>
+

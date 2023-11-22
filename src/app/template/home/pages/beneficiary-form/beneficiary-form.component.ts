@@ -80,6 +80,10 @@ export class BeneficiaryFormComponent implements OnInit{
       )
     );
   }
+  active() {
+    this.archived = false;
+    this.getAllbeneficiary();
+  }
   allarchivedHolder!: holder[]
   getholderArchived() {
     this.archived = true;

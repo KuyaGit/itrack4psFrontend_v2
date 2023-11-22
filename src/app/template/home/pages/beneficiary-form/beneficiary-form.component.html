@@ -14,7 +14,7 @@
   </div>
   
   <div class="archived-buttons">
-    <button mat-button color="primary" (click)="archived = false" [class.mat-mdc-raised-button]="!archived">
+    <button mat-button color="primary" (click)="active()" [class.mat-mdc-raised-button]="!archived">
       Active
     </button>
     <button mat-button color="primary" (click)="getholderArchived()" [class.mat-mdc-raised-button]="archived">

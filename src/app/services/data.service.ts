@@ -41,7 +41,7 @@ export class DataService {
       })
       .pipe(catchError(this.handleError));
   }
-  public get_child_profile(child_id: number): Observable<any> {
+  public get_child_profile(child_id: any): Observable<any> {
     return this.http
       .post<any>(this.url.concat('/api/beneficiary/getchildprofile'), {
         child_id: child_id,
@@ -130,6 +130,16 @@ export class DataService {
     const formData: FormData = new FormData();
     formData.append('image', file);
     const req = new HttpRequest('POST', `${this.url}/api/image-upload`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+  }
+
+  uploadFile(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('files', file);
+    const req = new HttpRequest('POST', `${this.url}/api/file-upload`, formData, {
       reportProgress: true,
       responseType: 'json'
     });

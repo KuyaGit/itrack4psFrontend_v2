@@ -1,4 +1,4 @@
-<body>
+<body *ngIf="!isMobileLayout">
   <div class="contain">
     <div class="header">
         <header>4Ps Holder</header>
@@ -155,4 +155,11 @@
   <mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
               [length]="alluserData.data.length"></mat-paginator>
 </div>
+</body>
+<body *ngIf="isMobileLayout">
+  <div class="container">
+    <div class="dashboard-error">
+      Dashboard is not available in mobile view
+    </div>
+  </div>
 </body>

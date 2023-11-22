@@ -15,6 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { UpdateComponent } from 'src/app/shared/beneficiary/update/update.component';
 @Component({
   selector: 'app-householdbeneficiary',
   templateUrl: './householdbeneficiary.component.html',
@@ -113,8 +114,8 @@ export class HouseholdbeneficiaryComponent implements OnInit {
     );
   }
 
-updateItem(accountuser_id: any) {
-  this.viewItemDialog(accountuser_id, 'Edit Information', UpdateinfoComponent);
+updateItem(child_id: number) {
+  this.viewItemDialog(child_id, 'Edit Information', UpdateComponent);
 }
 
 

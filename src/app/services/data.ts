@@ -56,7 +56,8 @@ export interface child_beneficiary{
   beneficiary_status : Number,
   statusName : string,
   barangay : string,
-  statusText: any
+  statusText: any,
+  proof : string,
 } 
 
 

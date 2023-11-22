@@ -156,7 +156,29 @@ button[type="submit"]:hover {
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   position: relative;
 }
-
+.file-input {
+  display: none;
+}
+.file-icon{
+  color: #fff
+}
+.wrapper{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: aliceblue;
+  padding: 3%;
+  flex-direction: column;
+  align-content: center;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  border-radius: 13px;
+}
+header{
+font-size: 30px;
+font-weight: 600;
+color: #333;
+}
 
 .profile-photo img {
   width: 100%;

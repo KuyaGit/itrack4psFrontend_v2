@@ -84,11 +84,9 @@ renderLineChart() {
     data: {
       labels: ['Status 1','Status 2','Status 3','Status 4','Status 5','Status 6','Status 7','Status 8','Status 9','Status 10','Status 11','Status 12'],
       datasets: [{
-        label: 'Count of Status that already approved by school',
+        label: 'Count of Beneficiaries Status',
         data: [],
         backgroundColor:["#ea5545", "#f46a9b", "#ef9b20", "#edbf33", "#ede15b", "#bdcf32", "#87bc45", "#27aeef", "#b33dc6"]
-
-
       }]
     }
   })
@@ -102,10 +100,8 @@ getallstatussum() {
         this.countValues = Object.values(this.allstatusSum); //convert object into array
         this.renderLineChart()
         if (this.linechart) {
-          console.log(this.countValues)
           // Update the data property of the chart with the extracted data
           console.log(this.linechart)
-
           this.sum = this.countValues + 10
           this.linechart.data.datasets[0].data = this.countValues;
           this.linechart.update();
