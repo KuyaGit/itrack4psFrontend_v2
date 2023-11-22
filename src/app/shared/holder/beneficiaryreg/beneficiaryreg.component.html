@@ -79,7 +79,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="width-50" hideRequiredMarker="true">
-            <mat-label>Address</mat-label>
+            <mat-label>Barangay</mat-label>
                 <mat-select formControlName="address" >
                   <mat-option *ngFor="let item of barangay" [value]="item.barangay">
                     {{item.barangay}}
@@ -112,23 +112,17 @@
           <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="registrationForm.controls['maritalstatus'].value === 'Married'|| registrationForm.controls['maritalstatus'].value === 'Widow'">
             <mat-label>Spouse Name</mat-label>
             <input matInput formControlName="spoucename">
-            <mat-error class="error-message">
-              <span *ngIf="registrationForm.controls.spoucename.touched">This field is required.</span>
-            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="registrationForm.controls['maritalstatus'].value === 'Married'|| registrationForm.controls['maritalstatus'].value === 'Widow'">
             <mat-label>Spouse Birthdate</mat-label>
             <input matInput formControlName="spoucebirthdate"  [matDatepicker]="picker" required>
             <mat-hint>MM/DD/YYYY</mat-hint><mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-            <mat-error class="error-message">
-              <span *ngIf="registrationForm.controls.spoucebirthdate.touched">This field is required.</span>
-            </mat-error>
           </mat-form-field>
         </form>
     </mat-grid-list>
   </mat-dialog-content>
 <div mat-dialog-actions align="end" class="bottom-buttons">
 <button mat-button mat-dialog-close>Cancel</button>
-<button mat-fab extended color="primary" [mat-dialog-close]="true" (click)="registerSubscription()" [disabled]="!registrationForm.valid" >Add User</button>
+<button mat-fab extended color="primary" [mat-dialog-close]="true" (click)="registerSubscription()" >Add User</button>
 </div>
