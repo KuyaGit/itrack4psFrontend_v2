@@ -91,7 +91,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 1">
-            <mat-label>Elementary School Address</mat-label>
+            <mat-label>Elementary School Barangay</mat-label>
             <mat-select formControlName="elemaddress" >
               <mat-option *ngFor="let item of barangay" [value]="item.barangay">
                 {{item.barangay}}
@@ -114,7 +114,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 2">
-            <mat-label>Junior High School Address</mat-label>
+            <mat-label>Junior High School Barangay</mat-label>
             <mat-select formControlName="junaddress" >
               <mat-option *ngFor="let item of barangay" [value]="item.barangay">
                 {{item.barangay}}
@@ -136,7 +136,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 3">
-            <mat-label>Senior High School Address</mat-label>
+            <mat-label>Senior High School Barangay</mat-label>
             <mat-select formControlName="scschooladdress" >
               <mat-option *ngFor="let item of barangay" [value]="item.barangay">
                 {{item.barangay}}
@@ -172,7 +172,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 5">
-            <mat-label>College School Address</mat-label>
+            <mat-label>College School Barangay</mat-label>
             <mat-select formControlName="collegeaddress" >
               <mat-option *ngFor="let item of barangay" [value]="item.barangay">
                 {{item.barangay}}

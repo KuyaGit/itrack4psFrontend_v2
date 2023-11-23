@@ -163,6 +163,7 @@ button[type="submit"]:hover {
   color: #fff
 }
 .wrapper{
+  width: 50;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -178,6 +179,9 @@ header{
 font-size: 30px;
 font-weight: 600;
 color: #333;
+}
+.file-upload-header{
+  margin-bottom: 2%;
 }
 
 .profile-photo img {

@@ -1,12 +1,12 @@
 body{
     background: var(--body-color);
-    height: 100vh;
+    height: 95vh;
     padding-top: 2% !important;
     padding:  3%;
     overflow-y: auto;
   }
   .header{
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 600;
     color: #333;
     mat-icon{
@@ -137,11 +137,6 @@ body{
     display: inline-block;
   }
   
-  .mat-icon {
-    color: gray;
-    border: none;
-    outline: none;
-  }
   
   .button{
     border: none;
@@ -383,12 +378,7 @@ form{
     margin-top: 10px;
     display: inline-block;
   }
-  
-  .mat-icon {
-    color: gray;
-    border: none;
-    outline: none;
-  }
+ 
   
   .button{
     border: none;
@@ -403,6 +393,7 @@ form{
 }
 
 .wrapper{
+    width: 50%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -418,4 +409,8 @@ header{
   font-size: 30px;
   font-weight: 600;
   color: #333;
+}
+
+.file-upload-header{
+  margin-bottom: 2%;
 }
