@@ -309,7 +309,7 @@ export class UpdateComponent implements OnInit {
       });
     }
     else if( status?.value == 2){
-    const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress',];
+    const fieldsToUpdate = ['junschool','junaddress',];
     const fieldsToClearValidators = [
       'snhcourse',
       'collegeschoolname',
@@ -318,7 +318,10 @@ export class UpdateComponent implements OnInit {
       'tesdacourse',
       'shschoolname',
       'scschooladdress',
-      'work'
+      'work',
+      'schoolname', 
+      'elemschool', 
+      'elemaddress',
     ];
     fieldsToUpdate.forEach(fieldName => {
       const field = this.childbeneficiary.get(fieldName);
