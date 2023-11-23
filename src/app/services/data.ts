@@ -33,7 +33,7 @@ export interface accountdetails {
 export interface child_beneficiary{
   date_created : Date,
   householdid : string,
-  child_id : Number,
+  child_id : number,
   schoolname : string,
   fname : string,
   lname : string,
@@ -58,6 +58,8 @@ export interface child_beneficiary{
   barangay : string,
   statusText: any,
   proof : string,
+  updated_by : string,
+  date_updated : Date,
 } 
 
 
@@ -133,4 +135,26 @@ export interface achievement{
   achievement_name : string;
   achievement_file : string;
   achievement_desc : string;
+}
+
+export interface update_childbeneficiary{
+  child_id :  number,
+	schoolname: string,
+	snhcourse : string,
+	collegecourse : string,
+	profile_piclink : string,
+	collegeschoolname : string,
+	collegeaddress_var : string,
+	shschoolname_var : string,
+	scschooladdress_var : string,
+	status : number,
+	elemschool : string,
+	elemaddress : string,
+	junschool_var : string,
+	junaddress_var : string,
+	tesdacourse_var : string,
+	work_var : string,
+	proof_var : string,
+	updated_by_var : string,
+	date_updated_var: Date,
 }

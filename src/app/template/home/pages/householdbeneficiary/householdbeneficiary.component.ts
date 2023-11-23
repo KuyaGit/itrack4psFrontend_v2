@@ -88,6 +88,7 @@ export class HouseholdbeneficiaryComponent implements OnInit {
   getChildsData() {
     this.activatedRoute.params.subscribe(params=>{
       this.householdid = params.id
+      
     })
     this.subscription.add(
       this._dataService.getbeneficiary(this.householdid).subscribe(
@@ -106,6 +107,12 @@ export class HouseholdbeneficiaryComponent implements OnInit {
               this.alluserData.sort = this.sort;
             }
           }
+          const userSessString = localStorage.getItem('user_loginSession');
+
+          if (userSessString !== null) {
+            const parsed = JSON.parse(userSessString);
+            this.householdid = parsed.householdid;
+          }
         },
         (error) => {
           console.log(error);
@@ -116,6 +123,7 @@ export class HouseholdbeneficiaryComponent implements OnInit {
 
 updateItem(child_id: number) {
   this.viewItemDialog(child_id, 'Edit Information', UpdateComponent);
+  this.getChildsData();
 }
 
 

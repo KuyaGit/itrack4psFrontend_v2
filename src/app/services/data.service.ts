@@ -114,10 +114,10 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  public update_childbeneficiary(child_beneficiary: any): Observable<any> {
+  public update_childbeneficiary(update_childbeneficiary: any): Observable<any> {
     return this.http
-      .post<any>(this.url.concat('/api/beneficiary/updatebeneficiary'), {
-        child_beneficiary,
+      .post<any>(this.url.concat('/api/beneficiary/updatechildbeneficiary'), {
+        update_childbeneficiary,
       })
       .pipe(catchError(this.handleError));
   } 
