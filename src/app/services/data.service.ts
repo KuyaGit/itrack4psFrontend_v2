@@ -51,7 +51,13 @@ export class DataService {
       })
       .pipe(catchError(this.handleError));
   }
-
+  public getchildachievements(child_id: any): Observable<any> {
+    return this.http
+      .post<any>(this.url.concat('/api/beneficiary/getchildachievements'), {
+        child_id: child_id,
+      })
+      .pipe(catchError(this.handleError));
+  }
   public getbeneficiary(accountuser_id: number): Observable<any> {
     return this.http
     .post<any>(this.url.concat('/api/beneficiary/getbeneficiary'), {
@@ -133,6 +139,10 @@ export class DataService {
 
   public addchildbeneficiary (child_beneficiary: any): Observable<any> {
     return this.http.post(this.url + '/api/beneficiary/addbeneficiary', child_beneficiary)
+    .pipe(catchError(this.handleError));
+  }
+  public addchildachievement ( achievement:any): Observable<any> {
+    return this.http.post(this.url + '/api/beneficiary/addchildachievement', achievement)
     .pipe(catchError(this.handleError));
   }
   public changepassword( accountuser: any ) : Observable<any> {

@@ -61,7 +61,7 @@ const routes: Routes = [
         component: ChildachievementsComponent
       }
     ]
-  },
+  }
 
 ];
 

@@ -47,6 +47,7 @@ import { UpdateComponent } from 'src/app/shared/beneficiary/update/update.compon
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ChildachievementsComponent } from './pages/childachievements/childachievements.component';
+import { CreateComponent } from 'src/app/shared/achievements/create/create.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -67,6 +68,8 @@ import { ChildachievementsComponent } from './pages/childachievements/childachie
     ViewuserinformationComponent,
     UpdateComponent,
     ChildachievementsComponent,
+    CreateComponent,
+    ViewchildComponent
   ],
   imports: [
     CommonModule,

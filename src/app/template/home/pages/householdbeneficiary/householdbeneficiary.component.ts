@@ -121,8 +121,7 @@ updateItem(child_id: number) {
 
 viewItem(child_id: any) {
     this.viewItemDialog(child_id, 'View Information', ViewchildComponent);
-    this.getChildsData()
-  }
+}
 
   viewItemDialog(child_id: number, title: string, component: any) {
     var _popup = this.dialog.open(component, {

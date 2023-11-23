@@ -126,3 +126,11 @@ export interface statusNames{
 export interface barangayNames{
   barangay : string;
 }
+
+
+export interface achievement{
+  child_id : number;
+  achievement_name : string;
+  achievement_file : string;
+  achievement_desc : string;
+}
