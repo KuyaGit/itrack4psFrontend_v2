@@ -137,11 +137,12 @@ export class UpdateComponent implements OnInit {
     this._dataService.update_childbeneficiary(this.childbeneficiary.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {
-          this.handleSuccess('4ps Holder Information Updated');
+          this.handleSuccess('Child Beneficiary Status Updated');
           this.upload()
+          this.uploadProof()
           this.ref.close();
         } else {
-          this.handleError('Failed to Update 4ps Holder Information');
+          this.handleError('Failed to Update Child Beneficiary Status');
         }
       },
       (error) => {

@@ -114,7 +114,7 @@ restoreholder(householdid : string){
       this._dataService.restoreholder(householdid).subscribe(
         (result) => {
           if (result && result.status === '200') {
-            this.handleSuccess('User profile deleted successfully');
+            this.handleSuccess('4ps Holder profile restored successfully');
             this.getholderArchived();
           } else {
             this.handleError('Failed to delete user profile');
@@ -134,13 +134,12 @@ deleteuser(householdid: string) {
     this._alertService.simpleAlert(
       'warning',
       'Warning',
-      'Are you sure you want to delete this user?',
+      'Are you sure you want to archived this 4ps Holder?',
       () => {
         this._dataService.deleteholderprofile(householdid).subscribe(
           (result) => {
             if (result && result.status === '200') {
-              this.handleSuccess('User profile deleted successfully');
-
+              this.handleSuccess('4ps Holder profile archived successfully');
               this.getAllbeneficiary();
             } else {
               this.handleError('Failed to delete user profile');

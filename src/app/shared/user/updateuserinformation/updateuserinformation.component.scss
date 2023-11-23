@@ -221,20 +221,20 @@ body{
   form{
     padding-top: 1%
   }
-  .title{
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    padding: 1%;
-    background-color: #fff;
-    border-radius: 13px;
-    margin-bottom: 2%;
-  }
-  .second-info{
-    padding: 5%;
-    background-color: #fff;
-    border-radius: 13px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    margin-bottom: center
-  }
+.title{
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  padding: 1%;
+  background-color: #fff;
+  border-radius: 13px;
+  margin-bottom: 2%;
+}
+.second-info{
+  padding: 5%;
+  background-color: #fff;
+  border-radius: 13px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2%
+}
   
   mat-grid-tile .name{
     display: block;

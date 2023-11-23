@@ -53,8 +53,12 @@
           <input matInput type="text" placeholder="Birthdate" id="inputEmail4" formControlName="birthdate" >
         </mat-form-field>
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
-          <mat-label>Address</mat-label>
-          <input matInput type="text" placeholder="Address" id="inputEmail4" formControlName="address" >
+          <mat-label>Barangay</mat-label>
+          <mat-select formControlName="address" [compareWith]="compareBarangayObjects">
+            <mat-option *ngFor="let item of barangay" [value]="item.barangay">
+              {{ item.barangay }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
           <mat-label>Marital Status</mat-label>

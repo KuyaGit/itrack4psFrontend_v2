@@ -5,11 +5,6 @@ body{
   height: 95vh !important;
   overflow: auto;
 }
-header{
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-}
 
 .user-image{
   height: 30%;
@@ -69,6 +64,12 @@ form{
   border-radius: 10px;
   margin-bottom: 1%;
 }
+header{
+  font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+  
 .second-info{
   background-color: #fff;
   padding: 3%;
@@ -80,7 +81,7 @@ form{
 }
 
 img {
-  border: solid 10px black
+  border: solid 3px #007E94;
 }
 
 .content {
@@ -96,4 +97,25 @@ img {
 
 button.disabled {
   pointer-events: none;
+}
+.file-icon{
+  color: #fff
+}
+
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: aliceblue;
+  padding: 3%;
+  flex-direction: column;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 13px;
+}
+
+.file-upload{
+  display: flex;
+  align-items: center;
+  padding: 3%;
+  justify-content: space-around;
 }

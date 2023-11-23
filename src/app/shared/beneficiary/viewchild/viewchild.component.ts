@@ -78,6 +78,15 @@ export class ViewchildComponent {
       })
     );
   }
+
+  downloadCertificate() {
+    // Assuming achievements_file contains the URL or path to the file
+    const fileUrl = this.userInfo.achievements_file;
+
+    // Open the file in a new window or tab
+    window.open(fileUrl, '_blank');
+  }
+
   statusText : string = ''
 
   statusName : any [] = [

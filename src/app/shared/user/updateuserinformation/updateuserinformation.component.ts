@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { HttpResponse } from '@angular/common/http';
+import { BarangaysService } from 'src/app/services/barangays.service';
 @Component({
   selector: 'app-updateuserinformation',
   templateUrl: './updateuserinformation.component.html',
@@ -33,6 +34,7 @@ export class UpdateuserinformationComponent {
     private _dataService: DataService,
     private fb: FormBuilder,
     private _alertService: AlertServiceService,
+    private _barangay : BarangaysService
   ){
     this.profileForm = this.fb.group({
       accountuser_id : [''],
@@ -63,13 +65,20 @@ export class UpdateuserinformationComponent {
     },
   ];
 
+  compareBarangayObjects(object1: any, object2: any) {
+    return object1 && object2 && object1.barangay === object2.barangay;
+  }
+
   getAccountType(account_type: number): string {
     const status = this.accountTypeName.find(
       (option) => option.value === account_type
     );
     return status ? status.text : '';
   }
+
+  barangay : any [] = []
   ngOnInit(): void {
+    this.barangay = this._barangay.getAllBarangayNames();
     this.inputdata = this.data
     this.subsription_get_all_user.add(
       this._dataService.get_user_profile(this.inputdata.code).subscribe((result) => {

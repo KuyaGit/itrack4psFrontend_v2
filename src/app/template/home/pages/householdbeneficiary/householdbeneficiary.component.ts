@@ -206,12 +206,12 @@ viewItem(child_id: any) {
     this._alertService.simpleAlert(
       'warning',
       'Warning',
-      'Are you sure you want to archived this user?',
+      'Are you sure you want to archived this Child Beneficiary?',
       () => {
         this._dataService.deletechildprofile(child_id).subscribe(
           (result) => {
             if (result && result.status === '200') {
-              this.handleSuccess('Child Beneficiary profile archived successfully');
+              this.handleSuccess('Child Beneficiary archived successfully');
               this.getChildsData();
             } else {
               this.handleError('Failed to delete user profile');
