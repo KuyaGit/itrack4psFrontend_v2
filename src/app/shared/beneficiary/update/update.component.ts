@@ -127,7 +127,6 @@ export class UpdateComponent implements OnInit {
       scschooladdress: ['',Validators.required],
       tesdacourse: ['',Validators.required],
       work: ['',Validators.required],
-      assigned : [this.assignedName],
       proof: [''],
       updated_by: [this.assignedName],
     })
@@ -173,6 +172,7 @@ export class UpdateComponent implements OnInit {
         this.beneStatus = this.userInfo.beneficiary_status;
         this.childbeneficiary.controls['fname'].patchValue(this.userInfo.fname);
         this.childbeneficiary.controls['lname'].patchValue(this.userInfo.lname);
+        this.childbeneficiary.controls['profile_piclink'].patchValue(this.userInfo.profile_piclink);
       })
     );
   }
