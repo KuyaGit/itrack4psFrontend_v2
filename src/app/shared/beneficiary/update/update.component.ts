@@ -135,7 +135,7 @@ export class UpdateComponent implements OnInit {
   }
 
   update() {
-    this._dataService.update_profile(this.childbeneficiary.value).subscribe(
+    this._dataService.update_childbeneficiary(this.childbeneficiary.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {
           this.handleSuccess(result.message);
