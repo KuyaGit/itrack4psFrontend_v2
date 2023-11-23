@@ -16,6 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { UpdateComponent } from 'src/app/shared/beneficiary/update/update.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-householdbeneficiary',
   templateUrl: './householdbeneficiary.component.html',
@@ -51,7 +52,6 @@ export class HouseholdbeneficiaryComponent implements OnInit {
   
   ngOnInit() {
     this.getChildsData()
-    
   }
 
   addchildBeneficiary(householdid: string) {
