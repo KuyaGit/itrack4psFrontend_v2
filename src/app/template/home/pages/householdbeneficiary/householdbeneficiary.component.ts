@@ -83,9 +83,16 @@ export class HouseholdbeneficiaryComponent implements OnInit {
     'assigned',
     'actions'
   ];
+  displayedArchivedColumns: any[] = [
+    'child_id',
+    'full_name',
+    'assigned',
+    'actions'
+  ];
   alluserData = new MatTableDataSource<child_beneficiary>([]);
   alluserList!: child_beneficiary[];
-  getChildsData() {
+  getChildsData() { 
+    this.archived = false
     this.activatedRoute.params.subscribe(params=>{
       this.householdid = params.id
       
@@ -95,7 +102,6 @@ export class HouseholdbeneficiaryComponent implements OnInit {
         (result) => {
           if (Array.isArray(result.result)) {
             this.alluserList = result.result;
-            console.log(this.alluserList)
             this.alluserList.forEach((user)=>{
               user.status = Number(user.status)
               user.statusName = this.getStatusType(user.status);
@@ -105,13 +111,8 @@ export class HouseholdbeneficiaryComponent implements OnInit {
               this.alluserData = new MatTableDataSource(this.alluserList);
               this.alluserData.paginator = this.paginator;
               this.alluserData.sort = this.sort;
+              console.log(this.alluserData)
             }
-          }
-          const userSessString = localStorage.getItem('user_loginSession');
-
-          if (userSessString !== null) {
-            const parsed = JSON.parse(userSessString);
-            this.householdid = parsed.householdid;
           }
         },
         (error) => {
@@ -233,9 +234,13 @@ viewItem(child_id: any) {
   archivedChild = new MatTableDataSource<child_beneficiary>([]);
   getholderArchived() {
     this.archived = true;
+    this.activatedRoute.params.subscribe(params=>{
+      this.householdid = params.id
+    })
     this.subsription_get_childlistarchived.add(
-      this._dataService.getchildarchived().subscribe(
+      this._dataService.getchildarchived(this.householdid).subscribe(
         (result) => {
+          console.log(result)
           if (Array.isArray(result.result)) {
             this.allarchivedChild = result.result
             if (this.paginator && this.sort) {
@@ -250,6 +255,34 @@ viewItem(child_id: any) {
         }
       )
     );
+  }
+
+
+  
+  restorechild(child_id : number){
+    this._alertService.simpleAlert(
+      'warning',
+      'Warning',
+      'Are you sure you want to restore this child beneficiary?',
+      () => {
+        this._dataService.restorechild(child_id).subscribe(
+          (result) => {
+            if (result && result.status === '200') {
+              this.handleSuccess('4ps Holder profile restored successfully');
+              this.getholderArchived();
+            } else {
+              this.handleError('Failed to delete user profile');
+            }
+          },
+          (error) => {
+            this.handleError(
+              'An error occurred while deleting the user profile'
+            );
+            console.error(error);
+          }
+    )},
+    )
+    
   }
   private handleError(message: string) {
     this._alertService.simpleAlert('error', 'Error', message);
