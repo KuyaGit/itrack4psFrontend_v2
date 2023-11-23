@@ -12,6 +12,7 @@ import { AuthGuard } from 'src/app/guard/auth.guard';
 import { SchoolregistrarComponent } from './pages/schoolregistrar/schoolregistrar.component';
 import { SchoolaccountsComponent } from './pages/schoolaccounts/schoolaccounts.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { ChildachievementsComponent } from './pages/childachievements/childachievements.component';
 
 const routes: Routes = [
   {
@@ -53,9 +54,14 @@ const routes: Routes = [
         path: 'schoolaccounts',
         title: 'School Registrar Account Management',
         component: SchoolaccountsComponent
+      },
+      {
+        path: 'child/achievements/:id',
+        title: 'Child Achievements',
+        component: ChildachievementsComponent
       }
     ]
-  },
+  }
 
 ];
 

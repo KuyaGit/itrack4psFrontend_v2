@@ -37,6 +37,7 @@ import { UpdateuserinformationComponent } from './shared/user/updateuserinformat
     LoginComponent,
     ArhivedchildComponent,
     UpdateuserinformationComponent,
+    
 
   ],
   imports: [

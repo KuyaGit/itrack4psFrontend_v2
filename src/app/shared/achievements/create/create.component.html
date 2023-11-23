@@ -1,0 +1,45 @@
+
+<body>
+    <div class="title">
+      <header>{{data.title}}</header>
+    </div>
+      <div class="second-info">
+        <form [formGroup]="achievement">
+            <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true">
+                <mat-label>Achievement</mat-label>
+                <input matInput type="text" formControlName="achievement_name" placeholder="Achievement">
+                <mat-error class="error-message">
+                  <span *ngIf="achievement.controls['achievement_name'].errors?.touched || achievement.controls['achievement_name'].errors?.required">This field is required.</span>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true">
+                <mat-label>Achievement Short Description</mat-label>
+                <input matInput type="text" formControlName="achievement_desc" placeholder="Achievement Short Description">
+                <mat-error class="error-message">
+                  <span *ngIf="achievement.controls['achievement_desc'].errors?.touched || achievement.controls['achievement_desc'].errors?.required">This field is required.</span>
+                </mat-error>
+              </mat-form-field>
+            <div>
+                <div class="file-upload-header">
+                    <header>Upload File Proof Document</header>
+                </div>
+                <div class="wrapper">
+                        <input type="file" class="file-input"
+                        accept="file/*"
+                        (change)="selectFileUpload($event)" #fileUpload>
+                    <div class="file-upload">
+                        {{fileName || "No file uploaded yet."}}
+                        <button mat-mini-fab color="primary" class="upload-btn"
+                        (click)="fileUpload.click()">
+                            <mat-icon class="file-icon">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+        <button mat-raised-button color="primary" (click)="addchildachievement()">Update</button>
+        <button mat-raised-button color="warn" class="actions" class="ml-2" (click)="closepopup()">Close</button>
+</body>
+

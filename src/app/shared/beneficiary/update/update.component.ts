@@ -1,4 +1,4 @@
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient,  HttpResponse } from '@angular/common/http';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -104,7 +104,6 @@ export class UpdateComponent implements OnInit {
   ) {
     this.inputdata = this.data.code;
     const currentDate = new Date();
-    // Format the date if needed (e.g., toISOString())
     const updateDate = currentDate.toISOString();
     this.childbeneficiary = this.fb.group({
       householdid: [this.inputdata],
