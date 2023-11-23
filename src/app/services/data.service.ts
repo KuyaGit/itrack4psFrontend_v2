@@ -25,8 +25,13 @@ export class DataService {
   public getholderarchived(): Observable<any> {
     return this.http.get<any>(this.url.concat('/api/admin/getholderarchived'));
   }
-  public getchildarchived(): Observable<any> {
-    return this.http.get<any>(this.url.concat('/api/admin/getchildlistarchived'));
+  
+  public getchildarchived(householdid: string): Observable<any> {
+    return this.http
+      .post<any>(this.url.concat('/api/beneficiary/getarchivedbeneficiary'), {
+        householdid : householdid,
+      })
+      .pipe(catchError(this.handleError));
   }
 
   public get_holder_profile(householdid: string): Observable<any> {
@@ -72,9 +77,9 @@ export class DataService {
     })
     .pipe(catchError(this.handleError));
   }
-  public deletechildprofile(accountuser_id: string): Observable<any> {
-    return this.http.post<any>(this.url.concat('/api/admin/deleteuserprofile'), {
-      accountuser_id: accountuser_id,
+  public deletechildprofile(child_id: any): Observable<any> {
+    return this.http.post<any>(this.url.concat('/api/beneficiary/archivedbeneficiary'), {
+      child_id: child_id,
     })
     .pipe(catchError(this.handleError));
   }
@@ -89,8 +94,18 @@ export class DataService {
   public restoreholder(householdid: string): Observable<any> {
     return this.http.post<any>(this.url.concat('/api/admin/restoreholder'), {
       householdid: householdid,
+    }) 
+  }
+  public restorechild(child_id: number): Observable<any> {
+    return this.http.post<any>(this.url.concat('/api/beneficiary/restorebeneficiary'), {
+      child_id: child_id,
     })
-    
+  }
+
+  public getchildarchivedlist( householdid : number) : Observable<any> {
+    return this.http.post<any>(this.url.concat('/api/beneficiary/archivedbeneficiary'), {
+      householdid : householdid,
+    })
   }
 
   public forcedeletechildprofile(child_id: string): Observable<any> {
