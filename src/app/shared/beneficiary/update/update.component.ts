@@ -106,7 +106,7 @@ export class UpdateComponent implements OnInit {
     const currentDate = new Date();
     const updateDate = currentDate.toISOString();
     this.childbeneficiary = this.fb.group({
-      householdid: [this.inputdata],
+      child_id: [this.inputdata],
       date_created: [''],
       date_updated: [updateDate],
       schoolname: ['',Validators.required],
@@ -118,7 +118,7 @@ export class UpdateComponent implements OnInit {
       profile_piclink: ['',Validators.required],
       collegeschoolname: ['',Validators.required],
       collegeaddress: ['',Validators.required],
-      status: ['',Validators.required],
+      status: [''],
       elemschool: ['',Validators.required],
       elemaddress: ['',Validators.required],
       junschool: ['',Validators.required],
@@ -131,31 +131,27 @@ export class UpdateComponent implements OnInit {
       proof: [''],
       updated_by: [this.assignedName],
     })
-    this.childbeneficiary.controls['status'].valueChanges.subscribe(value => this.statusRequired(value))
+    
   }
 
   update() {
     this._dataService.update_childbeneficiary(this.childbeneficiary.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {
-          this.handleSuccess(result.message);
+          this.handleSuccess('4ps Holder Information Updated');
           this.upload()
-          this.uploadProof()
           this.ref.close();
-          
         } else {
-          this.handleError('Failed to Create Beneficiary profile');
+          this.handleError('Failed to Update 4ps Holder Information');
         }
       },
       (error) => {
-        this.handleError('An error occurred while updating profile');
+        this.handleError('Server Error');
         console.error(error);
       }
     );
   }
-
-
-
+  
 
   private subsription_get_all_user: Subscription = new Subscription();
   childId: any
@@ -270,352 +266,7 @@ export class UpdateComponent implements OnInit {
   private handleError(message: any) {
     this._alertService.simpleAlert('error', 'Error', message);
   }
-  statusRequired(value: string) {
-    const status = this.childbeneficiary.get('status');
-    console.log('Status value:', status?.value);
-
-    if (status?.value == 1) {
-      const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress'];
-
-      // Clear validators for fields not in fieldsToUpdate
-      const fieldsToClearValidators = [
-        'snhcourse',
-        'collegeschoolname',
-        'collegeaddress',
-        'collegecourse',
-        'tesdacourse',
-        'junschool',
-        'junaddress',
-        'shschoolname',
-        'scschooladdress',
-        'work'
-      ];
-
-      fieldsToUpdate.forEach(fieldName => {
-        const field = this.childbeneficiary.get(fieldName);
-        if (field) {
-          field.setValidators(Validators.required);
-        }
-        field?.updateValueAndValidity();
-      });
-
-      fieldsToClearValidators.forEach(fieldName => {
-        const field = this.childbeneficiary.get(fieldName);
-        if (field) {
-          field.clearValidators();
-          field?.updateValueAndValidity();
-        }
-      });
-    }
-    else if( status?.value == 2){
-    const fieldsToUpdate = ['junschool','junaddress',];
-    const fieldsToClearValidators = [
-      'snhcourse',
-      'collegeschoolname',
-      'collegeaddress',
-      'collegecourse',
-      'tesdacourse',
-      'shschoolname',
-      'scschooladdress',
-      'work',
-      'schoolname', 
-      'elemschool', 
-      'elemaddress',
-    ];
-    fieldsToUpdate.forEach(fieldName => {
-      const field = this.childbeneficiary.get(fieldName);
-      if (field) {
-        field.setValidators(Validators.required);
-      }
-      field?.updateValueAndValidity();
-    });
-
-    fieldsToClearValidators.forEach(fieldName => {
-      const field = this.childbeneficiary.get(fieldName);
-      if (field) {
-        field.clearValidators();
-        field?.updateValueAndValidity();
-      }
-    });
-    }
-    else if( status?.value == 3){
-    const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress',];
-    const fieldsToClearValidators = [
-      'collegeschoolname',
-      'collegeaddress',
-      'collegecourse',
-      'tesdacourse',
-      'work'
-    ];
-      fieldsToUpdate.forEach(fieldName => {
-        const field = this.childbeneficiary.get(fieldName);
-        if (field) {
-          field.setValidators(Validators.required);
-        }
-        field?.updateValueAndValidity();
-      });
-
-      fieldsToClearValidators.forEach(fieldName => {
-        const field = this.childbeneficiary.get(fieldName);
-        if (field) {
-          field.clearValidators();
-          field?.updateValueAndValidity();
-        }
-      });
-    }
-    else if( status?.value == 4){
-    const fieldsToUpdate = [
-      'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress',];
-    const fieldsToClearValidators = [
-      'schoolname',
-      'collegeschoolname',
-      'collegeaddress',
-      'collegecourse',
-      'tesdacourse',
-      'work'
-    ];
-
-      fieldsToUpdate.forEach(fieldName => {
-        const field = this.childbeneficiary.get(fieldName);
-        if (field) {
-          field.setValidators(Validators.required);
-        }
-        field?.updateValueAndValidity();
-      });
-
-      fieldsToClearValidators.forEach(fieldName => {
-        const field = this.childbeneficiary.get(fieldName);
-        if (field) {
-          field.clearValidators();
-          field?.updateValueAndValidity();
-        }
-      });
-      }
-      else if( status?.value == 5){
-        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress','collegeschoolname','collegeaddress','collegecourse',];
-        const fieldsToClearValidators = [
-          'tesdacourse',
-          'work'
-        ];
-        fieldsToUpdate.forEach(fieldName => {
-          const field = this.childbeneficiary.get(fieldName);
-          if (field) {
-            field.setValidators(Validators.required);
-          }
-          field?.updateValueAndValidity();
-        });
-
-        fieldsToClearValidators.forEach(fieldName => {
-          const field = this.childbeneficiary.get(fieldName);
-          if (field) {
-            field.clearValidators();
-            field?.updateValueAndValidity();
-          }
-        });
-      }
-      else if( status?.value == 6){
-        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'tesdacourse',];
-        const fieldsToClearValidators = [
-          'collegeschoolname',
-          'collegeaddress',
-          'collegecourse',
-          'work'
-        ];
-        fieldsToUpdate.forEach(fieldName => {
-          const field = this.childbeneficiary.get(fieldName);
-          if (field) {
-            field.setValidators(Validators.required);
-          }
-          field?.updateValueAndValidity();
-        });
-
-        fieldsToClearValidators.forEach(fieldName => {
-          const field = this.childbeneficiary.get(fieldName);
-          if (field) {
-            field.clearValidators();
-            field?.updateValueAndValidity();
-          }
-        });
-      }
-      else if( status?.value == 7){
-        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress',  'tesdacourse',];
-        const fieldsToClearValidators = [
-          'collegeschoolname',
-          'collegeaddress',
-          'collegecourse',
-          'work','snhcourse','shschoolname', 'scschooladdress',
-        ];
-        fieldsToUpdate.forEach(fieldName => {
-          const field = this.childbeneficiary.get(fieldName);
-          if (field) {
-            field.setValidators(Validators.required);
-          }
-          field?.updateValueAndValidity();
-        });
-
-        fieldsToClearValidators.forEach(fieldName => {
-          const field = this.childbeneficiary.get(fieldName);
-          if (field) {
-            field.clearValidators();
-            field?.updateValueAndValidity();
-          }
-        });
-        }
-        else if( status?.value == 8){
-          const fieldsToUpdate = ['elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'work'];
-          const fieldsToClearValidators = [
-            'schoolname',
-            'collegeschoolname',
-            'collegeaddress',
-            'collegecourse',
-            'tesdacourse',
-          ];
-          fieldsToUpdate.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.setValidators(Validators.required);
-            }
-            field?.updateValueAndValidity();
-          });
-
-          fieldsToClearValidators.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.clearValidators();
-              field?.updateValueAndValidity();
-            }
-          });
-        }
-        else if( status?.value == 9){
-          const fieldsToUpdate = [ 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'collegeschoolname',
-          'collegeaddress',
-          'collegecourse', ];
-          const fieldsToClearValidators = [
-            'schoolname',
-            'tesdacourse',
-            'work'
-          ];
-          fieldsToUpdate.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.setValidators(Validators.required);
-            }
-            field?.updateValueAndValidity();
-          });
-
-          fieldsToClearValidators.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.clearValidators();
-              field?.updateValueAndValidity();
-            }
-          });
-        }
-        else if( status?.value == 10){
-          const fieldsToUpdate = [ 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'collegeschoolname',
-          'collegeaddress',
-          'collegecourse', 'work'];
-          const fieldsToClearValidators = [
-            'schoolname',
-            'tesdacourse',
-          ];
-          fieldsToUpdate.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.setValidators(Validators.required);
-            }
-            field?.updateValueAndValidity();
-          });
-
-          fieldsToClearValidators.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.clearValidators();
-              field?.updateValueAndValidity();
-            }
-          });
-        }
-        else if( status?.value == 11){
-          const fieldsToUpdate = ['tesdacourse' ];
-          const fieldsToClearValidators = [
-            'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'collegeschoolname',
-          'collegeaddress',
-          'collegecourse', 'work',
-            'schoolname',
-
-          ];
-          fieldsToUpdate.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.setValidators(Validators.required);
-            }
-            field?.updateValueAndValidity();
-          });
-
-          fieldsToClearValidators.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.clearValidators();
-              field?.updateValueAndValidity();
-            }
-          });
-        }
-        else if( status?.value == 12){
-          const fieldsToUpdate = ['elemschool', 'elemaddress','junschool','junaddress' ];
-          const fieldsToClearValidators = [
-            'tesdacourse',
-            'snhcourse',
-            'shschoolname',
-            'scschooladdress',
-            'collegeschoolname',
-            'collegeaddress',
-            'collegecourse',
-            'work',
-            'schoolname',
-          ];
-          fieldsToUpdate.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.setValidators(Validators.required);
-            }
-            field?.updateValueAndValidity();
-          });
-
-          fieldsToClearValidators.forEach(fieldName => {
-            const field = this.childbeneficiary.get(fieldName);
-            if (field) {
-              field.clearValidators();
-              field?.updateValueAndValidity();
-            }
-          });
-        }
-    else {
-
-      const allFields = [
-        'schoolname',
-        'elemschool',
-        'elemaddress',
-        'snhcourse',
-        'collegeschoolname',
-        'collegeaddress',
-        'collegecourse',
-        'tesdacourse',
-        'junschool',
-        'junaddress',
-        'shschoolname',
-        'scschooladdress',
-        'work'
-      ];
-
-      allFields.forEach(fieldName => {
-        const field = this.childbeneficiary.get(fieldName);
-        if (field) {
-          field.clearValidators();
-          field?.updateValueAndValidity();
-        }
-      });
-    }
-  }
+ 
 
     
 

@@ -58,6 +58,8 @@ export interface child_beneficiary{
   barangay : string,
   statusText: any,
   proof : string,
+  updated_by : string,
+  date_updated : Date,
 } 
 
 
