@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { SchoolService } from 'src/app/services/school.service';
 import { schoolname, statusNames, barangayNames } from 'src/app/services/data';
 import { StatusService } from 'src/app/services/status.service';
@@ -7,8 +7,9 @@ import { BarangaysService } from 'src/app/services/barangays.service';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { DataService } from 'src/app/services/data.service';
 import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-childbeneficiary',
   templateUrl: './childbeneficiary.component.html',
@@ -28,7 +29,7 @@ export class ChildbeneficiaryComponent implements OnInit {
   childbeneficiary : FormGroup;
   startDate = new Date(2000, 0, 1);
   fileUrl: string = 'assets/default.png';
-  
+
   inputdata : string = '';
   constructor(
     @Inject (MAT_DIALOG_DATA)
@@ -39,8 +40,8 @@ export class ChildbeneficiaryComponent implements OnInit {
     private statuslist: StatusService,
     private _barangay: BarangaysService,
     private _alertService: AlertServiceService,
-    private _dataService: DataService
-
+    private _dataService: DataService,
+    private cdr : ChangeDetectorRef,
   ) {
     this.inputdata = this.data.code;
     const currentDate = new Date();
@@ -49,8 +50,6 @@ export class ChildbeneficiaryComponent implements OnInit {
     this.childbeneficiary = this.fb.group({
       householdid: [this.inputdata],
       date_created: [creationDate],
-      
-      schoolname: ['',Validators.required],
       fname: ['',Validators.required],
       lname: ['',Validators.required],
       birthdate: ['',Validators.required],
@@ -69,7 +68,8 @@ export class ChildbeneficiaryComponent implements OnInit {
       tesdacourse: ['',Validators.required],
       work: ['',Validators.required],
       assigned : [this.assignedName],
-      proof: [''],
+      proof: ['', Validators.required],
+      otherSchool: [''],
     })
     this.childbeneficiary.controls['status'].valueChanges.subscribe(value => this.statusRequired(value))
   }
@@ -106,12 +106,64 @@ export class ChildbeneficiaryComponent implements OnInit {
   }
 
 
+  isOtherElemSchoolSelected = false;
+  onElemSelectChange(event: MatSelectChange): void {
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherElemSchoolSelected = selectedValue === 'Other';
+
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherElemSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
+  }
+  isOtherJunSchoolSelected = false;
+  onJunSelectChange(event: MatSelectChange): void {
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherJunSchoolSelected = selectedValue === 'Other';
+
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherJunSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
+    this.cdr.detectChanges();
+  }
+  isOtherSenSchoolSelected = false;
+  onSenSelectChange(event: MatSelectChange): void {
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherSenSchoolSelected = selectedValue === 'Other';
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherSenSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
+  }
+  isOtherColSchoolSelected = false;
+  onColSelectChange(event: MatSelectChange): void {
+
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherColSchoolSelected = selectedValue === 'Other';
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherColSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
+  }
+
   statusRequired(value: string) {
     const status = this.childbeneficiary.get('status');
-    console.log('Status value:', status?.value);
-
-    if (status?.value == 1) {
-      const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress'];
+    const elemschool = this.childbeneficiary.get('elemschool');
+    if (status?.value == 1  && elemschool?.value == 'Other Schools' ) {
+      const fieldsToUpdate = ['elemschool', 'elemaddress', 'proof'];
 
       // Clear validators for fields not in fieldsToUpdate
       const fieldsToClearValidators = [
@@ -124,7 +176,8 @@ export class ChildbeneficiaryComponent implements OnInit {
         'junaddress',
         'shschoolname',
         'scschooladdress',
-        'work'
+        'work',
+        'otherSchool',
       ];
 
       fieldsToUpdate.forEach(fieldName => {
@@ -144,7 +197,7 @@ export class ChildbeneficiaryComponent implements OnInit {
       });
     }
     else if( status?.value == 2){
-    const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress',];
+    const fieldsToUpdate = ['elemschool', 'elemaddress','junschool','junaddress',];
     const fieldsToClearValidators = [
       'snhcourse',
       'collegeschoolname',
@@ -172,7 +225,7 @@ export class ChildbeneficiaryComponent implements OnInit {
     });
     }
     else if( status?.value == 3){
-    const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress',];
+    const fieldsToUpdate = [ 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress',];
     const fieldsToClearValidators = [
       'collegeschoolname',
       'collegeaddress',
@@ -200,7 +253,7 @@ export class ChildbeneficiaryComponent implements OnInit {
     const fieldsToUpdate = [
       'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress',];
     const fieldsToClearValidators = [
-      'schoolname',
+
       'collegeschoolname',
       'collegeaddress',
       'collegecourse',
@@ -225,7 +278,7 @@ export class ChildbeneficiaryComponent implements OnInit {
       });
       }
       else if( status?.value == 5){
-        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress','collegeschoolname','collegeaddress','collegecourse',];
+        const fieldsToUpdate = ['elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress','collegeschoolname','collegeaddress','collegecourse',];
         const fieldsToClearValidators = [
           'tesdacourse',
           'work'
@@ -247,7 +300,7 @@ export class ChildbeneficiaryComponent implements OnInit {
         });
       }
       else if( status?.value == 6){
-        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'tesdacourse',];
+        const fieldsToUpdate = [ 'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'tesdacourse',];
         const fieldsToClearValidators = [
           'collegeschoolname',
           'collegeaddress',
@@ -271,7 +324,7 @@ export class ChildbeneficiaryComponent implements OnInit {
         });
       }
       else if( status?.value == 7){
-        const fieldsToUpdate = ['schoolname', 'elemschool', 'elemaddress','junschool','junaddress',  'tesdacourse',];
+        const fieldsToUpdate = [ 'elemschool', 'elemaddress','junschool','junaddress',  'tesdacourse',];
         const fieldsToClearValidators = [
           'collegeschoolname',
           'collegeaddress',
@@ -297,7 +350,6 @@ export class ChildbeneficiaryComponent implements OnInit {
         else if( status?.value == 8){
           const fieldsToUpdate = ['elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'work'];
           const fieldsToClearValidators = [
-            'schoolname',
             'collegeschoolname',
             'collegeaddress',
             'collegecourse',
@@ -324,7 +376,6 @@ export class ChildbeneficiaryComponent implements OnInit {
           'collegeaddress',
           'collegecourse', ];
           const fieldsToClearValidators = [
-            'schoolname',
             'tesdacourse',
             'work'
           ];
@@ -349,7 +400,6 @@ export class ChildbeneficiaryComponent implements OnInit {
           'collegeaddress',
           'collegecourse', 'work'];
           const fieldsToClearValidators = [
-            'schoolname',
             'tesdacourse',
           ];
           fieldsToUpdate.forEach(fieldName => {
@@ -373,8 +423,7 @@ export class ChildbeneficiaryComponent implements OnInit {
           const fieldsToClearValidators = [
             'elemschool', 'elemaddress','junschool','junaddress', 'snhcourse','shschoolname', 'scschooladdress', 'collegeschoolname',
           'collegeaddress',
-          'collegecourse', 'work',
-            'schoolname',
+          'collegecourse', 'work'
 
           ];
           fieldsToUpdate.forEach(fieldName => {
@@ -404,7 +453,6 @@ export class ChildbeneficiaryComponent implements OnInit {
             'collegeaddress',
             'collegecourse',
             'work',
-            'schoolname',
           ];
           fieldsToUpdate.forEach(fieldName => {
             const field = this.childbeneficiary.get(fieldName);
@@ -425,7 +473,6 @@ export class ChildbeneficiaryComponent implements OnInit {
     else {
       // Clear validators for all fields when status is not '1'
       const allFields = [
-        'schoolname',
         'elemschool',
         'elemaddress',
         'snhcourse',

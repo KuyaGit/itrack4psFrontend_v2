@@ -1,5 +1,5 @@
 import { HttpClient,  HttpResponse } from '@angular/common/http';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
@@ -10,6 +10,7 @@ import { StatusService } from 'src/app/services/status.service';
 import { barangayNames, schoolname, statusNames } from 'src/app/services/data';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { finalize } from 'rxjs';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-update',
@@ -100,7 +101,8 @@ export class UpdateComponent implements OnInit {
     private statuslist: StatusService,
     private _barangay: BarangaysService,
     private _alertService: AlertServiceService,
-    private _dataService: DataService
+    private _dataService: DataService,
+    private cdr : ChangeDetectorRef,
   ) {
     this.inputdata = this.data.code;
     const currentDate = new Date();
@@ -130,7 +132,60 @@ export class UpdateComponent implements OnInit {
       proof: [''],
       updated_by: [this.assignedName],
     })
-    
+
+  }
+
+  isOtherElemSchoolSelected = false;
+  onElemSelectChange(event: MatSelectChange): void {
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherElemSchoolSelected = selectedValue === 'Other';
+
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherElemSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
+  }
+  isOtherJunSchoolSelected = false;
+  onJunSelectChange(event: MatSelectChange): void {
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherJunSchoolSelected = selectedValue === 'Other';
+
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherJunSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
+    this.cdr.detectChanges();
+  }
+  isOtherSenSchoolSelected = false;
+  onSenSelectChange(event: MatSelectChange): void {
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherSenSchoolSelected = selectedValue === 'Other';
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherSenSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
+  }
+  isOtherColSchoolSelected = false;
+  onColSelectChange(event: MatSelectChange): void {
+
+    const selectedValue = event.value;
+    // eck if "Other Schools" is selected
+    this.isOtherColSchoolSelected = selectedValue === 'Other';
+    // Reset the manual input field if a different option is selected
+    this.cdr.detectChanges();
+    if (!this.isOtherColSchoolSelected) {
+      this.childbeneficiary.get('otherSchool')?.setValue('');
+      this.cdr.detectChanges();
+    }
   }
 
   update() {
@@ -151,7 +206,7 @@ export class UpdateComponent implements OnInit {
       }
     );
   }
-  
+
 
   private subsription_get_all_user: Subscription = new Subscription();
   childId: any
@@ -181,7 +236,7 @@ export class UpdateComponent implements OnInit {
   closepopup(){
     this.ref.close();
   }
-  
+
   selectedFiles?: FileList;
   currentFile?: File;
   progress = 0;
@@ -267,11 +322,11 @@ export class UpdateComponent implements OnInit {
   private handleError(message: any) {
     this._alertService.simpleAlert('error', 'Error', message);
   }
- 
 
-    
 
-  
+
+
+
   fileName = '';
   currentFileUpload?: File;
   progressbar = 0;
