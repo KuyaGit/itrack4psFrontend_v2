@@ -59,12 +59,14 @@ export class ViewchildComponent {
   }
   childId: any
   beneStatus: any
+  proofUrl: string = ''
   ngOnInit() {
     this.inputdata = this.data
     this.subsription_get_all_user.add(
       this._dataService.get_child_profile(this.inputdata.code).subscribe((result) => {
         this.userInfo = result.result[0];
         this.fileUrl = this.userInfo.profile_piclink;
+        this.proofUrl = this.userInfo.proof
         this.statusValue = this.userInfo.status;
         this.childId = this.userInfo.child_id;
         this.beneStatus = this.userInfo.beneficiary_status;
@@ -81,7 +83,7 @@ export class ViewchildComponent {
 
   downloadCertificate() {
     // Assuming achievements_file contains the URL or path to the file
-    const fileUrl = this.userInfo.achievements_file;
+    const fileUrl = this.proofUrl;
 
     // Open the file in a new window or tab
     window.open(fileUrl, '_blank');

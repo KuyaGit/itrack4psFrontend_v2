@@ -1,9 +1,9 @@
 body{
   background: var(--body-color);
   padding-top: 2% !important;
-  padding:  3%;
-  height: 95vh !important;
-  overflow: auto;
+  padding: 3%;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
 .user-image{
@@ -69,12 +69,10 @@ header{
     font-weight: 600;
     color: #333;
 }
-  
+
 .second-info{
   background-color: #fff;
   padding: 3%;
-  height: 40vh;
-  overflow-y: auto;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 2%;
