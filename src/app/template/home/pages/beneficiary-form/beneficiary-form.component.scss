@@ -42,9 +42,9 @@ mat-label{
 }
 .table-container{
   margin-top: 1%;
-  height: 90%;
   max-width: 100%;
   overflow: auto;
+  max-height: 78%;
 }
 
 
@@ -91,4 +91,9 @@ mat-label{
 .archived-buttons{
   display: flex;
   justify-content: flex-end;
+}
+
+.sticky{
+  position: sticky;
+  right: 0;
 }
