@@ -54,6 +54,7 @@ mat-label{
 .table-container{
   margin-top: 1%;
   border-radius: 10%;
+  max-height: 78%;
 }
 .square-image {
   width: 300px;
@@ -184,19 +185,6 @@ color: #333;
   margin-bottom: 2%;
 }
 
-.profile-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
-  position: absolute;
-}
-
-.center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .information{
   display: flex;
@@ -286,7 +274,8 @@ mat-grid-tile .name{
   }
 
   > img {
-    width: 20%;
+    width: 100%;
+    height: 200px;
     margin-bottom: 2%;
     border-radius: 50%;
     border: 3px solid #007E94;

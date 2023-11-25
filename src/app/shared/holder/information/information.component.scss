@@ -120,7 +120,7 @@ button{
 
 
 
-// 
+//
 .control-container {
   display: flex;
   flex-direction: column;
@@ -142,7 +142,8 @@ button{
   }
 
   > img {
-    width: 20%;
+    width: 100%;
+    height: 200px;
     border-radius: 50%;
     border: 3px solid #007E94;
   }

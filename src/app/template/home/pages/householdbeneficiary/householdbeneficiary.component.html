@@ -22,7 +22,7 @@
     </button>
   </div>
   <div class="table-container" *ngIf="archived == false">
-      <table mat-table [dataSource]="alluserData" matSort > 
+      <table mat-table [dataSource]="alluserData" matSort >
         <!-- header row -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
         <!-- column -->
@@ -53,8 +53,8 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef > Action </th>
-        <td mat-cell *matCellDef="let item">
+        <th mat-header-cell *matHeaderCellDef class="sticky"> Action </th>
+        <td mat-cell *matCellDef="let item" class="sticky">
               <button mat-icon-button (click)="viewItem(item.child_id)">
                 <mat-icon> preview </mat-icon>
               </button>
@@ -70,11 +70,14 @@
         </td>
     </ng-container>
       </table>
-    <mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
-                [length]="alluserData.data.length"></mat-paginator>
+
   </div>
-  <div class="table-container" *ngIf="archived == true">
-    <table mat-table [dataSource]="archivedChild" matSort > 
+  <mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
+                [length]="alluserData.data.length"></mat-paginator>
+
+<div class="archived" *ngIf="archived == true">
+  <div class="table-container" >
+    <table mat-table [dataSource]="archivedChild" matSort >
       <!-- header row -->
       <tr mat-header-row *matHeaderRowDef="displayedArchivedColumns sticky: true"></tr>
       <!-- column -->
@@ -98,9 +101,9 @@
           {{ item.assigned }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef > Action </th>
-      <td mat-cell *matCellDef="let item">
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell *matHeaderCellDef class="sticky"> Action </th>
+      <td mat-cell *matCellDef="let item" class="sticky">
             <button mat-icon-button (click)="viewItem(item.child)">
               <mat-icon> preview </mat-icon>
             </button>
@@ -110,7 +113,8 @@
       </td>
   </ng-container>
     </table>
-  <mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
+</div>
+<mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
               [length]="archivedChild.data.length"></mat-paginator>
 </div>
 </body>

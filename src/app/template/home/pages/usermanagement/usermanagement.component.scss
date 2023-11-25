@@ -42,9 +42,8 @@ mat-label{
 }
 .table-container{
   margin-top: 1%;
-  height: 90%;
   max-width: 100%;
-  overflow: auto;
+  overflow-y: auto;
 }
 .square-image {
   width: 100px;
@@ -58,9 +57,10 @@ mat-label{
   overflow: hidden;
 }
 .mat-paginator-sticky {
-  bottom: 0px;
   position: sticky;
+  bottom: 0px;
   z-index: 10;
+  width: 100%;
 }
 
 .contain{
@@ -92,4 +92,9 @@ mat-label{
     font-size: 1rem;
     margin-right: 0;
   }
+}
+
+.sticky{
+  position: sticky;
+  right: 0;
 }
