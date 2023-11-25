@@ -20,7 +20,7 @@
         <input
           #inputField
           hidden
-          type="file" 
+          type="file"
           accept="image/*"
           (change)="selectFile($event)"
           (click)="inputField.value = ''"
@@ -34,7 +34,7 @@
       <form [formGroup]="profileForm">
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
           <mat-label>Household ID</mat-label>
-          <input matInput type="text" placeholder="Household ID" id="inputEmail4" formControlName="householdid" >
+          <input matInput type="text" placeholder="Household ID" id="inputEmail4" formControlName="householdid" readonly>
         </mat-form-field>
         <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
           <mat-label>First Name</mat-label>
