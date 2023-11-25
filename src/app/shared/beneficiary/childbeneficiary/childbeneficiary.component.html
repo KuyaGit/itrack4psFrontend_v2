@@ -20,7 +20,7 @@
                   <input
                     #inputField
                     hidden
-                    type="file" 
+                    type="file"
                     accept="image/*"
                     (change)="selectFile($event)"
                     (click)="inputField.value = ''"
@@ -217,7 +217,11 @@
           </form>
         </mat-grid-list>
         <div mat-dialog-actions align="end" class="bottom-buttons">
-          <button mat-button mat-dialog-close>Cancel</button>
-          <button mat-fab extended color="primary" [mat-dialog-close]="true" (click)="addbeneficiariesSubscription()" [disabled]="!childbeneficiary.valid" >Add User</button>
-          </div>
+            <button mat-button mat-dialog-close>
+              Cancel
+            </button>
+            <button mat-fab extended color="primary" [mat-dialog-close]="true" (click)="addbeneficiariesSubscription()" [disabled]="!childbeneficiary.valid" >
+              Add Child Beneficiary
+            </button>
+        </div>
       </mat-dialog-content>

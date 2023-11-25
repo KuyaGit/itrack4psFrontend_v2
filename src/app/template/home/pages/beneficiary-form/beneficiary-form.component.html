@@ -2,7 +2,10 @@
   <div class="contain">
     <div class="header">
         <header>4Ps Holder</header>
-        <button *ngIf="account_type === 1 || account_type === 2" mat-raised-button color="primary" (click)="createbeneficiary()">Add 4ps Holder</button>
+        <button mat-raised-button color="primary" (click)="createbeneficiary()">
+          <mat-icon>add</mat-icon>
+          Add 4ps Holder
+        </button>
     </div>
       <div class="search-container">
         <mat-form-field appearance="outline" class="search">
@@ -12,7 +15,7 @@
       </div>
       <app-avatar *ngIf="!isMobileLayout"></app-avatar>
   </div>
-  
+
   <div class="archived-buttons">
     <button mat-button color="primary" (click)="active()" [class.mat-mdc-raised-button]="!archived">
       Active
@@ -22,7 +25,7 @@
     </button>
   </div>
   <div class="table-container" *ngIf="archived == false">
-      <table mat-table [dataSource]="alluserData" matSort > 
+      <table mat-table [dataSource]="alluserData" matSort >
         <!-- header row -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
         <!-- column -->
@@ -80,7 +83,7 @@
                 [length]="alluserData.data.length"></mat-paginator>
   </div>
   <div class="table-container" *ngIf="archived == true">
-    <table mat-table [dataSource]="archivedHolder" matSort > 
+    <table mat-table [dataSource]="archivedHolder" matSort >
       <!-- header row -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
       <!-- column -->
