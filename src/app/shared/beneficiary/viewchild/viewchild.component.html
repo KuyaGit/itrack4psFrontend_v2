@@ -4,7 +4,7 @@
       <header>{{data.title}}</header>
       <button mat-fab disabled *ngIf="this.beneStatus == 2">
         <mat-icon>pending</mat-icon>
-        
+
       </button>
       <button mat-fab class="disabled" color="primary" *ngIf="this.beneStatus == 1">
         <mat-icon>recommend</mat-icon>
@@ -41,10 +41,6 @@
           <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true">
             <mat-label>Status</mat-label>
             <input matInput type="text" placeholder="Account Type" id="inputEmail4" formControlName="status" readonly>
-          </mat-form-field>
-          <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true" *ngIf="this.statusValue == 1 || this.statusValue == 2 || this.statusValue == 3 || this.statusValue == 5 || this.statusValue == 6 || this.statusValue == 7 ||this.statusValue == 8">
-            <mat-label>School Name Currently Studying</mat-label>
-            <input matInput type="text" placeholder="School Name Currently Studying" id="inputEmail4" formControlName="schoolname" readonly>
           </mat-form-field>
           <mat-form-field class="full-width" appearance="outline" hideRequiredMarker="true" *ngIf="this.statusValue == 1 || this.statusValue == 2 || this.statusValue == 3 || this.statusValue == 4 || this.statusValue == 5 || this.statusValue == 6 || this.statusValue == 7">
             <mat-label>Elementary School Name</mat-label>
@@ -96,7 +92,7 @@
           </mat-form-field>
           <div *ngIf="this.statusValue == 1 || this.statusValue == 2 || this.statusValue == 3 || this.statusValue == 5 || this.statusValue == 6 || this.statusValue == 7 || this.statusValue == 4 || this.statusValue == 9 || this.statusValue == 11">
             <div class="file-upload-header">
-                
+
             </div>
             <div class="wrapper">
                 <div class="file-upload">
@@ -112,7 +108,7 @@
             </div>
         </div>
         </form>
-        
+
       </div>
         <button mat-raised-button color="primary" (click)="approved(this.childId,1)" *ngIf="account_type == '4'">Aprroved</button>
         <button mat-raised-button color="accent" class="actions" (click)="declined(this.childId,3)" *ngIf="account_type == '4'">Declined</button>

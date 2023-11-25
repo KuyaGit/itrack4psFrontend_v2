@@ -4,14 +4,14 @@
       <header>{{data.title}}</header>
       <button mat-fab disabled *ngIf="this.beneStatus == 2">
         <mat-icon>pending</mat-icon>
-        
+
       </button>
       <button mat-fab class="disabled" color="primary" *ngIf="this.beneStatus == 1">
         <mat-icon>recommend</mat-icon>
       </button>
       <button mat-fab class="disabled" color="warn" *ngIf="this.beneStatus == 3">
         <mat-icon>recommend</mat-icon>
-        
+
       </button>
     </div>
     <div class="first-info">
@@ -31,7 +31,7 @@
                 <input
                   #inputField
                   hidden
-                  type="file" 
+                  type="file"
                   accept="image/*"
                   (change)="selectFile($event)"
                   (click)="inputField.value = ''"
@@ -68,17 +68,6 @@
             </mat-error>
           </mat-form-field>
           <br>
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 1 || childbeneficiary.controls.status.value == 2 || childbeneficiary.controls.status.value == 3 || childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 7">
-            <mat-label>School Name currently studying</mat-label>
-            <mat-select formControlName="schoolname" >
-              <mat-option *ngFor="let item of schoolnames" [value]="item.schoolName">
-                {{item.schoolName}}
-              </mat-option>
-            </mat-select>
-            <mat-error class="error-message">
-              <span *ngIf="childbeneficiary.controls['schoolname'].errors?.touched || childbeneficiary.controls['schoolname'].errors?.required">This field is required.</span>
-            </mat-error>
-          </mat-form-field>
           <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 1">
             <mat-label>Elementary School Name</mat-label>
             <mat-select formControlName="elemschool" >
@@ -213,7 +202,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </form>
     </div>
         <button mat-raised-button color="primary" (click)="update()">Update</button>
