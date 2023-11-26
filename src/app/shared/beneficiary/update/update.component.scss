@@ -245,15 +245,15 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
   }
   .image-select{
     background-color: #007E94;
     color: white;
   }
 
-  .name {
-	width: 50%
+.name {
+  margin-top: 2%;
+	width: 100%
 }
 
 .example-radio-button{
@@ -374,7 +374,6 @@ form{
 }
 
 .wrapper{
-    width: 50%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -395,3 +394,16 @@ header{
 .file-upload-header{
   margin-bottom: 2%;
 }
+
+
+.mat-mini-fab {
+  height:3px !important;
+  padding-bottom: 40px !important;
+  border-radius: 9px !important;
+  /* font-size: 1em; */
+  transition: none !important;
+  box-shadow: none !important;
+  margin-right: 5px;
+  margin-left: 5px;
+  }
+
