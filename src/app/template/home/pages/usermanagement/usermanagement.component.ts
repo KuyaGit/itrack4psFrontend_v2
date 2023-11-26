@@ -81,6 +81,7 @@ export class UsermanagementComponent implements OnInit{
   viewItemDialog(accountuser_id: number, title: string, component: any) {
     var _popup = this.dialog.open(component, {
       width: '80%',
+      height: '95vh',
       data: {
         title: title,
         code: accountuser_id
