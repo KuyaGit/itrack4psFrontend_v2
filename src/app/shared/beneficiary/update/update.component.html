@@ -2,17 +2,6 @@
 <body>
     <div class="title">
       <header>{{data.title}}</header>
-      <button mat-fab disabled *ngIf="this.beneStatus == 2">
-        <mat-icon>pending</mat-icon>
-
-      </button>
-      <button mat-fab class="disabled" color="primary" *ngIf="this.beneStatus == 1">
-        <mat-icon>recommend</mat-icon>
-      </button>
-      <button mat-fab class="disabled" color="warn" *ngIf="this.beneStatus == 3">
-        <mat-icon>recommend</mat-icon>
-
-      </button>
     </div>
     <div class="first-info">
             <div class="control-container">
