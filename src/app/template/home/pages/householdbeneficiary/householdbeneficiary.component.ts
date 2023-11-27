@@ -25,9 +25,9 @@ import { Router } from '@angular/router';
 export class HouseholdbeneficiaryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  householdid: any = localStorage.getItem('householdid')
   hide = true;
-  householdid: any;
-  childbeneficiaryForm: FormGroup;  
+  childbeneficiaryForm: FormGroup;
     constructor(
       private breakpointObserver: BreakpointObserver,
       private cdr : ChangeDetectorRef,
@@ -49,7 +49,7 @@ export class HouseholdbeneficiaryComponent implements OnInit {
     return this.childbeneficiaryForm.controls;
   }
   inputdata : any;
-  
+
   ngOnInit() {
     this.getChildsData()
   }
@@ -89,13 +89,13 @@ export class HouseholdbeneficiaryComponent implements OnInit {
     'assigned',
     'actions'
   ];
+
   alluserData = new MatTableDataSource<child_beneficiary>([]);
   alluserList!: child_beneficiary[];
-  getChildsData() { 
+  getChildsData() {
     this.archived = false
     this.activatedRoute.params.subscribe(params=>{
       this.householdid = params.id
-      
     })
     this.subscription.add(
       this._dataService.getbeneficiary(this.householdid).subscribe(
@@ -122,6 +122,7 @@ export class HouseholdbeneficiaryComponent implements OnInit {
     );
   }
 
+
 updateItem(child_id: number) {
   this.viewItemDialog(child_id, 'Edit Information', UpdateComponent);
   this.getChildsData();
@@ -139,7 +140,7 @@ viewItem(child_id: any) {
         title: title,
         code: child_id
       }
-      
+
     });
     _popup.afterClosed().subscribe(item => {
       this.getChildsData();
@@ -258,7 +259,7 @@ viewItem(child_id: any) {
   }
 
 
-  
+
   restorechild(child_id : number){
     this._alertService.simpleAlert(
       'warning',
@@ -282,7 +283,7 @@ viewItem(child_id: any) {
           }
     )},
     )
-    
+
   }
   private handleError(message: string) {
     this._alertService.simpleAlert('error', 'Error', message);

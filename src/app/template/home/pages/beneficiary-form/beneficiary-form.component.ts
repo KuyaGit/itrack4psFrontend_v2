@@ -53,10 +53,16 @@ export class BeneficiaryFormComponent implements OnInit{
     private router : Router
   ) {}
   ngOnInit(): void {
+    localStorage.removeItem('householdid')
     this.getAllbeneficiary();
     console.log(this.fname)
   }
-  
+
+
+  viewchildbeneficiary(householdid: string) {
+    localStorage.setItem('householdid', householdid);
+    this.router.navigate(['/home/householdbeneficiary/' + householdid])
+  }
   alluserList!: getalluser[]
   getAllbeneficiary() {
     this.subsription_get_all_user.add(
@@ -66,7 +72,7 @@ export class BeneficiaryFormComponent implements OnInit{
           if (Array.isArray(result.result)) {
             this.alluserList = result.result
             console.log(this.alluserList)
-            
+
             if (this.paginator && this.sort) {
               this.alluserData = new MatTableDataSource(this.alluserList);
               this.alluserData.paginator = this.paginator;
@@ -104,7 +110,7 @@ export class BeneficiaryFormComponent implements OnInit{
         }
       )
     );
-  }
+}
 restoreholder(householdid : string){
   this._alertService.simpleAlert(
     'warning',
@@ -128,7 +134,7 @@ restoreholder(householdid : string){
         }
   )},
   )
-  
+
 }
 deleteuser(householdid: string) {
     this._alertService.simpleAlert(

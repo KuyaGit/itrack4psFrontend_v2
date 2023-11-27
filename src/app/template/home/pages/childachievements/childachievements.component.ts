@@ -16,6 +16,7 @@ import { CreateComponent } from 'src/app/shared/achievements/create/create.compo
   styleUrls: ['./childachievements.component.scss']
 })
 export class ChildachievementsComponent implements OnInit{
+  householdid: any = localStorage.getItem('householdid')
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
@@ -52,7 +53,7 @@ export class ChildachievementsComponent implements OnInit{
       this.child_id = params.id
     })
     this.subscription.add(
-      
+
       this._dataService.getchildachievements(this.child_id).subscribe(
         (result) => {
           console.log("this.alluserList")
@@ -107,14 +108,14 @@ viewItemDialog( title: string, component: any) {
       title: title,
       code: this.child_id
     }
-    
+
   });
   _popup.afterClosed().subscribe(item => {
     this.getChildachievement();
   })
-} 
-  
-  
+}
+
+
 private handleError(message: string) {
   this._alertService.simpleAlert('error', 'Error', message);
 }

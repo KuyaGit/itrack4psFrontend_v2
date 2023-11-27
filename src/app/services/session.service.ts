@@ -15,6 +15,8 @@ export class SessionService {
 	account_type: number = 0;
   fname : string = "";
   lname : string = "";
+  householdid : number = 0;
+  address: string ='';
   profile_piclink: string = "";
   navbarVisibilityChange: Subject<boolean> = new Subject<boolean>();
 	isUserLoggedInStatus: Subject<boolean> = new Subject<boolean>();
@@ -44,7 +46,9 @@ export class SessionService {
       this.fname = JSON.parse(sessionVal)['fname'];
       this.lname = JSON.parse(sessionVal)['lname'];
       this.profile_piclink = JSON.parse(sessionVal)['profile_piclink'];
-        }
+      this.address = JSON.parse(sessionVal)['address'];
+      this.householdid = JSON.parse(sessionVal)['householdid'];
+      }
 		return sessionVal;
 	}
 
@@ -56,8 +60,7 @@ export class SessionService {
 		return false;
 	}
 
-	logout() {
-
+logout() {
 		localStorage.removeItem('user_loginSession');
 		this.router.navigate(['']);
 		window.location.reload();
