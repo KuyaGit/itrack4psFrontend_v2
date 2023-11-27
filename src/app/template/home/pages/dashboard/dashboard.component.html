@@ -1,4 +1,4 @@
-<body *ngIf="!isMobileLayout">
+<body>
   <div class="contain">
     <div class="header">
         <header>4Ps Holder</header>
@@ -59,7 +59,7 @@
     </div>
   </div>
   <div class="charts">
-    <mat-card class="bar">
+    <mat-card  [ngClass]="isMobileLayout? 'line' : 'bar' ">
       <mat-card-title>
         Graduates Currently Working
       </mat-card-title>
@@ -81,7 +81,7 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card class="pie">
+    <mat-card [ngClass]="isMobileLayout? 'line' : 'pie'">
       <mat-card-title>Beneficiary Students Continue Studying College</mat-card-title>
       <mat-card-content>
         <div class="chart-container">
@@ -156,10 +156,10 @@
               [length]="alluserData.data.length"></mat-paginator>
 </div>
 </body>
-<body *ngIf="isMobileLayout">
+<!-- <body *ngIf="isMobileLayout">
   <div class="container">
     <div class="dashboard-error">
       Dashboard is not available in mobile view
     </div>
   </div>
-</body>
+</body> -->

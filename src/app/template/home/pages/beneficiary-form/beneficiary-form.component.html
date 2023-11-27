@@ -24,7 +24,8 @@
       Archived
     </button>
   </div>
-  <div class="table-container" *ngIf="archived == false">
+  <div class="notarchived" *ngIf="archived == false">
+    <div class="table-container" >
       <table mat-table [dataSource]="alluserData" matSort >
         <!-- header row -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
@@ -82,6 +83,8 @@
   </div>
   <mat-paginator class="mat-paginator-sticky" #paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10"
                   [length]="alluserData.data.length"></mat-paginator>
+  </div>
+
   <div class="archived" *ngIf="archived == true">
       <div class="table-container" >
         <table mat-table [dataSource]="archivedHolder" matSort >

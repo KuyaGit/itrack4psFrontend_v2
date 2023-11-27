@@ -118,6 +118,7 @@ header{
     .chart{
       height: 30%;
       width: 60%;
+
     }
   }
 }
@@ -130,6 +131,7 @@ header{
 }
 
 .pie{
+  margin-top: 3%;
   padding: 1%;
   width: 30%;
   display: flex;
@@ -140,6 +142,7 @@ header{
   margin-top: 2%;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 mat-card-content{
@@ -154,6 +157,7 @@ mat-card-content{
 }
 
 .full-with{
+  margin-top: 1%;
   padding: 2.4%;
 }
 
@@ -204,4 +208,12 @@ mat-card-content{
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+
+.mobile{
+  margin-top: 4%;
+  padding: 1%;
+  width: 100%;
+  padding: 2.4%;
 }
