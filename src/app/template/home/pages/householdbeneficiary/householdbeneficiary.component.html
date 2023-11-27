@@ -13,14 +13,14 @@
       Add Beneficiary Details
     </button>
   </div>
-  <div class="archived-buttons">
+  <!-- <div class="archived-buttons">
     <button mat-button color="primary" (click)="getChildsData()" [class.mat-mdc-raised-button]="!archived">
       Active
     </button>
     <button mat-button color="primary" (click)="getholderArchived()" [class.mat-mdc-raised-button]="archived">
       Archived
     </button>
-  </div>
+  </div> -->
   <div class="table-container" *ngIf="archived == false">
       <table mat-table [dataSource]="alluserData" matSort >
         <!-- header row -->
