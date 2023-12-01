@@ -25,6 +25,7 @@ export class ChildbeneficiaryComponent implements OnInit {
   fname = (JSON.parse(this.id)).fname;
   lname = (JSON.parse(this.id)).lname;
   assignedName = this.fname + ' ' + this.lname;
+  address : any = localStorage.getItem('address')
   previousStatusValue?: string;
   childbeneficiary : FormGroup;
   startDate = new Date(2000, 0, 1);
@@ -70,6 +71,7 @@ export class ChildbeneficiaryComponent implements OnInit {
       assigned : [this.assignedName],
       proof: ['', Validators.required],
       otherSchool: [''],
+      address: [this.address]
     })
     this.childbeneficiary.controls['status'].valueChanges.subscribe(value => this.statusRequired(value))
   }
@@ -85,6 +87,7 @@ export class ChildbeneficiaryComponent implements OnInit {
   }
 
   addbeneficiariesSubscription() {
+    console.log(this.childbeneficiary.value)
     this._dataService.addchildbeneficiary(this.childbeneficiary.value).subscribe(
       async (result) => {
         if (result && result.status === '200') {
