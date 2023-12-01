@@ -59,8 +59,9 @@ export class BeneficiaryFormComponent implements OnInit{
   }
 
 
-  viewchildbeneficiary(householdid: string) {
+  viewchildbeneficiary(householdid: string, address : string) {
     localStorage.setItem('householdid', householdid);
+    localStorage.setItem('address', address);
     this.router.navigate(['/home/householdbeneficiary/' + householdid])
   }
   alluserList!: getalluser[]
