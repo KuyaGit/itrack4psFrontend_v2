@@ -196,7 +196,13 @@ mat-card-content{
     margin-right: 0;
   }
 }
-
+.numbers{
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
 
 .dashboard-error{
   font-size: 30px;
@@ -215,4 +221,27 @@ mat-card-content{
   padding: 1%;
   width: 100%;
   padding: 2.4%;
+}
+
+.first-chart{
+  margin-top: 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.linechart {
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  padding: 1%;
+  width: 50% !important;
+
+}
+.doughnut {
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  padding: 1%;
+  width: 30%;
 }

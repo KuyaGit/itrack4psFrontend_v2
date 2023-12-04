@@ -7,47 +7,72 @@
     <app-avatar *ngIf="!isMobileLayout"></app-avatar>
   </div>
   <!-- Numbers -->
-  <div class="grid-container">
-    <div id="root">
-      <div class="container">
-        <div class="row align-items-stretch">
-          <div class="c-dashboardInfo col-lg-3 col-md-6">
-            <div class="wrap">
-              <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Mabini Population<svg
-                  class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
-                  </path>
-                </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">50,858</span>
-            </div>
-          </div>
-          <div class="c-dashboardInfo col-lg-3 col-md-6">
-            <div class="wrap">
-              <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">4Ps Holder<svg
-                  class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
-                  </path>
-                </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">{{this.FourpsHolder.analytics_4psholder}}</span>
-            </div>
-          </div>
-
-          <div class="c-dashboardInfo col-lg-3 col-md-6">
-            <div class="wrap">
-              <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Beneficiaries<svg
-                  class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
-                  </path>
-                </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">{{this.allstatusCount}}</span>
-            </div>
-          </div>
+  <div class="numbers">
+    <div class="population">
+      <div class="c-dashboardInfo">
+        <div class="wrap">
+          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Mabini Population<svg
+              class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+              </path>
+            </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">50,858</span>
+        </div>
+      </div>
+      
+    </div>
+    <div class="holder">
+      <div class="c-dashboardInfo">
+        <div class="wrap">
+          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">4Ps Holder<svg
+              class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+              </path>
+            </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">{{this.FourpsHolder.analytics_4psholder}}</span>
         </div>
       </div>
     </div>
+    <div class="beneficiaries">
+      <div class="c-dashboardInfo">
+        <div class="wrap">
+          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Beneficiaries<svg
+              class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+              </path>
+            </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">{{this.allstatusCount}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="first-chart">
+    <mat-card [ngClass]="isMobileLayout? 'line' : 'doughnut'">
+      <mat-card-title>School that has most enrolled Beneficiary Student </mat-card-title>
+      <mat-card-content>
+        <div class="chart-container">
+          <div class="chart">
+            <app-schoolline></app-schoolline>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card  [ngClass]="isMobileLayout? 'line' : 'linechart' ">
+      <mat-card-title>
+        Beneficiaries Count in Every Barangay
+      </mat-card-title>
+      <mat-card-content>
+        <div class="chart-container">
+          <div class="chart">
+            <app-barangaycount> </app-barangaycount>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
   </div>
   <div class="charts">
     <mat-card  [ngClass]="isMobileLayout? 'line' : 'bar' ">
