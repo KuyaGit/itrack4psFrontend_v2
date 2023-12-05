@@ -41,6 +41,7 @@ export class DashboardComponent implements OnInit{
     this.getStatus4()
     this.getallUser()
     this.getallstatussum()
+    this.gettopschools()
 }
 public isMobileLayout = false;
   ngAfterViewInit() {
@@ -128,7 +129,26 @@ renderPieChart() {
   })
 }
 
+gettopschools() {
+  this._analytics.topschools().subscribe(res => {
+    const topschools = res['result'];
+    this.doughnutChartData.datasets[0].data = [];
+    this.doughnutChartData.labels = [];
+    for (let school of topschools) {
+      this.doughnutChartData.labels.push(school.schoolname);
+      this.doughnutChartData.datasets[0].data.push(school.total);
+    }
+  });
+}
 
+public doughnutChartData: ChartData<'doughnut'> = {
+  labels: [],
+  datasets: [
+    {data: []}
+  ]
+};
+doughnutChartType: ChartType = 'doughnut';
+// events
 
 FourpsHolder:any = []
 get4psholderS() {

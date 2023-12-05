@@ -20,7 +20,7 @@
             </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">50,858</span>
         </div>
       </div>
-      
+
     </div>
     <div class="holder">
       <div class="c-dashboardInfo">
@@ -55,7 +55,13 @@
       <mat-card-content>
         <div class="chart-container">
           <div class="chart">
-            <app-schoolline></app-schoolline>
+              <canvas
+              baseChart
+              class="chart"
+              [data]="doughnutChartData"
+              [type]="doughnutChartType"
+            >
+            </canvas>
           </div>
         </div>
       </mat-card-content>
@@ -72,7 +78,7 @@
         </div>
       </mat-card-content>
     </mat-card>
-    
+
   </div>
   <div class="charts">
     <mat-card  [ngClass]="isMobileLayout? 'line' : 'bar' ">
