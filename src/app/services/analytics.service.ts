@@ -42,7 +42,9 @@ export class AnalyticsService {
     return this.http.get(this.url + '/api/admin/analytics/allstatussum')
   .pipe(catchError(this.handleError));;
   }
-
+  public topschools(): Observable<any>{
+    return this.http.get(this.url + '/api/admin/analytics/topschools')
+  }
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
