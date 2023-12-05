@@ -20,15 +20,11 @@ export class SchoollineComponent implements OnInit{
         this.doughnutChartData.labels.push(school.schoolname);
         this.doughnutChartData.datasets[0].data.push(school.total);
       }
-
-      // Ensure that the labels are updated after pushing data
-      this.doughnutChartData.labels = [...this.doughnutChartData.labels];
     });
   }
   // Doughnut
-  doughnutChartLabels: string[] = [];
   public doughnutChartData: ChartData<'doughnut'> = {
-    labels: this.doughnutChartLabels,
+    labels: [],
     datasets: [
       {data: []}
     ]
