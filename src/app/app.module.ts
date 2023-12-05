@@ -30,7 +30,6 @@ import { UpdateuserinformationComponent } from './shared/user/updateuserinformat
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +37,8 @@ import { UpdateuserinformationComponent } from './shared/user/updateuserinformat
     ArhivedchildComponent,
     UpdateuserinformationComponent,
     
+
+
 
   ],
   imports: [

@@ -57,7 +57,7 @@
             </mat-error>
           </mat-form-field>
           <br>
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 1 || childbeneficiary.controls.status.value == 2 || childbeneficiary.controls.status.value == 3 || childbeneficiary.controls.status.value == 4 || childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 7 || childbeneficiary.controls.status.value == 8 || childbeneficiary.controls.status.value == 9 ||childbeneficiary.controls.status.value == 10 || childbeneficiary.controls.status.value == 12">
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 1">
             <mat-label>Elementary School Name</mat-label>
             <mat-select [formControlName]="isOtherElemSchoolSelected ? 'otherSchool' : 'elemschool'" (selectionChange)="onElemSelectChange($event)">
               <mat-option *ngFor="let item of schoolnames" [value]="item.schoolName">
@@ -95,7 +95,7 @@
               <span *ngIf="childbeneficiary.controls.elemschool.touched || childbeneficiary.controls['elemaddress'].errors?.required">This field is required.</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 2 || childbeneficiary.controls.status.value == 3 || childbeneficiary.controls.status.value == 4 || childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 7 || childbeneficiary.controls.status.value == 8 || childbeneficiary.controls.status.value == 9 || childbeneficiary.controls.status.value == 10 || childbeneficiary.controls.status.value == 12">
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 2">
             <mat-label>Junior High School Name</mat-label>
             <mat-select [formControlName]="isOtherJunSchoolSelected ? 'otherSchool' : 'junschool'" (selectionChange)="onJunSelectChange($event)">
               <mat-option *ngFor="let item of schoolnames" [value]="item.schoolName">
@@ -137,7 +137,7 @@
               <span *ngIf="childbeneficiary.controls.junschool.touched || childbeneficiary.controls['junschool'].errors?.required">This field is required.</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 3 || childbeneficiary.controls.status.value == 4 || childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 8 || childbeneficiary.controls.status.value == 9 || childbeneficiary.controls.status.value == 10">
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 3">
             <mat-label>Senior High School Name</mat-label>
             <mat-select [formControlName]="isOtherSenSchoolSelected? 'otherSchool' : 'shschoolname'" (selectionChange)="onSenSelectChange($event)">
               <mat-option *ngFor="let item of schoolnames" [value]="item.schoolName">
@@ -179,7 +179,7 @@
               <span *ngIf="childbeneficiary.controls.elemschool.touched || childbeneficiary.controls['junaddress'].errors?.required">This field is required.</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 3 || childbeneficiary.controls.status.value == 4 || childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 8 ||childbeneficiary.controls.status.value == 9 || childbeneficiary.controls.status.value == 10">
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 3">
             <mat-label>Senior High School Course</mat-label>
             <input matInput type="text" formControlName="snhcourse" placeholder="Course">
             <mat-error class="error-message">
@@ -189,14 +189,14 @@
 
 
 
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 7 || childbeneficiary.controls.status.value == 11">
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 6 || childbeneficiary.controls.status.value == 7 || childbeneficiary.controls.status.value == 11">
             <mat-label>TESDA Course</mat-label>
             <input matInput type="text" formControlName="tesdacourse" placeholder="Course">
             <mat-error class="error-message">
               <span *ngIf="childbeneficiary.controls['tesdacourse'].errors?.touched || childbeneficiary.controls['tesdacourse'].errors?.required">This field is required.</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 9 || childbeneficiary.controls.status.value == 10">
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf="childbeneficiary.controls.status.value == 5">
             <mat-label>College School Name</mat-label>
             <mat-select [formControlName]="isOtherColSchoolSelected? 'otherSchool' : 'collegeschoolname'" (selectionChange)="onColSelectChange($event)" >
               <mat-option *ngFor="let item of schoolnames" [value]="item.schoolName">
@@ -231,7 +231,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 5 || childbeneficiary.controls.status.value == 9 || childbeneficiary.controls.status.value == 10">
+          <mat-form-field appearance="outline" class="width-100" hideRequiredMarker="true" *ngIf=" childbeneficiary.controls.status.value == 5">
             <mat-label>College Course</mat-label>
             <input matInput type="text" formControlName="collegecourse" placeholder="Course">
             <mat-error class="error-message">
@@ -265,7 +265,7 @@
 
         </form>
     </div>
-        <button mat-raised-button color="primary" (click)="update()">Update</button>
+        <button mat-raised-button color="primary" (click)="updateSchoolName()">Update</button>
         <button mat-raised-button color="warn" class="actions" class="ml-2" (click)="closepopup()">Close</button>
 </body>
 

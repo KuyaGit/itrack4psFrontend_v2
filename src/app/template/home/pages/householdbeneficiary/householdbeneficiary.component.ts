@@ -92,9 +92,10 @@ export class HouseholdbeneficiaryComponent implements OnInit {
 
   alluserData = new MatTableDataSource<child_beneficiary>([]);
   alluserList!: child_beneficiary[];
+  wedding : string = ''
   getChildsData() {
     this.archived = false
-    this.activatedRoute.params.subscribe(params=>{
+    this.activatedRoute.params.subscribe(params => {
       this.householdid = params.id
     })
     this.subscription.add(

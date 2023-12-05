@@ -132,9 +132,28 @@ export class UpdateComponent implements OnInit {
       proof: [''],
       updated_by: [this.assignedName],
     })
-
+    this.childbeneficiary.get('junSchool')?.valueChanges.subscribe(() => this.updateSchoolName());
+    this.childbeneficiary.get('collegeSchoolName')?.valueChanges.subscribe(() => this.updateSchoolName());
+    this.childbeneficiary.get('shSchoolName')?.valueChanges.subscribe(() => this.updateSchoolName());
   }
 
+  updateSchoolName() {
+    // Get values from individual controls
+    const junSchoolValue = this.childbeneficiary.get('junschool')?.value;
+    const collegeSchoolNameValue = this.childbeneficiary.get('collegeschoolname')?.value;
+    const shSchoolNameValue = this.childbeneficiary.get('shschoolname')?.value;
+
+    // Check if any of the controls has a value
+    if (junSchoolValue || collegeSchoolNameValue || shSchoolNameValue) {
+      // Concatenate values and update schoolname control
+      const newSchoolName = `${junSchoolValue || ''} ${collegeSchoolNameValue || ''} ${shSchoolNameValue || ''}`.trim();
+      this.childbeneficiary.get('schoolname')?.setValue(newSchoolName);
+      this.update()
+    } else {
+      // If none of the controls has a value, set schoolname to an empty string or any default value
+      this.childbeneficiary.get('schoolname')?.setValue('');
+    }
+  }
   isOtherElemSchoolSelected = false;
   onElemSelectChange(event: MatSelectChange): void {
     const selectedValue = event.value;
@@ -186,6 +205,10 @@ export class UpdateComponent implements OnInit {
       this.childbeneficiary.get('otherSchool')?.setValue('');
       this.cdr.detectChanges();
     }
+  }
+
+  checkschoolname() {
+
   }
 
   update() {
