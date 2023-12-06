@@ -97,15 +97,7 @@
         <div class="chart-container">
           <div class="chart">
             <canvas
-              #chart
-              baseChart
-              class="chart"
-              [data]="allworkingdata"
-              [options]="barChartOptions"
-              [plugins]="barChartPlugins"
-              [type]="barChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"
+              id="workchart"
               >
             </canvas>
           </div>

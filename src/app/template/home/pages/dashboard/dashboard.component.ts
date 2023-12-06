@@ -129,20 +129,7 @@ renderPieChart() {
     },
   })
 }
-renderdougnut() {
-  this.mychart = new Chart("doughnutChart", {
-    type: 'doughnut',
-    data: {
-      labels: ['Continue College', 'Beneficiaries'],
-      datasets: [{
-        label: 'Number of Beneficiaries',
-        data: [this.status5parse,this.beneficiaries],
-        borderWidth: 1,
-        hoverOffset: 4
-      }]
-    },
-  })
-}
+
 
 gettopschools() {
   this._analytics.topschools().subscribe(res => {
@@ -154,7 +141,7 @@ gettopschools() {
       this.doughnutChartData.labels.push(school.schoolname);
       this.doughnutChartData.datasets[0].data.push(school.total);
     }
-    console.log(this.doughnutChartData)
+
     this.mychart = new Chart("doughnutChart", {
       type: 'doughnut',
       data: {
@@ -318,6 +305,7 @@ public chartPie : any;
 
 private sub_get_allworking : Subscription = new Subscription();
 chartdata : any = []
+barchart: any
 getallworking() {
   this.sub_get_allworking.add(
     this._analytics.allworking().subscribe((result) => {
@@ -326,9 +314,19 @@ getallworking() {
       this.junior = parseInt(this.allworking[0].count_12);
       this.college = parseInt(this.allworking[0].count_10);
       this.allworkingdata.datasets[0].data = [this.junior, this.senior, this.college];
-
+      this.barchart = new Chart("workchart", {
+        type: 'bar',
+        data: {
+          labels: ['Junior Highschool Graduate', 'Senior Highschool Graduate',  'College Graduate'],
+          datasets: [{
+            label: 'Beneficiaries Currently Working',
+            data: [this.junior, this.senior, this.college],
+            backgroundColor:["#ea5545", "#f46a9b", "#ef9b20", "#edbf33", "#ede15b", "#bdcf32", "#87bc45", "#27aeef", "#b33dc6"]
+          }]
+        }
+      })
       // After data retrieval, call a function to render the bar chart
-      this.renderBarChart();
+
     })
   );
 }
