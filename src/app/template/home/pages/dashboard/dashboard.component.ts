@@ -85,7 +85,7 @@ renderLineChart() {
   this.linechart = new Chart("lineChart", {
     type: 'bar',
     data: {
-      labels: ['Status 1','Status 2','Status 3','Status 4','Status 5','Status 6','Status 7','Status 8','Status 9','Status 10','Status 11','Status 12'],
+      labels: ['Elementary Student', 'Elementary Graduate continue studying Junior High School', 'Junior High School Graduate continue studying Senior High School', 'Senior High School Graduate', 'Senior High School Graduate continue studying College', 'Senior High School Graduate continue studying TESDA', 'Junior High School Graduate continue studying TESDA', 'Senior High School Graduate Working Now', 'College Graduate', 'College Graduate and Working Now', 'TESDA Graduate', 'Junior High School Graduate Working Now'],
       datasets: [{
         label: 'Count of Beneficiaries Status',
         data: [],
