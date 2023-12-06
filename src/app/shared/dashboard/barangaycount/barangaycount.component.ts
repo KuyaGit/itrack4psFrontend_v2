@@ -1,22 +1,47 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import Annotation from 'chartjs-plugin-annotation';
 import { BaseChartDirective } from 'ng2-charts';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 
 @Component({
   selector: 'app-barangaycount',
   templateUrl: './barangaycount.component.html',
   styleUrls: ['./barangaycount.component.scss']
 })
-export class BarangaycountComponent {
+export class BarangaycountComponent implements OnInit{
   private newLabel? = 'New label';
-  constructor() {
-    Chart.register(Annotation);
+  constructor(
+    private _analytics: AnalyticsService
+  ) {
+
   }
+  ngOnInit(): void {
+    this._analytics.address().subscribe((res: { result: { year: number, month: string, address: string, total: number }[] }) => {
+      const child = res.result;
+      console.log(child);
+
+      this.lineChartData.datasets = [];
+      this.lineChartData.labels = [];
+
+      // Collect unique months
+      const uniqueMonths = [...new Set(child.map(entry => entry.month))];
+
+      for (let entry of child) {
+        this.lineChartData.datasets[0].data.push(entry.total);
+      }
+
+      // Populate labels with unique months
+      this.lineChartData.labels = uniqueMonths;
+    });
+  }
+  // datasets -> data: datasets from api
+  // datasets -> labels: labels from api
+
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [],
         label: 'Series A',
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',

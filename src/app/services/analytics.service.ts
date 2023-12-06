@@ -46,6 +46,10 @@ export class AnalyticsService {
     return this.http.get(this.url + '/api/admin/analytics/topschools')
   }
 
+  public address(): Observable<any>{
+    return this.http.get(this.url + '/api/admin/analytics/getaddress')
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
