@@ -129,6 +129,20 @@ renderPieChart() {
     },
   })
 }
+renderdougnut() {
+  this.mychart = new Chart("doughnutChart", {
+    type: 'doughnut',
+    data: {
+      labels: ['Continue College', 'Beneficiaries'],
+      datasets: [{
+        label: 'Number of Beneficiaries',
+        data: [this.status5parse,this.beneficiaries],
+        borderWidth: 1,
+        hoverOffset: 4
+      }]
+    },
+  })
+}
 
 gettopschools() {
   this._analytics.topschools().subscribe(res => {
@@ -141,6 +155,13 @@ gettopschools() {
       this.doughnutChartData.datasets[0].data.push(school.total);
     }
     console.log(this.doughnutChartData)
+    this.mychart = new Chart("doughnutChart", {
+      type: 'doughnut',
+      data: {
+        labels: this.doughnutChartData.labels,
+        datasets: this.doughnutChartData.datasets
+      },
+    })
   });
 }
 
