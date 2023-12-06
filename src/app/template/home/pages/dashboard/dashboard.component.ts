@@ -186,7 +186,7 @@ getChartData() {
 
 
 
-
+@ViewChild ('line') line? : BaseChartDirective;
 public lineChartData: ChartConfiguration['data'] = {
 
   datasets: [
@@ -313,9 +313,10 @@ getallworking() {
   );
 }
 
+@ViewChild ('chart') chart?: BaseChartDirective;
 renderBarChart() {
-  if (this.barChart && this.barChart.chart) {
-    this.barChart.chart.update();
+  if (this.chart && this.chart.chart) {
+    this.chart.chart.update();
   }
 }
 
@@ -335,8 +336,6 @@ public allworkingdata: ChartData<'bar'> = {
 
 
 
-@ViewChild('barChart') barChart?: BaseChartDirective;
-@ViewChild('lineChart') lineChart?: BaseChartDirective;
 
   /** Based on the screen size, switch from standard to one column per row */
   public barChartOptions: ChartConfiguration['options'] = {
