@@ -133,13 +133,14 @@ renderPieChart() {
 gettopschools() {
   this._analytics.topschools().subscribe(res => {
     const topschools = res['result'];
-    console.log(topschools)
+
     this.doughnutChartData.datasets[0].data = [];
     this.doughnutChartData.labels = [];
     for (let school of topschools) {
       this.doughnutChartData.labels.push(school.schoolname);
       this.doughnutChartData.datasets[0].data.push(school.total);
     }
+    console.log(this.doughnutChartData)
   });
 }
 
