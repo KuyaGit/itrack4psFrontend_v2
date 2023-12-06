@@ -196,7 +196,6 @@ getChartData() {
     };
 
     this.lineChartData = lineChartData;
-    console.log(this.lineChartData);
   });
 }
 
@@ -207,7 +206,7 @@ getChartData() {
 
 
 
-@ViewChild ('line') line? : BaseChartDirective;
+
 public lineChartData: ChartConfiguration['data'] = {
 
   datasets: [
@@ -334,7 +333,7 @@ getallworking() {
   );
 }
 
-@ViewChild ('chart') chart?: BaseChartDirective;
+@ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 renderBarChart() {
   if (this.chart && this.chart.chart) {
     this.chart.chart.update();
