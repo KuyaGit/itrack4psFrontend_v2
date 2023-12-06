@@ -48,7 +48,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ChildachievementsComponent } from './pages/childachievements/childachievements.component';
 import { CreateComponent } from 'src/app/shared/achievements/create/create.component';
-import { BarangaycountComponent } from 'src/app/shared/dashboard/barangaycount/barangaycount.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -71,7 +71,6 @@ import { BarangaycountComponent } from 'src/app/shared/dashboard/barangaycount/b
     ChildachievementsComponent,
     CreateComponent,
     ViewchildComponent,
-    BarangaycountComponent
   ],
   imports: [
     CommonModule,

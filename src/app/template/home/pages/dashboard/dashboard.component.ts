@@ -133,6 +133,7 @@ renderPieChart() {
 gettopschools() {
   this._analytics.topschools().subscribe(res => {
     const topschools = res['result'];
+    console.log(topschools)
     this.doughnutChartData.datasets[0].data = [];
     this.doughnutChartData.labels = [];
     for (let school of topschools) {
@@ -190,7 +191,6 @@ public lineChartData: ChartConfiguration['data'] = {
   datasets: [
     {
       data: [],
-      label: '',
       fill: 'origin',
     },
   ],
