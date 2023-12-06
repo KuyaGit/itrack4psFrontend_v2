@@ -314,8 +314,8 @@ getallworking() {
 }
 
 renderBarChart() {
-  if (this.chart && this.chart.chart) {
-    this.chart.chart.update();
+  if (this.barChart && this.barChart.chart) {
+    this.barChart.chart.update();
   }
 }
 
@@ -335,7 +335,9 @@ public allworkingdata: ChartData<'bar'> = {
 
 
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+@ViewChild('barChart') barChart?: BaseChartDirective;
+@ViewChild('lineChart') lineChart?: BaseChartDirective;
+
   /** Based on the screen size, switch from standard to one column per row */
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
