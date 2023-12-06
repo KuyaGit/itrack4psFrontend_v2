@@ -12,6 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 Chart.register(...registerables)
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -42,6 +43,7 @@ export class DashboardComponent implements OnInit{
     this.getallUser()
     this.getallstatussum()
     this.gettopschools()
+    this.getChartData()
 }
 public isMobileLayout = false;
   ngAfterViewInit() {
@@ -102,7 +104,6 @@ getallstatussum() {
         this.renderLineChart()
         if (this.linechart) {
           // Update the data property of the chart with the extracted data
-          console.log(this.linechart)
           this.sum = this.countValues + 10
           this.linechart.data.datasets[0].data = this.countValues;
           this.linechart.update();
@@ -140,6 +141,92 @@ gettopschools() {
     }
   });
 }
+
+lineData : any;
+getChartData() {
+  this._analytics.address().subscribe((res: { result: { year: number, month: string, address: string | null, total: number }[]}) => {
+    const data = res.result;
+    const uniqueMonths: string[] = Array.from(new Set(data.map(entry => entry.month.trim())));
+    const uniqueAddresses: string[] = Array.from(new Set(data.map(entry => entry.address || 'Unknown')));
+
+    const datasets: { label: string; data: number[]; fill: boolean }[] = [];
+
+    uniqueAddresses.forEach(address => {
+      const addressData: number[] = [];
+
+      uniqueMonths.forEach(month => {
+        const filteredEntries = data.filter(entry => entry.address === address && entry.month.trim() === month);
+        const totalForMonth = filteredEntries.reduce((sum, entry) => sum + entry.total, 0);
+        addressData.push(totalForMonth);
+      });
+
+      datasets.push({
+        label: address || 'Unknown',
+        data: addressData,
+        fill: true,
+      });
+    });
+
+    const lineChartData: ChartConfiguration['data'] = {
+      datasets: datasets,
+      labels: uniqueMonths,
+    };
+
+    this.lineChartData = lineChartData;
+    console.log(this.lineChartData);
+  });
+}
+
+
+
+
+
+
+
+
+
+public lineChartData: ChartConfiguration['data'] = {
+
+  datasets: [
+    {
+      data: [],
+      label: '',
+      fill: 'origin',
+    },
+  ],
+  labels: [],
+};
+
+public lineChartOptions: ChartConfiguration['options'] = {
+  elements: {
+    line: {
+      tension: .1,
+    },
+  },
+  scales: {
+    // We use this empty structure as a placeholder for dynamic theming.
+    y: {
+      position: 'left',
+    },
+    y1: {
+      position: 'right',
+      grid: {
+        color: 'rgba(255,0,0,0.3)',
+      },
+      ticks: {
+        color: 'red',
+      },
+    },
+  },
+
+  plugins: {
+    legend: { display: true },
+  },
+};
+
+public lineChartType: ChartType = 'line';
+
+
 
 public doughnutChartData: ChartData<'doughnut'> = {
   labels: [],
