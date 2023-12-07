@@ -151,6 +151,7 @@ export class UpdateComponent implements OnInit {
       this.update()
     } else {
       // If none of the controls has a value, set schoolname to an empty string or any default value
+      this.update()
       this.childbeneficiary.get('schoolname')?.setValue('');
     }
   }
