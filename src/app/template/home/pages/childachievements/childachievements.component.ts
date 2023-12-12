@@ -17,6 +17,8 @@ import { CreateComponent } from 'src/app/shared/achievements/create/create.compo
 })
 export class ChildachievementsComponent implements OnInit{
   householdid: any = localStorage.getItem('householdid')
+  id: any = localStorage.getItem('user_loginSession')
+  account_type = (JSON.parse(this.id)).account_type;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(

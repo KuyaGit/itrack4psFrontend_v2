@@ -2,7 +2,7 @@
   <div class="contain">
     <div class="header">
         <header>4Ps Holder</header>
-        <button mat-raised-button color="primary" (click)="createbeneficiary()">
+        <button mat-raised-button color="primary" (click)="createbeneficiary()" *ngIf="account_type == 2">
           <mat-icon>add</mat-icon>
           Add 4ps Holder
         </button>
@@ -68,10 +68,10 @@
               <button mat-icon-button (click)="viewItem(item.householdid)">
                 <mat-icon> preview </mat-icon>
               </button>
-              <button mat-icon-button (click)="updateItem(item.householdid)">
+              <button mat-icon-button (click)="updateItem(item.householdid)" *ngIf="account_type == 2">
                 <mat-icon> edit </mat-icon>
               </button>
-              <button mat-icon-button (click)="deleteuser(item.householdid)">
+              <button mat-icon-button (click)="deleteuser(item.householdid)" *ngIf="account_type == 2">
                 <mat-icon> person_remove </mat-icon>
               </button>
               <button mat-icon-button (click)="viewchildbeneficiary(item.householdid, item.address)">
@@ -129,7 +129,7 @@
                 <button mat-icon-button (click)="viewItem(item.householdid)">
                   <mat-icon> preview </mat-icon>
                 </button>
-                <button mat-icon-button (click)="restoreholder(item.householdid)">
+                <button mat-icon-button (click)="restoreholder(item.householdid)" *ngIf="account_type == 2">
                   <mat-icon> restore_page </mat-icon>
                 </button>
           </td>

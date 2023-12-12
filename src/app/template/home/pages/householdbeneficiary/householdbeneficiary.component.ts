@@ -23,6 +23,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./householdbeneficiary.component.scss']
 })
 export class HouseholdbeneficiaryComponent implements OnInit {
+  id: any = localStorage.getItem('user_loginSession')
+  account_type = (JSON.parse(this.id)).account_type;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   householdid: any = localStorage.getItem('householdid')

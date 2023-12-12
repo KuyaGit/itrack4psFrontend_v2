@@ -8,7 +8,7 @@
         </button>
       </div>
       <header>Child Achievements</header>
-      <button mat-raised-button extended color="primary" (click)="addchildchildachievements()">
+      <button mat-raised-button extended color="primary" (click)="addchildchildachievements()" *ngIf="account_type == 2">
         <mat-icon>add</mat-icon>
         Add Achievement
       </button>

@@ -8,19 +8,11 @@
       </button>
     </div>
     <header>Child Beneficiaries</header>
-    <button mat-raised-button extended color="primary" (click)="addchildBeneficiary(this.householdid)">
+    <button mat-raised-button extended color="primary" (click)="addchildBeneficiary(this.householdid)" *ngIf="account_type == 2" >
       <mat-icon>add</mat-icon>
       Add Beneficiary Details
     </button>
   </div>
-  <!-- <div class="archived-buttons">
-    <button mat-button color="primary" (click)="getChildsData()" [class.mat-mdc-raised-button]="!archived">
-      Active
-    </button>
-    <button mat-button color="primary" (click)="getholderArchived()" [class.mat-mdc-raised-button]="archived">
-      Archived
-    </button>
-  </div> -->
   <div class="table-container" *ngIf="archived == false">
       <table mat-table [dataSource]="alluserData" matSort >
         <!-- header row -->
@@ -58,7 +50,7 @@
               <button mat-icon-button (click)="viewItem(item.child_id)">
                 <mat-icon> preview </mat-icon>
               </button>
-              <button mat-icon-button (click)="updateItem(item.child_id)">
+              <button mat-icon-button (click)="updateItem(item.child_id)" *ngIf="account_type == 2">
                 <mat-icon> edit </mat-icon>
               </button>
               <button mat-icon-button [routerLink]="'/home/child/achievements/'+ item.child_id">
