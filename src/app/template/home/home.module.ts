@@ -48,6 +48,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ChildachievementsComponent } from './pages/childachievements/childachievements.component';
 import { CreateComponent } from 'src/app/shared/achievements/create/create.component';
+import { ClockComponent } from 'src/app/shared/clock/clock.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CreateComponent } from 'src/app/shared/achievements/create/create.compo
     ChildachievementsComponent,
     CreateComponent,
     ViewchildComponent,
+    ClockComponent
   ],
   imports: [
     CommonModule,

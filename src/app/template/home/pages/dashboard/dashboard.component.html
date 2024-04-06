@@ -7,7 +7,7 @@
     <app-avatar *ngIf="!isMobileLayout"></app-avatar>
   </div>
   <!-- Numbers -->
-  <div class="numbers">
+  <div class="numbersnew">
     <div class="population">
       <div class="c-dashboardInfo">
         <div class="wrap">
@@ -23,7 +23,7 @@
 
     </div>
     <div class="holder">
-      <div class="c-dashboardInfo">
+      <div class="c-dashboardInfo ">
         <div class="wrap">
           <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">4Ps Holder<svg
               class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
@@ -48,6 +48,13 @@
         </div>
       </div>
     </div>
+    <div class="beneficiaries">
+      <div class="c-dashboardInfo">
+        <div class="wrap clock">
+            <app-clock />
+          </div>
+      </div>
+    </div>
   </div>
   <div class="first-chart">
     <mat-card [ngClass]="isMobileLayout? 'line' : 'doughnut'">
@@ -63,7 +70,7 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card  [ngClass]="isMobileLayout? 'line' : 'linechart' ">
+    <mat-card  [ngClass]="isMobileLayout? 'line' : 'bar' ">
       <mat-card-title>
         Beneficiaries Count in Every Barangay
       </mat-card-title>

@@ -216,19 +216,29 @@ mat-card-content{
 }
 
 
+
 .mobile{
   margin-top: 4%;
   padding: 1%;
   width: 100%;
   padding: 2.4%;
 }
-
-.first-chart{
+.numbersnew{
   margin-top: 2%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 1em;
   align-items: center;
+  justify-content: center ;
+}
+
+.first-chart{
+  margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
 }
 .linechart {
   display: flex;
@@ -245,3 +255,4 @@ mat-card-content{
   padding: 1%;
   width: 30%;
 }
+
