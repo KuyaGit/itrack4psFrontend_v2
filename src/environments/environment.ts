@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server_link : 'https://itrack4ps.solutions'
+  server_link : 'https://mcbportal.cloud'
 };
